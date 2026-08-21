@@ -3,1266 +3,606 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Only EULA — Gaming Peripherals</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect rx='15' width='100' height='100' fill='%237c3aed'/%3E%3Ctext x='50' y='65' text-anchor='middle' fill='white' font-size='40' font-weight='900' font-family='sans-serif'%3EOE%3C/text%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>ONLY EULA | Premium Oyuncu Ekipmanları</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* CSS reset and variables */
         :root {
-            --bg: #f5f5f5;
-            --bg-white: #ffffff;
-            --text-dark: #111111;
-            --text-mid: #555555;
-            --text-light: #888888;
-            --accent: #7c3aed;
-            --accent-dark: #6d28d9;
-            --accent-light: #a78bfa;
-            --border: #e5e5e5;
-            --radius: 12px;
-            --radius-lg: 18px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
-            --transition: all 0.3s ease;
+            --primary: #7c3aed;
+            --primary-hover: #6d28d9;
+            --bg-color: #f8fafc;
+            --text-main: #0f172a;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --white: #ffffff;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        ::selection { background: var(--accent); color: white; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-
-        /* ==================== TOP BAR ==================== */
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+        img { max-width: 100%; display: block; }
+        
+        /* Top Bar */
         .top-bar {
-            background: var(--accent);
-            color: white;
-            height: 36px;
-            overflow: hidden;
-            position: relative;
-            z-index: 1001;
+            background-color: var(--primary); color: var(--white);
+            padding: 8px 0; overflow: hidden; white-space: nowrap; font-size: 13px; font-weight: 500; position: relative;
         }
-
-        .top-bar-track {
-            display: flex;
-            animation: scroll-left 30s linear infinite;
-            white-space: nowrap;
-            height: 100%;
-            align-items: center;
-        }
-
-        .top-bar-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            padding: 0 40px;
-            flex-shrink: 0;
-            letter-spacing: 0.3px;
-        }
-
-        .top-bar-item .sep {
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            margin: 0 12px;
-        }
-
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* ==================== NAVBAR ==================== */
+        .top-bar-track { display: inline-block; animation: marquee 20s linear infinite; }
+        .top-bar-track span { margin: 0 40px; display: inline-flex; align-items: center; gap: 8px; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
+        /* Navbar */
         .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border);
-            padding: 0 40px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: var(--transition);
+            background-color: var(--white); height: 72px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.3s ease;
         }
-
-        .navbar.scrolled {
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 36px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--text-dark);
-        }
-
-        .nav-logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 12px;
-            color: white;
-        }
-
-        .nav-logo-text {
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            color: var(--text-dark);
-        }
-
-        .nav-logo-text span { color: var(--accent); }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-mid);
-            font-size: 14px;
-            font-weight: 600;
-            padding: 8px 14px;
-            border-radius: 8px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-dark);
-            background: rgba(0,0,0,0.04);
-        }
-
-        .nav-links a.active {
-            color: var(--text-dark);
-        }
-
-        .nav-links .dropdown {
-            position: relative;
-        }
-
-        .nav-links .dropdown-arrow {
-            font-size: 10px;
-            margin-left: 4px;
-            transition: var(--transition);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-dark);
-            font-size: 18px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-icon:hover {
-            background: rgba(0,0,0,0.05);
-        }
-
-        .nav-icon .badge {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: white;
-            font-size: 9px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
-
-        /* ==================== HERO GRID ==================== */
-        .hero-section {
-            max-width: 1280px;
-            margin: 24px auto;
-            padding: 0 24px;
-        }
-
+        .navbar.scrolled { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .nav-left { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.5px; }
+        .nav-left img { height: 32px; border-radius: 4px; }
+        .nav-center { display: flex; gap: 32px; font-weight: 500; font-size: 15px; }
+        .nav-center a { transition: color 0.2s; position: relative; }
+        .nav-center a:hover { color: var(--primary); }
+        .nav-right { display: flex; gap: 20px; align-items: center; }
+        .icon-btn { background: none; color: var(--text-main); display: flex; align-items: center; justify-content: center; transition: color 0.2s; }
+        .icon-btn:hover { color: var(--primary); }
+        .icon-btn svg { width: 24px; height: 24px; stroke-width: 2; }
+        
+        /* Hero Grid */
+        .hero-section { padding: 24px 5%; max-width: 1600px; margin: 0 auto; }
         .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1.3fr 0.8fr;
-            grid-template-rows: 320px 260px;
-            gap: 16px;
+            grid-template-columns: 3fr 2fr 2fr;
+            grid-template-rows: 250px 250px;
+            gap: 16px; height: auto;
         }
-
+        @media (min-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 4fr 3fr 3fr;
+                grid-template-rows: 300px 300px;
+                grid-template-areas: 
+                    "left mid-top right-top"
+                    "left mid-bottom right-bottom";
+            }
+            .hero-card.tall { grid-area: left; }
+            .hero-card.mid-top { grid-area: mid-top; }
+            .hero-card.right-top { grid-area: right-top; }
+            .hero-card.mid-bottom { grid-area: mid-bottom; }
+            .hero-card.right-bottom { grid-area: right-bottom; }
+        }
+        
         .hero-card {
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative; border-radius: 16px; overflow: hidden; cursor: pointer; display: flex; align-items: flex-end; padding: 24px;
         }
-
-        .hero-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+        .hero-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
-        .hero-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+            z-index: 2; transition: background 0.3s ease;
         }
-
-        .hero-card:hover img {
-            transform: scale(1.03);
-        }
-
-        .hero-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-            transition: var(--transition);
-        }
-
-        .hero-card:hover .hero-card-overlay {
-            background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.6));
-        }
-
-        .hero-card-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--accent);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            width: fit-content;
-        }
-
-        .hero-card-title {
-            font-size: 28px;
-            font-weight: 900;
-            color: white;
-            letter-spacing: -0.5px;
-            line-height: 1.1;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .hero-card-title.sm { font-size: 22px; }
-
-        .hero-card-subtitle {
-            font-size: 13px;
-            color: rgba(255,255,255,0.75);
-            margin-top: 4px;
-            font-weight: 500;
-        }
-
-        /* Card 1: tall keyboard */
-        .hero-card-1 { grid-row: 1 / 3; }
-
-        /* Card 2: wide mousepad */
-        .hero-card-2 { grid-column: 2; grid-row: 1; }
-
-        /* Card 3: square cyberglass */
-        .hero-card-3 { grid-column: 3; grid-row: 1; }
-
-        /* Card 4: wide ravenfall */
-        .hero-card-4 { grid-column: 2; grid-row: 2; }
-
-        /* Card 5: square */
-        .hero-card-5 { grid-column: 3; grid-row: 2; }
-
-        /* Title-only overlay (no gradient for bright images) */
-        .hero-card-title-only {
-            position: absolute;
-            top: 24px;
-            left: 24px;
-        }
-
-        .hero-card-title-only h2 {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--text-dark);
-            letter-spacing: -1px;
-            line-height: 1;
-        }
-
-        .hero-card-title-only .accent { color: var(--accent); }
-
-        /* ==================== PRODUCTS SECTION ==================== */
-        .products-section {
-            max-width: 1280px;
-            margin: 60px auto;
-            padding: 0 24px;
-        }
-
-        .products-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 28px;
-        }
-
-        .products-header h2 {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .products-header-tabs {
-            display: flex;
-            gap: 4px;
-        }
-
-        .tab-btn {
-            padding: 8px 18px;
-            background: none;
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-mid);
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-
-        .tab-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .tab-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
+        .hero-content { position: relative; z-index: 3; color: var(--white); }
+        .hero-content h3 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .hero-content p { font-size: 14px; opacity: 0.9; }
+        
+        .hero-card:hover .hero-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%); }
+        .hero-card:hover .hero-img { transform: scale(1.08) !important; animation-play-state: paused; }
+        
+        /* Ken Burns Animations */
+        @keyframes kb1 { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.15) translate(-2%, 2%); } }
+        @keyframes kb2 { 0% { transform: scale(1.1) translate(2%, -2%); } 100% { transform: scale(1) translate(0, 0); } }
+        @keyframes kb3 { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.1) translate(2%, 2%); } }
+        @keyframes kb4 { 0% { transform: scale(1.15) translate(-2%, -2%); } 100% { transform: scale(1) translate(0, 0); } }
+        @keyframes kb5 { 0% { transform: scale(1.05) translate(1%, 0); } 100% { transform: scale(1.15) translate(-1%, -1%); } }
+        
+        .anim-1 { animation: kb1 20s infinite alternate ease-in-out; }
+        .anim-2 { animation: kb2 18s infinite alternate ease-in-out; }
+        .anim-3 { animation: kb3 22s infinite alternate ease-in-out; }
+        .anim-4 { animation: kb4 15s infinite alternate ease-in-out; }
+        .anim-5 { animation: kb5 25s infinite alternate ease-in-out; }
+        
+        /* Product Section */
+        .section-title { font-size: 32px; font-weight: 800; text-align: center; margin: 60px 0 40px; letter-spacing: -0.5px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; padding: 0 5%; max-width: 1400px; margin: 0 auto; }
         .product-card {
-            background: var(--bg-white);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid transparent;
+            background: var(--white); border-radius: 16px; padding: 16px; border: 1px solid var(--border);
+            transition: all 0.3s ease; position: relative; cursor: pointer; display: flex; flex-direction: column;
         }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--border);
+        .product-card:hover { transform: translateY(-4px); box-shadow: var(--hover-shadow); }
+        .product-img-wrap { position: relative; width: 100%; aspect-ratio: 1; border-radius: 12px; overflow: hidden; margin-bottom: 16px; background: #f1f5f9; }
+        .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+        .tag { position: absolute; top: 12px; left: 12px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; z-index: 10; }
+        .wishlist-btn { position: absolute; top: 12px; right: 12px; background: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); opacity: 0; transition: opacity 0.2s, color 0.2s; z-index: 10; color: var(--text-light); }
+        .wishlist-btn:hover { color: #ef4444; }
+        .product-card:hover .wishlist-btn { opacity: 1; }
+        
+        .p-brand { color: var(--primary); font-size: 12px; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; }
+        .p-name { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .p-desc { font-size: 13px; color: var(--text-light); margin-bottom: 16px; flex-grow: 1; }
+        .p-bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
+        .p-price-wrap { display: flex; flex-direction: column; }
+        .p-old-price { font-size: 13px; color: var(--text-light); text-decoration: line-through; }
+        .p-price { font-size: 18px; font-weight: 800; color: var(--text-main); }
+        .add-to-cart-btn { background: var(--text-main); color: white; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600; transition: background 0.2s; display: flex; align-items: center; gap: 8px; }
+        .add-to-cart-btn:hover { background: var(--primary); }
+        
+        /* Features Bar */
+        .features-bar { background: white; padding: 40px 5%; margin: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; }
+        .feature-item { display: flex; align-items: center; gap: 16px; }
+        .f-icon { width: 48px; height: 48px; border-radius: 12px; background: #f3e8ff; color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .f-text h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+        .f-text p { font-size: 13px; color: var(--text-light); }
+        
+        /* CTA Banner */
+        .cta-banner { margin: 60px 5%; border-radius: 24px; overflow: hidden; position: relative; background: #0f172a; color: white; padding: 80px 40px; display: flex; align-items: center; justify-content: space-between; }
+        .cta-bg { position: absolute; top: 0; right: 0; width: 60%; height: 100%; object-fit: cover; opacity: 0.4; mask-image: linear-gradient(to right, transparent, black); -webkit-mask-image: linear-gradient(to right, transparent, black); }
+        .cta-content { position: relative; z-index: 2; max-width: 500px; }
+        .cta-content h2 { font-size: 36px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
+        .cta-content p { font-size: 16px; color: #cbd5e1; margin-bottom: 32px; }
+        .dl-btn { background: var(--primary); color: white; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s; }
+        .dl-btn:hover { background: var(--primary-hover); }
+        
+        /* Footer */
+        footer { background: white; padding: 60px 5% 40px; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1400px; margin: 0 auto; margin-bottom: 60px; }
+        .f-brand h3 { font-size: 24px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .f-brand h3 img { height: 32px; border-radius: 4px; }
+        .f-brand p { color: var(--text-light); font-size: 14px; margin-bottom: 24px; max-width: 300px; }
+        .social-icons { display: flex; gap: 12px; }
+        .social-icons a { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-color); display: flex; align-items: center; justify-content: center; color: var(--text-main); transition: all 0.2s; }
+        .social-icons a:hover { background: var(--primary); color: white; }
+        
+        .f-col h4 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+        .f-col ul { display: flex; flex-direction: column; gap: 12px; }
+        .f-col a { color: var(--text-light); font-size: 14px; transition: color 0.2s; }
+        .f-col a:hover { color: var(--primary); }
+        
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; color: var(--text-light); font-size: 13px; }
+        .payment-methods { display: flex; gap: 8px; }
+        .payment-methods span { padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; font-weight: 600; font-size: 12px; }
+        
+        /* Cookie Bar */
+        .cookie-bar { position: fixed; bottom: 24px; left: 24px; background: white; padding: 20px; border-radius: 12px; box-shadow: var(--hover-shadow); z-index: 1000; max-width: 400px; display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--border); transition: transform 0.3s, opacity 0.3s; }
+        .cookie-bar p { font-size: 13px; color: var(--text-light); }
+        .cookie-btn { background: var(--text-main); color: white; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600; text-align: center; }
+        .cookie-btn:hover { background: var(--primary); }
+        .cookie-hidden { transform: translateY(150%); opacity: 0; pointer-events: none; }
+        
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: white; width: 100%; max-width: 900px; border-radius: 20px; overflow: hidden; display: flex; position: relative; transform: scale(0.95) translateY(20px); transition: transform 0.3s; max-height: 90vh; }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        .modal-close { position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.05); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s; border: none; }
+        .modal-close:hover { background: rgba(0,0,0,0.1); }
+        
+        .modal-img-col { flex: 1; background: #f8fafc; min-height: 400px; position: relative; }
+        .modal-img-col img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; }
+        .modal-info-col { flex: 1; padding: 40px; display: flex; flex-direction: column; overflow-y: auto; }
+        .m-brand { color: var(--primary); font-size: 13px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+        .m-title { font-size: 28px; font-weight: 800; margin-bottom: 16px; color: var(--text-main); line-height: 1.2; }
+        .m-desc { font-size: 15px; color: var(--text-light); margin-bottom: 24px; line-height: 1.6; }
+        .m-specs { margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
+        .m-spec-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--text-main); }
+        .m-spec-icon { color: #10b981; }
+        .m-price-area { margin-top: auto; margin-bottom: 24px; display: flex; align-items: flex-end; gap: 12px; }
+        .m-price { font-size: 32px; font-weight: 800; color: var(--text-main); line-height: 1; }
+        .m-old-price { font-size: 18px; color: var(--text-light); text-decoration: line-through; margin-bottom: 4px; }
+        .m-add-btn { background: var(--primary); color: white; border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 700; width: 100%; display: flex; justify-content: center; align-items: center; gap: 12px; transition: background 0.2s; margin-bottom: 16px; }
+        .m-add-btn:hover { background: var(--primary-hover); }
+        .m-meta { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--text-light); }
+        .m-meta span { display: flex; align-items: center; gap: 8px; }
+        
+        @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 250px); grid-template-areas: none; }
+            .hero-card { grid-area: auto !important; grid-column: auto !important; grid-row: auto !important; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .modal-content { flex-direction: column; }
+            .modal-img-col { min-height: 300px; }
         }
-
-        .product-img {
-            position: relative;
-            aspect-ratio: 1;
-            overflow: hidden;
-            background: #f0f0f0;
-        }
-
-        .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-img img {
-            transform: scale(1.05);
-        }
-
-        .product-tag {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: var(--accent);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .product-tag.new { background: #10b981; }
-        .product-tag.sale { background: #ef4444; }
-
-        .product-wishlist {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            opacity: 0;
-        }
-
-        .product-card:hover .product-wishlist { opacity: 1; }
-        .product-wishlist:hover { transform: scale(1.1); color: #ef4444; }
-
-        .product-info {
-            padding: 16px;
-        }
-
-        .product-brand {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .product-name {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 4px;
-            letter-spacing: -0.2px;
-        }
-
-        .product-desc {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .product-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .product-price {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text-dark);
-            letter-spacing: -0.3px;
-        }
-
-        .product-price .old {
-            font-size: 13px;
-            color: var(--text-light);
-            text-decoration: line-through;
-            font-weight: 500;
-            margin-left: 6px;
-        }
-
-        .product-add {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .product-add:hover {
-            background: var(--accent-dark);
-            transform: scale(1.05);
-        }
-
-        /* ==================== FEATURES BAR ==================== */
-        .features-bar {
-            max-width: 1280px;
-            margin: 60px auto;
-            padding: 0 24px;
-        }
-
-        .features-bar-inner {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .feature-bar-item {
-            background: var(--bg-white);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            border: 1px solid var(--border);
-            transition: var(--transition);
-        }
-
-        .feature-bar-item:hover {
-            border-color: var(--accent);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .feature-bar-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(124, 58, 237, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            flex-shrink: 0;
-        }
-
-        .feature-bar-text h4 {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .feature-bar-text p {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-
-        /* ==================== CTA BANNER ==================== */
-        .cta-banner {
-            max-width: 1280px;
-            margin: 60px auto;
-            padding: 0 24px;
-        }
-
-        .cta-inner {
-            background: linear-gradient(135deg, #1a1a2e, #16162a, #0d0d1a);
-            border-radius: var(--radius-lg);
-            padding: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .cta-inner::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
-        }
-
-        .cta-content { position: relative; z-index: 1; }
-
-        .cta-content h2 {
-            font-size: 32px;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .cta-content p {
-            font-size: 15px;
-            color: rgba(255,255,255,0.6);
-            max-width: 450px;
-            margin-bottom: 24px;
-        }
-
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 32px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: var(--radius);
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            font-family: inherit;
-        }
-
-        .cta-btn:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
-        }
-
-        .cta-image {
-            position: relative;
-            z-index: 1;
-            max-width: 320px;
-        }
-
-        .cta-image img {
-            width: 100%;
-            border-radius: var(--radius);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-        }
-
-        /* ==================== FOOTER ==================== */
-        footer {
-            background: var(--bg-white);
-            border-top: 1px solid var(--border);
-            padding: 48px 40px 24px;
-            margin-top: 60px;
-        }
-
-        .footer-inner {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 36px;
-        }
-
-        .footer-brand-text {
-            font-size: 22px;
-            font-weight: 900;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        .footer-brand-text span { color: var(--accent); }
-
-        .footer-brand p {
-            font-size: 13px;
-            color: var(--text-light);
-            line-height: 1.6;
-            max-width: 280px;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .footer-social {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(0,0,0,0.04);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: var(--text-mid);
-            font-size: 16px;
-            transition: var(--transition);
-        }
-
-        .footer-social:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        .footer-col h4 {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-        }
-
-        .footer-col a {
-            display: block;
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: 13px;
-            padding: 4px 0;
-            transition: var(--transition);
-        }
-
-        .footer-col a:hover {
-            color: var(--accent);
-            transform: translateX(3px);
-        }
-
-        .footer-bottom {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: var(--text-light);
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .footer-payments {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .footer-payment {
-            padding: 4px 10px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-mid);
-        }
-
-        /* ==================== COOKIE BAR ==================== */
-        .cookie-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-white);
-            border-top: 1px solid var(--border);
-            padding: 14px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 999;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-            font-size: 12px;
-            color: var(--text-light);
-            transform: translateY(0);
-            transition: var(--transition);
-        }
-
-        .cookie-bar.hidden { transform: translateY(100%); }
-
-        .cookie-bar a { color: var(--accent); text-decoration: underline; }
-
-        .cookie-accept {
-            padding: 8px 20px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-        }
-
-        .cookie-accept:hover { background: var(--accent-dark); }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto auto auto;
-            }
-            .hero-card-1 { grid-row: 1; grid-column: 1; }
-            .hero-card-2 { grid-column: 2; grid-row: 1; }
-            .hero-card-3 { grid-column: 1; grid-row: 2; }
-            .hero-card-4 { grid-column: 2; grid-row: 2; }
-            .hero-card-5 { grid-column: 1 / 3; grid-row: 3; }
-            .products-grid { grid-template-columns: repeat(3, 1fr); }
-            .features-bar-inner { grid-template-columns: repeat(2, 1fr); }
-            .footer-inner { grid-template-columns: 1fr 1fr; }
-            .cta-inner { flex-direction: column; text-align: center; padding: 40px; }
-            .cta-content p { margin: 0 auto 24px; }
-        }
-
         @media (max-width: 768px) {
-            .navbar { padding: 0 16px; }
-            .nav-links, .nav-right { display: none; }
-            .nav-toggle { display: block; }
-            .hero-section { padding: 0 16px; margin: 16px auto; }
-            .hero-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-            }
-            .hero-card-1, .hero-card-2, .hero-card-3, .hero-card-4, .hero-card-5 {
-                grid-column: 1; grid-row: auto;
-                min-height: 220px;
-            }
-            .products-section { padding: 0 16px; }
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .features-bar { padding: 0 16px; }
-            .features-bar-inner { grid-template-columns: 1fr; }
-            .footer-inner { grid-template-columns: 1fr; }
-            .cookie-bar { flex-direction: column; gap: 10px; text-align: center; padding: 14px 20px; }
-            .cta-banner { padding: 0 16px; }
-            .cta-image { max-width: 200px; }
-        }
-
-        /* ==================== ANIMATIONS ==================== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .nav-center { display: none; }
+            .cta-banner { flex-direction: column; padding: 40px 24px; text-align: center; }
+            .cta-bg { width: 100%; opacity: 0.2; mask-image: none; -webkit-mask-image: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============ TOP BAR ============ -->
+    <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-track">
-            <div class="top-bar-item">🚚 14:00'ten önce verilen siparişler aynı gün kargoya teslim edilir.</div>
-            <div class="top-bar-item">📦 2199₺ ve üzeri siparişlerinizde ücretsiz* kargo</div>
-            <div class="top-bar-item">⚡ Hafta içi saat 14:00'ten önce verilen siparişler aynı gün kargoya teslim edilir.</div>
-            <div class="top-bar-item">🔒 256-bit SSL güvenli ödeme altyapısı</div>
-            <div class="top-bar-item">🎮 Only EULA — Designed for Champions</div>
-            <!-- Duplicate for seamless loop -->
-            <div class="top-bar-item">🚚 14:00'ten önce verilen siparişler aynı gün kargoya teslim edilir.</div>
-            <div class="top-bar-item">📦 2199₺ ve üzeri siparişlerinizde ücretsiz* kargo</div>
-            <div class="top-bar-item">⚡ Hafta içi saat 14:00'ten önce verilen siparişler aynı gün kargoya teslim edilir.</div>
-            <div class="top-bar-item">🔒 256-bit SSL güvenli ödeme altyapısı</div>
-            <div class="top-bar-item">🎮 Only EULA — Designed for Champions</div>
+            <span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"></path></svg>
+                SAAT 14:00'A KADAR VERİLEN SİPARİŞLERDE AYNI GÜN KARGO
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:24px"><path d="M5 12l5 5L20 7"></path></svg>
+                2199₺ VE ÜZERİ SİPARİŞLERDE ÜCRETSİZ KARGO
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:24px"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg>
+                256-BIT SSL GÜVENLİ ALIŞVERİŞ
+            </span>
+            <span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"></path></svg>
+                SAAT 14:00'A KADAR VERİLEN SİPARİŞLERDE AYNI GÜN KARGO
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:24px"><path d="M5 12l5 5L20 7"></path></svg>
+                2199₺ VE ÜZERİ SİPARİŞLERDE ÜCRETSİZ KARGO
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:24px"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg>
+                256-BIT SSL GÜVENLİ ALIŞVERİŞ
+            </span>
         </div>
     </div>
 
-    <!-- ============ NAVBAR ============ -->
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-left">
-            <a href="#" class="nav-logo">
-                <div class="nav-logo-icon">OE</div>
-                <div class="nav-logo-text">ONLY<span>EULA.</span></div>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#" class="active">Ana Sayfa</a></li>
-                <li class="dropdown">
-                    <a href="#">Kategoriler <span class="dropdown-arrow">▾</span></a>
-                </li>
-                <li class="dropdown">
-                    <a href="#">Markalar <span class="dropdown-arrow">▾</span></a>
-                </li>
-                <li><a href="#">Partner Programı</a></li>
-                <li><a href="#">İletişim</a></li>
-            </ul>
+            <img src="logo.jpg" alt="Only EULA Logo">
+            ONLYEULA.
+        </div>
+        <div class="nav-center">
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Kategoriler ▾</a>
+            <a href="#">Markalar ▾</a>
+            <a href="#">Partner Programı</a>
+            <a href="#">İletişim</a>
         </div>
         <div class="nav-right">
-            <button class="nav-icon" aria-label="Ara">🔍</button>
-            <button class="nav-icon" aria-label="Hesap">👤</button>
-            <button class="nav-icon" aria-label="Sepet">
-                🛒
-                <span class="badge">2</span>
+            <button class="icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+            </button>
+            <button class="icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            <button class="icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"></path><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
             </button>
         </div>
-        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')">☰</button>
     </nav>
 
-    <!-- ============ HERO GRID ============ -->
-    <div class="hero-section">
+    <!-- Hero Grid -->
+    <section class="hero-section">
         <div class="hero-grid">
-            <!-- Card 1: Tall keyboard -->
-            <div class="hero-card hero-card-1 fade-in">
-                <img src="keyboard_vertical.jpg" alt="KF90 HE PRO">
-                <div class="hero-card-overlay">
-                    <div class="hero-card-tag">Yeni</div>
-                    <div class="hero-card-title">KF90</div>
-                    <div class="hero-card-subtitle">Hall Effect 60% Keyboard</div>
+            <div class="hero-card tall" onclick="openModal(1)">
+                <img src="keyboard_vertical.jpg" alt="KF90" class="hero-img anim-1">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h3>KF90 HE</h3>
+                    <p>60% Manyetik Switch Klavye</p>
                 </div>
             </div>
-
-            <!-- Card 2: Wide mousepad circuit -->
-            <div class="hero-card hero-card-2 fade-in">
-                <img src="mousepad_circuit.jpg" alt="Circuit Deskmat">
-                <div class="hero-card-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.3));">
-                    <div class="hero-card-tag" style="background:#10b981;">Popüler</div>
-                    <div class="hero-card-title sm">Circuit<br>Deskmat</div>
-                    <div class="hero-card-subtitle">Cyberpunk XL Mousepad — 900x400mm</div>
+            
+            <div class="hero-card mid-top" onclick="openModal(4)">
+                <img src="mousepad_circuit.jpg" alt="Circuit" class="hero-img anim-2">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h3>Circuit Deskmat</h3>
+                    <p>Cyberpunk Temalı XL Yüzey</p>
                 </div>
             </div>
-
-            <!-- Card 3: Cyberglass mousepad -->
-            <div class="hero-card hero-card-3 fade-in">
-                <img src="mousepad_cyberglass.jpg" alt="Cyberglass">
-                <div class="hero-card-overlay">
-                    <div class="hero-card-title sm" style="font-style:italic;letter-spacing:2px;">CYBERGLASS<br><span style="font-size:14px;font-weight:600;letter-spacing:3px;opacity:0.8;">DOT CLICKER<br>EDITION</span></div>
+            
+            <div class="hero-card right-top" onclick="openModal(6)">
+                <img src="mousepad_cyberglass.jpg" alt="Cyberglass" class="hero-img anim-3">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h3>Cyberglass</h3>
+                    <p>Ultra Hızlı Cam Hissi</p>
                 </div>
             </div>
-
-            <!-- Card 4: Ravenfall deskmat -->
-            <div class="hero-card hero-card-4 fade-in">
-                <img src="mousepad_ravenfall.jpg" alt="Ravenfall Deskmat">
-                <div class="hero-card-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.4));">
-                    <div class="hero-card-title" style="font-family:serif;font-style:italic;font-size:36px;">Ravenfall</div>
-                    <div class="hero-card-subtitle">Cyberpunk City Deskmat — Limited Edition</div>
+            
+            <div class="hero-card mid-bottom" onclick="openModal(5)">
+                <img src="mousepad_ravenfall.jpg" alt="Ravenfall" class="hero-img anim-4">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h3>Ravenfall</h3>
+                    <p>Şehir Manzaralı Konfor</p>
                 </div>
             </div>
-
-            <!-- Card 5: Keyboard showcase -->
-            <div class="hero-card hero-card-5 fade-in">
-                <img src="keyboard.jpg" alt="KF90 HE PRO" style="object-position: center;">
-                <div class="hero-card-overlay">
-                    <div class="hero-card-tag">8000Hz</div>
-                    <div class="hero-card-title sm">KF90 HE PRO</div>
-                    <div class="hero-card-subtitle">0.01mm Rapid Trigger</div>
+            
+            <div class="hero-card right-bottom" onclick="openModal(1)">
+                <img src="keyboard.jpg" alt="KF90 PRO" class="hero-img anim-5">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h3>KF90 HE PRO</h3>
+                    <p>Ultimate Performans</p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Product Grid -->
+    <h2 class="section-title">En Yeni Ürünler</h2>
+    <div class="products-grid" id="productsGrid">
+        <!-- JS Render -->
     </div>
 
-    <!-- ============ FEATURES BAR ============ -->
+    <!-- Features Bar -->
     <div class="features-bar">
-        <div class="features-bar-inner">
-            <div class="feature-bar-item fade-in">
-                <div class="feature-bar-icon">🚚</div>
-                <div class="feature-bar-text">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="f-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
+                <div class="f-text">
                     <h4>Aynı Gün Kargo</h4>
-                    <p>14:00'e kadar sipariş ver</p>
+                    <p>14:00'dan önceki siparişler</p>
                 </div>
             </div>
-            <div class="feature-bar-item fade-in">
-                <div class="feature-bar-icon">🔒</div>
-                <div class="feature-bar-text">
+            <div class="feature-item">
+                <div class="f-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg></div>
+                <div class="f-text">
                     <h4>Güvenli Ödeme</h4>
-                    <p>256-bit SSL şifreleme</p>
+                    <p>256-Bit SSL Koruması</p>
                 </div>
             </div>
-            <div class="feature-bar-item fade-in">
-                <div class="feature-bar-icon">📦</div>
-                <div class="feature-bar-text">
+            <div class="feature-item">
+                <div class="f-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                <div class="f-text">
                     <h4>Ücretsiz Kargo</h4>
-                    <p>2199₺ üzeri siparişlerde</p>
+                    <p>2199₺ Üzeri Siparişlerde</p>
                 </div>
             </div>
-            <div class="feature-bar-item fade-in">
-                <div class="feature-bar-icon">🔄</div>
-                <div class="feature-bar-text">
+            <div class="feature-item">
+                <div class="f-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.13 15.57a9 9 0 1 0 3.09-10.4l3.18 3.18"></path></svg></div>
+                <div class="f-text">
                     <h4>Kolay İade</h4>
-                    <p>14 gün içinde ücretsiz iade</p>
+                    <p>14 Gün İçinde İade İmkanı</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============ PRODUCTS ============ -->
-    <div class="products-section">
-        <div class="products-header">
-            <h2>Ürünler</h2>
-            <div class="products-header-tabs">
-                <button class="tab-btn active">Tümü</button>
-                <button class="tab-btn">Klavyeler</button>
-                <button class="tab-btn">Mousepad</button>
-            </div>
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <img src="keyboard.jpg" alt="Driver" class="cta-bg">
+        <div class="cta-content">
+            <h2>Performansı Serbest Bırak</h2>
+            <p>KF90 serisi için özel olarak tasarlanmış Only EULA Driver v3.2 ile Rapid Trigger ve SOCD ayarlarını yapılandır.</p>
+            <a href="OnlyEULA_KF90_HE_Driver_v3.2.1_Setup.txt" download class="dl-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Driver İndir (Windows)
+            </a>
         </div>
+    </section>
 
-        <div class="products-grid">
-            <!-- Product 1 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="keyboard.jpg" alt="KF90 HE PRO">
-                    <div class="product-tag">En Çok Satan</div>
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">KF90 HE PRO</div>
-                    <div class="product-desc">60% Hall Effect Klavye — 8000Hz, Rapid Trigger</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺7,999</div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="keyboard_vertical.jpg" alt="KF90 HE">
-                    <div class="product-tag new">Yeni</div>
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">KF90 HE</div>
-                    <div class="product-desc">60% Hall Effect Klavye — 1000Hz, RGB</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺4,999</div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="mousepad_circuit.jpg" alt="Circuit Deskmat">
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">Circuit Deskmat XL</div>
-                    <div class="product-desc">900x400mm — Cyberpunk Circuit Design</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺1,299</div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="mousepad_ravenfall.jpg" alt="Ravenfall Deskmat">
-                    <div class="product-tag sale">%20 İndirim</div>
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">Ravenfall Deskmat</div>
-                    <div class="product-desc">900x400mm — Cyberpunk City Edition</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺999 <span class="old">₺1,249</span></div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="mousepad_cyberglass.jpg" alt="Cyberglass Mousepad">
-                    <div class="product-tag new">Yeni</div>
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">Cyberglass Dot Clicker</div>
-                    <div class="product-desc">450x400mm — BW Cyberpunk Mousepad</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺899</div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 6 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="keyboard.jpg" alt="KF90 HE MAX" style="filter:brightness(0.9) contrast(1.1);">
-                    <div class="product-tag" style="background:#f59e0b;">Ultimate</div>
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">KF90 HE MAX</div>
-                    <div class="product-desc">60% CNC Alüminyum — OLED, 8000Hz, DKS</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺12,999</div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 7 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="mousepad_circuit.jpg" alt="Circuit Mousepad M" style="object-position:left;">
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">Circuit Mousepad M</div>
-                    <div class="product-desc">450x400mm — Kompakt versiyon</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺699</div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 8 -->
-            <div class="product-card fade-in">
-                <div class="product-img">
-                    <img src="mousepad_ravenfall.jpg" alt="Ravenfall M" style="object-position:right;">
-                    <button class="product-wishlist">♡</button>
-                </div>
-                <div class="product-info">
-                    <div class="product-brand">Only EULA</div>
-                    <div class="product-name">Ravenfall Mousepad M</div>
-                    <div class="product-desc">450x400mm — Kompakt versiyon</div>
-                    <div class="product-bottom">
-                        <div class="product-price">₺649</div>
-                        <button class="product-add">+</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ CTA BANNER ============ -->
-    <div class="cta-banner">
-        <div class="cta-inner">
-            <div class="cta-content">
-                <h2>KF90 HE Driver İndir</h2>
-                <p>Rapid Trigger, SOCD, RGB ve tüm gelişmiş ayarları yapılandırmak için ücretsiz driver yazılımını indirin.</p>
-                <a href="OnlyEULA_KF90_HE_Driver_v3.2.1_Setup.txt" download class="cta-btn">⬇ Ücretsiz İndir — v3.2.1</a>
-            </div>
-            <div class="cta-image">
-                <img src="keyboard.jpg" alt="KF90 HE PRO">
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ FOOTER ============ -->
+    <!-- Footer -->
     <footer>
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <div class="footer-brand-text">ONLY<span>EULA.</span></div>
-                <p>Profesyonel oyuncular için tasarlanmış Hall Effect klavyeler ve gaming mousepadler. Rakipsiz hassasiyet, üstün performans.</p>
-                <div class="footer-socials">
-                    <a href="#" class="footer-social">𝕏</a>
-                    <a href="#" class="footer-social">📷</a>
-                    <a href="#" class="footer-social">▶</a>
-                    <a href="#" class="footer-social">💬</a>
+        <div class="footer-grid">
+            <div class="f-brand">
+                <h3><img src="logo.jpg" alt="Logo"> ONLY EULA</h3>
+                <p>Oyuncular için tasarlanmış premium donanım çözümleri. Sınırları aşın, oyununuzu bir üst seviyeye taşıyın.</p>
+                <div class="social-icons">
+                    <a href="#"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
                 </div>
             </div>
-            <div class="footer-col">
+            <div class="f-col">
                 <h4>Ürünler</h4>
-                <a href="#">KF90 HE</a>
-                <a href="#">KF90 HE PRO</a>
-                <a href="#">KF90 HE MAX</a>
-                <a href="#">Circuit Deskmat</a>
-                <a href="#">Ravenfall Deskmat</a>
-                <a href="#">Cyberglass Mousepad</a>
+                <ul>
+                    <li><a href="#">Klavyeler</a></li>
+                    <li><a href="#">Mousepadler</a></li>
+                    <li><a href="#">Switchler</a></li>
+                    <li><a href="#">Aksesuarlar</a></li>
+                </ul>
             </div>
-            <div class="footer-col">
+            <div class="f-col">
                 <h4>Destek</h4>
-                <a href="#">Driver İndir</a>
-                <a href="#">Firmware</a>
-                <a href="#">SSS</a>
-                <a href="#">Sipariş Takibi</a>
-                <a href="#">İade & Değişim</a>
-                <a href="#">Garanti</a>
+                <ul>
+                    <li><a href="#">Kargo ve İade</a></li>
+                    <li><a href="#">Garanti Şartları</a></li>
+                    <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                    <li><a href="#">İletişim</a></li>
+                </ul>
             </div>
-            <div class="footer-col">
+            <div class="f-col">
                 <h4>Şirket</h4>
-                <a href="#">Hakkımızda</a>
-                <a href="#">Partner Programı</a>
-                <a href="#">İletişim</a>
-                <a href="#">Gizlilik Politikası</a>
-                <a href="#">Kullanım Koşulları</a>
+                <ul>
+                    <li><a href="#">Hakkımızda</a></li>
+                    <li><a href="#">Partner Programı</a></li>
+                    <li><a href="#">Gizlilik Sözleşmesi</a></li>
+                    <li><a href="#">Mesafeli Satış Sözleşmesi</a></li>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© 2026 Only EULA. Tüm hakları saklıdır.</span>
-            <div class="footer-payments">
-                <span class="footer-payment">VISA</span>
-                <span class="footer-payment">MC</span>
-                <span class="footer-payment">TROY</span>
-                <span class="footer-payment">Havale</span>
+            <p>&copy; 2026 Only EULA. Tüm hakları saklıdır.</p>
+            <div class="payment-methods">
+                <span>VISA</span>
+                <span>MASTERCARD</span>
+                <span>TROY</span>
+                <span>HAVALE/EFT</span>
             </div>
         </div>
     </footer>
 
-    <!-- ============ COOKIE BAR ============ -->
+    <!-- Cookie Bar -->
     <div class="cookie-bar" id="cookieBar">
-        <span>🍪 Bu sitede deneyiminizi iyileştirmek amacıyla çerezler kullanılmaktadır. Sitede gezinmeye devam ederek çerez kullanılmasını izin vermiş olursunuz. <a href="#">Gizlilik Politikası</a></span>
-        <button class="cookie-accept" onclick="document.getElementById('cookieBar').classList.add('hidden')">Kabul Et</button>
+        <p>Sizlere daha iyi hizmet sunabilmek için web sitemizde çerezler kullanılmaktadır. Sitemizi kullanarak çerez politikamızı kabul etmiş sayılırsınız.</p>
+        <button class="cookie-btn" onclick="document.getElementById('cookieBar').classList.add('cookie-hidden')">Kabul Et ve Kapat</button>
     </div>
 
-    <!-- ============ JAVASCRIPT ============ -->
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal" onclick="closeModalOnOverlay(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-img-col">
+                <img id="mImg" src="" alt="Product">
+            </div>
+            <div class="modal-info-col">
+                <div class="m-brand" id="mBrand"></div>
+                <h2 class="m-title" id="mTitle"></h2>
+                <p class="m-desc" id="mDesc"></p>
+                
+                <div class="m-specs" id="mSpecs">
+                    <!-- Specs injected via JS -->
+                </div>
+                
+                <div class="m-price-area">
+                    <div>
+                        <div class="m-old-price" id="mOldPrice" style="display:none;"></div>
+                        <div class="m-price" id="mPrice"></div>
+                    </div>
+                </div>
+                
+                <button class="m-add-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    Sepete Ekle
+                </button>
+                
+                <div class="m-meta">
+                    <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10b981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Stokta Var</span>
+                    <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> Bugün 14:00'a kadar sipariş verin, bugün kargolayalım.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Navbar scroll
+        // Sticky Navbar Script
         window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
 
-        // Scroll animations
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach((e, i) => {
-                if (e.isIntersecting) {
-                    setTimeout(() => e.target.classList.add('visible'), i * 80);
-                }
-            });
-        }, { threshold: 0.1 });
+        // Products Data
+        const products = [
+            {
+                id: 1, name: "KF90 HE PRO", brand: "ONLY EULA", price: "₺7,999", oldPrice: null, 
+                desc: "60% HE Klavye, 8000Hz, Rapid Trigger, SOCD desteği ile en üst düzey rekabetçi avantaj.", 
+                specs: ["Manyetik Switchler", "8000Hz Polling Rate", "Rapid Trigger (0.1mm - 4.0mm)", "SOCD Desteği", "PBT Keycaps"], 
+                img: "keyboard.jpg", tag: "Ultimate"
+            },
+            {
+                id: 2, name: "KF90 HE", brand: "ONLY EULA", price: "₺4,999", oldPrice: null, 
+                desc: "60% HE Klavye, 1000Hz, per-key RGB aydınlatma ve premium alüminyum kasa.", 
+                specs: ["Manyetik Switchler", "1000Hz Polling Rate", "Per-key RGB Aydınlatma", "Alüminyum Kasa"], 
+                img: "keyboard_vertical.jpg", tag: "En Çok Satan"
+            },
+            {
+                id: 3, name: "KF90 HE MAX", brand: "ONLY EULA", price: "₺12,999", oldPrice: null, 
+                desc: "Tam CNC Alüminyum gövde, entegre OLED ekran ve Dynamic Keystroke (DKS) teknolojisi.", 
+                specs: ["CNC Alüminyum Kasa", "OLED Bilgi Ekranı", "DKS (Dynamic Keystroke)", "Premium Conta Yapısı"], 
+                img: "keyboard.jpg", tag: "Yeni"
+            },
+            {
+                id: 4, name: "Circuit Deskmat XL", brand: "ONLY EULA", price: "₺1,299", oldPrice: null, 
+                desc: "900x400mm cyberpunk devre kartı temalı, dikişli kenarlı dev mousepad.", 
+                specs: ["900x400x4mm Boyut", "Mikro Dokuma Speed Yüzey", "Kaymaz Kauçuk Taban", "Dikişli Kenarlar"], 
+                img: "mousepad_circuit.jpg", tag: null
+            },
+            {
+                id: 5, name: "Ravenfall Deskmat", brand: "ONLY EULA", price: "₺999", oldPrice: "₺1,249", 
+                desc: "900x400mm cyberpunk şehir manzarası. Su itici kaplama ile uzun ömürlü.", 
+                specs: ["900x400x4mm Boyut", "Su İtici Özel Yüzey", "Kaymaz Kauçuk Taban", "Dikişli Kenarlar"], 
+                img: "mousepad_ravenfall.jpg", tag: "%20 İndirim"
+            },
+            {
+                id: 6, name: "Cyberglass Dot Clicker", brand: "ONLY EULA", price: "₺899", oldPrice: null, 
+                desc: "450x400mm BW cyberpunk temalı, ultra hızlı cam hissiyatlı özel yüzey.", 
+                specs: ["450x400x4mm Boyut", "Cam Hissiyatlı Speed Yüzey", "Siyah Beyaz Cyberpunk Tasarım", "Lazer Kesim Kenarlar"], 
+                img: "mousepad_cyberglass.jpg", tag: null
+            },
+            {
+                id: 7, name: "Circuit Mousepad M", brand: "ONLY EULA", price: "₺699", oldPrice: null, 
+                desc: "450x400mm kompakt boyut. Mükemmel kontrol ve durma gücü arayanlar için.", 
+                specs: ["450x400x4mm Boyut", "Üst Düzey Kontrol Yüzeyi", "Cyberpunk Devre Tasarımı", "Kauçuk Taban"], 
+                img: "mousepad_circuit.jpg", tag: null
+            },
+            {
+                id: 8, name: "Ravenfall Mousepad M", brand: "ONLY EULA", price: "₺649", oldPrice: null, 
+                desc: "450x400mm kompakt boyutlu Ravenfall temalı dengeli (hybrid) mousepad.", 
+                specs: ["450x400x4mm Boyut", "Dengeli (Hybrid) Yüzey", "Cyberpunk Şehir Teması", "Dikişsiz Kenarlar"], 
+                img: "mousepad_ravenfall.jpg", tag: null
+            }
+        ];
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        // Render Products
+        const grid = document.getElementById('productsGrid');
+        let html = '';
+        products.forEach(p => {
+            html += `
+            <div class="product-card" onclick="openModal(${p.id})">
+                ${p.tag ? `<div class="tag">${p.tag}</div>` : ''}
+                <button class="wishlist-btn" onclick="event.stopPropagation(); alert('Favorilere eklendi!')">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+                <div class="product-img-wrap">
+                    <img src="${p.img}" alt="${p.name}">
+                </div>
+                <div class="p-brand">${p.brand}</div>
+                <h3 class="p-name">${p.name}</h3>
+                <p class="p-desc">${p.desc}</p>
+                <div class="p-bottom">
+                    <div class="p-price-wrap">
+                        ${p.oldPrice ? `<span class="p-old-price">${p.oldPrice}</span>` : ''}
+                        <span class="p-price">${p.price}</span>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="event.stopPropagation(); openModal(${p.id})">İncele</button>
+                </div>
+            </div>`;
+        });
+        grid.innerHTML = html;
 
-        // Tab filtering
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+        // Modal Logic
+        const modal = document.getElementById('productModal');
+        
+        function openModal(id) {
+            const p = products.find(x => x.id === id);
+            if(!p) return;
+            
+            document.getElementById('mImg').src = p.img;
+            document.getElementById('mBrand').innerText = p.brand;
+            document.getElementById('mTitle').innerText = p.name;
+            document.getElementById('mDesc').innerText = p.desc;
+            document.getElementById('mPrice').innerText = p.price;
+            
+            if(p.oldPrice) {
+                document.getElementById('mOldPrice').innerText = p.oldPrice;
+                document.getElementById('mOldPrice').style.display = 'block';
+            } else {
+                document.getElementById('mOldPrice').style.display = 'none';
+            }
+            
+            let specsHtml = '';
+            p.specs.forEach(s => {
+                specsHtml += `
+                <div class="m-spec-item">
+                    <svg class="m-spec-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    ${s}
+                </div>`;
             });
+            document.getElementById('mSpecs').innerHTML = specsHtml;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function closeModalOnOverlay(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') closeModal();
         });
     </script>
 </body>
