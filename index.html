@@ -51,6 +51,19 @@
         .icon-btn:hover { color: var(--primary); }
         .icon-btn svg { width: 24px; height: 24px; stroke-width: 2; }
         
+        
+        .nav-center .dropdown { position: relative; display: flex; align-items: center; cursor: pointer; height: 100%; }
+        .dropdown-menu { 
+            position: absolute; top: 40px; left: -16px; background: var(--white); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 12px; padding: 12px;
+            display: flex; flex-direction: column; min-width: 200px;
+            opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease;
+            border: 1px solid var(--border); z-index: 100;
+        }
+        .nav-center .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { padding: 12px 16px; border-radius: 8px; font-weight: 500; display: block; color: var(--text-main); text-decoration: none; }
+        .dropdown-menu a:hover { background: var(--bg); color: var(--primary); }
+
         /* Hero Grid */
         .hero-section { padding: 24px 5%; max-width: 1600px; margin: 0 auto; }
         .hero-grid {
@@ -91,20 +104,20 @@
         .hero-content p { font-size: 14px; opacity: 0.9; }
         
         .hero-card:hover .hero-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%); }
-        .hero-card:hover .hero-img { transform: scale(1.08) !important; animation-play-state: paused; }
+        .hero-card:hover .hero-img { transform: scale(1.15) !important; animation-play-state: paused; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
         
         /* Ken Burns Animations */
-        @keyframes kb1 { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.15) translate(-2%, 2%); } }
-        @keyframes kb2 { 0% { transform: scale(1.1) translate(2%, -2%); } 100% { transform: scale(1) translate(0, 0); } }
-        @keyframes kb3 { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.1) translate(2%, 2%); } }
-        @keyframes kb4 { 0% { transform: scale(1.15) translate(-2%, -2%); } 100% { transform: scale(1) translate(0, 0); } }
-        @keyframes kb5 { 0% { transform: scale(1.05) translate(1%, 0); } 100% { transform: scale(1.15) translate(-1%, -1%); } }
+        @keyframes kb1 { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.25) translate(-4%, 4%); } }
+        @keyframes kb2 { 0% { transform: scale(1.2) translate(4%, -4%); } 100% { transform: scale(1) translate(0, 0); } }
+        @keyframes kb3 { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.2) translate(4%, 4%); } }
+        @keyframes kb4 { 0% { transform: scale(1.25) translate(-4%, -4%); } 100% { transform: scale(1) translate(0, 0); } }
+        @keyframes kb5 { 0% { transform: scale(1.05) translate(2%, 0); } 100% { transform: scale(1.25) translate(-2%, -2%); } }
         
-        .anim-1 { animation: kb1 20s infinite alternate ease-in-out; }
-        .anim-2 { animation: kb2 18s infinite alternate ease-in-out; }
-        .anim-3 { animation: kb3 22s infinite alternate ease-in-out; }
-        .anim-4 { animation: kb4 15s infinite alternate ease-in-out; }
-        .anim-5 { animation: kb5 25s infinite alternate ease-in-out; }
+        .anim-1 { animation: kb1 12s infinite alternate ease-in-out; }
+        .anim-2 { animation: kb2 10s infinite alternate ease-in-out; }
+        .anim-3 { animation: kb3 14s infinite alternate ease-in-out; }
+        .anim-4 { animation: kb4 9s infinite alternate ease-in-out; }
+        .anim-5 { animation: kb5 15s infinite alternate ease-in-out; }
         
         /* Product Section */
         .section-title { font-size: 32px; font-weight: 800; text-align: center; margin: 60px 0 40px; letter-spacing: -0.5px; }
@@ -250,8 +263,27 @@
         </div>
         <div class="nav-center">
             <a href="#">Ana Sayfa</a>
-            <a href="#">Kategoriler ▾</a>
-            <a href="#">Markalar ▾</a>
+            
+            <div class="dropdown">
+                <span>Kategoriler ▾</span>
+                <div class="dropdown-menu">
+                    <a href="#">Klavyeler</a>
+                    <a href="#">Mousepadler</a>
+                    <a href="#">Aksesuarlar</a>
+                    <a href="#">Switches</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown">
+                <span>Markalar ▾</span>
+                <div class="dropdown-menu">
+                    <a href="#">ONLY EULA</a>
+                    <a href="#">Wraith</a>
+                    <a href="#">Gateron</a>
+                </div>
+            </div>
+
             <a href="#">Partner Programı</a>
             <a href="#">İletişim</a>
         </div>
