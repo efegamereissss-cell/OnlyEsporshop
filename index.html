@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only EULA KF90 HE — Driver & Configuration</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect rx='20' width='100' height='100' fill='%237c3aed'/%3E%3Ctext x='50' y='65' text-anchor='middle' fill='white' font-size='45' font-weight='900' font-family='sans-serif'%3EOE%3C/text%3E%3C/svg%3E">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* ======================== RESET & BASE ======================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #06060b;
+            --bg-secondary: #0c0c14;
+            --bg-card: #111119;
+            --bg-card-hover: #16161f;
+            --bg-input: #13131d;
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(124, 58, 237, 0.35);
+            --accent-subtle: rgba(124, 58, 237, 0.08);
+            --cyan: #22d3ee;
+            --cyan-glow: rgba(34, 211, 238, 0.3);
+            --green: #10b981;
+            --red: #ef4444;
+            --orange: #f59e0b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(148, 163, 184, 0.06);
+            --border-hover: rgba(124, 58, 237, 0.3);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ======================== SCROLLBAR ======================== */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* ======================== BACKGROUND EFFECTS ======================== */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(124, 58, 237, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 0;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+        }
+
+        .bg-gradient-top {
+            position: fixed;
+            top: -300px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(124, 58, 237, 0.08), transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ======================== NAVBAR ======================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(6, 6, 11, 0.6);
+            backdrop-filter: blur(24px) saturate(1.2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(6, 6, 11, 0.92);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 13px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo::after {
+            content: '';
+            position: absolute;
+            inset: 1.5px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            z-index: 0;
+        }
+
+        .nav-logo span {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-brand-text {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+
+        .nav-brand-text .accent { color: var(--accent-light); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            background: var(--accent-subtle);
+        }
+
+        .nav-links a.active {
+            color: var(--accent-light);
+            background: var(--accent-subtle);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent), #6d28d9) !important;
+            color: white !important;
+            padding: 7px 18px !important;
+            border-radius: var(--radius-sm) !important;
+            font-weight: 600 !important;
+            box-shadow: 0 2px 10px var(--accent-glow);
+        }
+
+        .nav-cta:hover {
+            box-shadow: 0 4px 20px var(--accent-glow) !important;
+            transform: translateY(-1px);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ======================== HERO ======================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content { animation: fadeInUp 0.8s ease; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(34, 211, 238, 0.05));
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 12px;
+            color: var(--accent-light);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 12px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, #c4b5fd, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .hero-model {
+            font-size: clamp(13px, 1.5vw, 16px);
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 460px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 28px;
+            margin-bottom: 36px;
+        }
+
+        .hero-stat { text-align: left; }
+
+        .hero-stat-value {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            color: white;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .btn-primary:hover::before { transform: translateX(100%); }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.03);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--border-hover);
+            background: rgba(124, 58, 237, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .btn-lg {
+            padding: 16px 36px;
+            font-size: 15px;
+            border-radius: var(--radius-lg);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 0.9s ease 0.2s both;
+        }
+
+        .keyboard-img-wrap {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow:
+                0 30px 60px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(124, 58, 237, 0.08);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease;
+            transform: perspective(1200px) rotateX(4deg) rotateY(-3deg);
+        }
+
+        .keyboard-img-wrap:hover {
+            transform: perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1.02);
+            box-shadow:
+                0 40px 80px rgba(0, 0, 0, 0.6),
+                0 0 120px rgba(124, 58, 237, 0.12);
+        }
+
+        .keyboard-hero-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .glow-effect {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 60px;
+            background: radial-gradient(ellipse, rgba(124, 58, 237, 0.2), transparent);
+            filter: blur(20px);
+            pointer-events: none;
+        }
+
+        /* ======================== FLOATING PARTICLES ======================== */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
+
+        /* ======================== SECTIONS ======================== */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 100px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(34, 211, 238, 0.05));
+            border: 1px solid rgba(124, 58, 237, 0.12);
+            border-radius: 100px;
+            padding: 5px 14px;
+            font-size: 11px;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), rgba(124, 58, 237, 0.1), var(--border), transparent);
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        /* ======================== MODELS ======================== */
+        #models { background: var(--bg-secondary); }
+
+        .model-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .model-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 36px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(124, 58, 237, 0.03), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .model-card:hover::before { opacity: 1; }
+
+        .model-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .model-card.featured {
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .model-card.featured::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--cyan), var(--accent));
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .model-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .model-name {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .model-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .model-specs {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .model-specs li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .model-specs li:last-child { border: none; }
+
+        .model-specs .check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .model-price {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .model-price .currency { font-size: 15px; color: var(--text-muted); font-weight: 500; }
+
+        .model-card .btn { width: 100%; justify-content: center; }
+
+        /* ======================== FEATURES ======================== */
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px 22px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.2), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(34, 211, 238, 0.05));
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+
+        .feature-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ======================== DOWNLOAD SECTION ======================== */
+        #download {
+            background: var(--bg-secondary);
+            overflow: hidden;
+        }
+
+        .download-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .download-card {
+            background: linear-gradient(145deg, var(--bg-card), rgba(124, 58, 237, 0.03));
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            border-radius: var(--radius-xl);
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--cyan), var(--accent), transparent);
+        }
+
+        .download-card::after {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.06), transparent 70%);
+            pointer-events: none;
+        }
+
+        .download-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 10px 40px var(--accent-glow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .download-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .download-version {
+            font-size: 14px;
+            color: var(--accent-light);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .download-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 48px;
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            text-decoration: none;
+            box-shadow: 0 8px 30px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.15), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .download-btn:hover::before { transform: translateX(100%); }
+
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.5);
+        }
+
+        .download-btn .dl-icon {
+            font-size: 20px;
+            animation: bounceDown 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
+        }
+
+        .download-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .download-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .download-meta-item .icon { color: var(--accent-light); }
+
+        .download-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .download-feature {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 14px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .download-feature:hover {
+            border-color: var(--border-hover);
+            background: rgba(124, 58, 237, 0.03);
+        }
+
+        .download-feature .df-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .download-feature .df-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .download-feature .df-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Download progress animation */
+        .download-progress {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .download-progress.active { display: block; }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-input);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* ======================== DRIVER SOFTWARE ======================== */
+        #driver { background: var(--bg-primary); }
+
+        .driver-app {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .driver-titlebar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .driver-titlebar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .driver-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .driver-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .driver-dots span:nth-child(1) { background: #ef4444; }
+        .driver-dots span:nth-child(2) { background: #f59e0b; }
+        .driver-dots span:nth-child(3) { background: #10b981; }
+
+        .driver-title-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .driver-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--green);
+            font-weight: 500;
+        }
+
+        .driver-status .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .driver-content {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            min-height: 550px;
+        }
+
+        .driver-sidebar {
+            background: rgba(0, 0, 0, 0.25);
+            border-right: 1px solid var(--border);
+            padding: 12px 0;
+        }
+
+        .driver-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 2px solid transparent;
+            font-weight: 500;
+        }
+
+        .driver-nav-item:hover {
+            color: var(--text-primary);
+            background: var(--accent-subtle);
+        }
+
+        .driver-nav-item.active {
+            color: var(--accent-light);
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.08), transparent);
+            border-left-color: var(--accent);
+        }
+
+        .driver-nav-item .icon { font-size: 14px; width: 18px; text-align: center; }
+
+        .driver-nav-section {
+            padding: 14px 18px 5px;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .driver-main { padding: 24px; }
+
+        .driver-panel { display: none; }
+        .driver-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .driver-panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .driver-panel-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        /* Driver Controls */
+        .control-group { margin-bottom: 24px; }
+
+        .control-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .control-label-text { font-size: 13px; font-weight: 600; }
+
+        .control-value {
+            font-size: 13px;
+            color: var(--accent-light);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .control-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        .range-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 3px;
+            background: var(--bg-input);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 18px var(--accent-glow);
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toggle-row:last-child { border: none; }
+        .toggle-info { flex: 1; }
+        .toggle-title { font-size: 13px; font-weight: 600; }
+        .toggle-desc { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+        .toggle-switch {
+            width: 42px;
+            height: 22px;
+            background: var(--bg-input);
+            border-radius: 11px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .toggle-switch.on { background: var(--accent); border-color: var(--accent); }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.on::after { left: 22px; }
+
+        .custom-select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition);
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+
+        .custom-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .custom-select option { background: var(--bg-card); }
+
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 6px;
+        }
+
+        .preset-btn {
+            padding: 9px 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .preset-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
+
+        .preset-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .keybind-grid { display: grid; gap: 6px; }
+
+        .keybind-row {
+            display: grid;
+            grid-template-columns: 110px 1fr 70px;
+            gap: 10px;
+            align-items: center;
+            padding: 9px 12px;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .keybind-key { font-weight: 700; font-size: 12px; color: var(--accent-light); }
+        .keybind-action { font-size: 12px; color: var(--text-secondary); }
+
+        .keybind-edit {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            padding: 4px 8px;
+            font-size: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .keybind-edit:hover { border-color: var(--accent); color: var(--accent-light); }
+
+        .profile-bar { display: flex; gap: 6px; margin-bottom: 20px; }
+
+        .profile-tab {
+            padding: 7px 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .profile-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            text-align: center;
+        }
+
+        .stat-box-value {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-box-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .rt-visual {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .rt-visual-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+        }
+
+        .rt-bar-container {
+            position: relative;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .rt-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            border-radius: 8px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .rt-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .rt-graph {
+            margin-top: 16px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 60px;
+        }
+
+        .rt-graph-bar {
+            flex: 1;
+            background: linear-gradient(180deg, var(--accent), rgba(124, 58, 237, 0.15));
+            border-radius: 2px 2px 0 0;
+            transition: height 0.5s ease;
+            min-width: 3px;
+        }
+
+        .effect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .effect-btn {
+            padding: 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .effect-btn:hover { border-color: var(--border-hover); }
+        .effect-btn.active { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-light); }
+
+        .color-grid {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .color-swatch:hover { transform: scale(1.1); }
+        .color-swatch.active { border-color: white; box-shadow: 0 0 10px currentColor; }
+
+        .firmware-bar {
+            height: 4px;
+            background: var(--bg-input);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .firmware-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), var(--cyan));
+            border-radius: 2px;
+            transition: width 2s ease;
+        }
+
+        /* ======================== SPECS ======================== */
+        #specs { background: var(--bg-secondary); }
+
+        .specs-table {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        .specs-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .specs-row:last-child { border: none; }
+        .specs-row:hover { background: rgba(124, 58, 237, 0.02); }
+
+        .specs-label {
+            padding: 13px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .specs-value {
+            padding: 13px 20px;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+
+        /* ======================== FOOTER ======================== */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            padding: 50px 40px 24px;
+            background: var(--bg-primary);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 36px;
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .footer-col a {
+            display: block;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            padding: 3px 0;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover { color: var(--accent-light); transform: translateX(3px); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ======================== RESPONSIVE ======================== */
+        @media (max-width: 1024px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin: 0 auto 32px; }
+            .hero-stats { justify-content: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { max-width: 600px; margin: 0 auto; }
+            .model-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .driver-content { grid-template-columns: 1fr; }
+            .driver-sidebar {
+                display: flex; overflow-x: auto; border-right: none;
+                border-bottom: 1px solid var(--border); padding: 0;
+            }
+            .driver-nav-item { white-space: nowrap; border-left: none; border-bottom: 2px solid transparent; padding: 10px 14px; }
+            .driver-nav-item.active { border-left-color: transparent; border-bottom-color: var(--accent); }
+            .driver-nav-section { display: none; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+            .download-features { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 0 16px; }
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            section { padding: 60px 16px; }
+            .hero { padding: 80px 16px 40px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .hero-stats { flex-wrap: wrap; gap: 16px; }
+            .keyboard-img-wrap { transform: none; }
+            .specs-row { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; }
+            .effect-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: 1fr; }
+            .download-card { padding: 36px 20px; }
+            .download-features { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ======================== ANIMATIONS ======================== */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger-children .animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+        .stagger-children .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-children .animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
+        .stagger-children .animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
+        .stagger-children .animate-on-scroll:nth-child(5) { transition-delay: 0.4s; }
+        .stagger-children .animate-on-scroll:nth-child(6) { transition-delay: 0.5s; }
+        .stagger-children .animate-on-scroll:nth-child(7) { transition-delay: 0.6s; }
+        .stagger-children .animate-on-scroll:nth-child(8) { transition-delay: 0.7s; }
+        .stagger-children .animate-on-scroll:nth-child(9) { transition-delay: 0.8s; }
+
+        /* Counter animation */
+        .count-up {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-gradient-top"></div>
+    <div class="noise-overlay"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-brand">
+            <div class="nav-logo"><span>OE</span></div>
+            <span class="nav-brand-text">Only <span class="accent">EULA</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#hero" class="active">Ana Sayfa</a></li>
+            <li><a href="#models">Modeller</a></li>
+            <li><a href="#features">Özellikler</a></li>
+            <li><a href="#download">İndir</a></li>
+            <li><a href="#driver">Driver</a></li>
+            <li><a href="#specs">Teknik</a></li>
+            <li><a href="#download" class="nav-cta">⬇ Driver İndir</a></li>
+        </ul>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">☰</button>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Yeni Nesil Hall Effect Teknolojisi
+                </div>
+                <h1>
+                    <span class="gradient">KF90 HE</span><br>
+                    Serisi
+                </h1>
+                <div class="hero-model">Only EULA — 60% Mekanik Klavye</div>
+                <p>
+                    0.01mm aktüasyon hassasiyeti, 8000Hz polling rate ve Rapid Trigger ile rakipsiz performans.
+                    SOCD, Dynamic Keystroke ve tam özelleştirme desteği.
+                </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value count-up" data-target="0.01">0.01mm</div>
+                        <div class="hero-stat-label">Hassasiyet</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value count-up" data-target="8000">8000Hz</div>
+                        <div class="hero-stat-label">Polling Rate</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">64 Tuş</div>
+                        <div class="hero-stat-label">60% Layout</div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary btn-lg">⬇ Driver İndir</a>
+                    <a href="#models" class="btn btn-secondary btn-lg">Modelleri İncele →</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="keyboard-showcase">
+                    <div class="keyboard-img-wrap">
+                        <img src="keyboard.jpg" alt="Only EULA KF90 HE PRO 60% Keyboard" class="keyboard-hero-img">
+                        <div class="glow-effect"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ MODELS ============ -->
+    <section id="models">
+        <div class="section-header animate-on-scroll">
+            <div class="section-tag">⌨ Modeller</div>
+            <h2>İhtiyacına Uygun Modeli Seç</h2>
+            <p>Her seviye için tasarlanmış üç farklı model. Tümü Hall Effect manyetik switch teknolojisi ile.</p>
+        </div>
+        <div class="model-grid stagger-children">
+            <div class="model-card animate-on-scroll">
+                <div class="model-name">KF90 HE</div>
+                <div class="model-sub">Standart Edition — 60% Layout</div>
+                <ul class="model-specs">
+                    <li><span class="check">✓</span> Hall Effect Manyetik Switch</li>
+                    <li><span class="check">✓</span> 0.02mm Aktüasyon Hassasiyeti</li>
+                    <li><span class="check">✓</span> 1000Hz Polling Rate</li>
+                    <li><span class="check">✓</span> Rapid Trigger</li>
+                    <li><span class="check">✓</span> RGB Aydınlatma</li>
+                    <li><span class="check">✓</span> PBT Keycap</li>
+                    <li><span class="check">✓</span> USB-C Bağlantı</li>
+                </ul>
+                <div class="model-price">₺4,999 <span class="currency">TRY</span></div>
+                <button class="btn btn-secondary" style="width:100%;justify-content:center;">Detayları Gör</button>
+            </div>
+
+            <div class="model-card featured animate-on-scroll">
+                <div class="model-badge">En Popüler</div>
+                <div class="model-name">KF90 HE <span style="color:var(--accent-light)">PRO</span></div>
+                <div class="model-sub">Pro Edition — 60% Layout</div>
+                <ul class="model-specs">
+                    <li><span class="check">✓</span> Xingyi Manyetik Switch</li>
+                    <li><span class="check">✓</span> 0.01mm Aktüasyon Hassasiyeti</li>
+                    <li><span class="check">✓</span> 8000Hz Polling Rate</li>
+                    <li><span class="check">✓</span> Rapid Trigger + SOCD</li>
+                    <li><span class="check">✓</span> Per-Key RGB + Underglow</li>
+                    <li><span class="check">✓</span> Gasket Mount</li>
+                    <li><span class="check">✓</span> Bluetooth 5.1 + USB-C</li>
+                    <li><span class="check">✓</span> Dynamic Keystroke</li>
+                </ul>
+                <div class="model-price">₺7,999 <span class="currency">TRY</span></div>
+                <button class="btn btn-primary" style="width:100%;justify-content:center;">Hemen Al</button>
+            </div>
+
+            <div class="model-card animate-on-scroll">
+                <div class="model-badge" style="background:linear-gradient(135deg, #f59e0b, #ef4444);">Ultimate</div>
+                <div class="model-name">KF90 HE <span style="color:var(--orange)">MAX</span></div>
+                <div class="model-sub">Ultimate Edition — 60% Layout</div>
+                <ul class="model-specs">
+                    <li><span class="check">✓</span> Xingyi V2 Manyetik Switch</li>
+                    <li><span class="check">✓</span> 0.005mm Aktüasyon Hassasiyeti</li>
+                    <li><span class="check">✓</span> 8000Hz Polling Rate</li>
+                    <li><span class="check">✓</span> Rapid Trigger + SOCD + DKS</li>
+                    <li><span class="check">✓</span> OLED Ekran</li>
+                    <li><span class="check">✓</span> Alüminyum CNC Kasa</li>
+                    <li><span class="check">✓</span> BT 5.1 + 2.4GHz + USB-C</li>
+                    <li><span class="check">✓</span> Ses Damperleme Sistemi</li>
+                    <li><span class="check">✓</span> Mod Tuşu + Macro Desteği</li>
+                </ul>
+                <div class="model-price">₺12,999 <span class="currency">TRY</span></div>
+                <button class="btn btn-secondary" style="width:100%;justify-content:center;border-color:var(--orange);color:var(--orange);">Detayları Gör</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ FEATURES ============ -->
+    <section id="features">
+        <div class="section-header animate-on-scroll">
+            <div class="section-tag">⚡ Teknoloji</div>
+            <h2>Rakipsiz Özellikler</h2>
+            <p>En son Hall Effect teknolojisi ile donatılmış, profesyonel oyuncular için tasarlandı.</p>
+        </div>
+        <div class="features-grid stagger-children">
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">⚡</div><h3>Rapid Trigger</h3><p>0.01mm hassasiyetle anında tepki. Tuşa basma ve bırakma noktalarını bağımsız ayarlayın.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">📡</div><h3>8000Hz Polling Rate</h3><p>0.125ms input lag ile rakiplerinizden 8 kat hızlı yanıt. True 8K native destekli kontrolcü.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">🎮</div><h3>SOCD Cleaning</h3><p>Zıt yönlü tuşlar için Neutral, Last Input Wins ve Custom modları ile tam kontrol.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">🧲</div><h3>Hall Effect Switch</h3><p>Manyetik sensör ile sınırsız ömür. Fiziksel temas yok, aşınma yok, debounce yok.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">🔑</div><h3>Dynamic Keystroke</h3><p>Her tuş vuruşu için 4 farklı aksiyon. Basma, tutma, bırakma ve çift basma aksiyonları.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">🌈</div><h3>Per-Key RGB</h3><p>16.8M renk, 20+ efekt, underglow RGB. Her tuşa ayrı renk atama desteği.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">📐</div><h3>Gasket Mount</h3><p>Esnek montaj ile yumuşak ve homojen yazım. Silikon ses damperleme katmanları.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">📱</div><h3>Çoklu Bağlantı</h3><p>BT 5.1, 2.4GHz dongle ve USB-C. 3 cihaz arası anlık geçiş.</p></div>
+            <div class="feature-card animate-on-scroll"><div class="feature-icon">💾</div><h3>On-Board Memory</h3><p>5 profil dahili hafızada. Yazılımsız her cihazda ayarlarınızı kullanın.</p></div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ DOWNLOAD SECTION ============ -->
+    <section id="download">
+        <div class="section-header animate-on-scroll">
+            <div class="section-tag">⬇ İndirme Merkezi</div>
+            <h2>Driver & Yazılım</h2>
+            <p>Klavyenizi tam potansiyeliyle kullanmak için driver yazılımını indirin.</p>
+        </div>
+
+        <div class="download-container animate-on-scroll">
+            <div class="download-card">
+                <div class="download-icon">⬇</div>
+                <div class="download-title">Only EULA KF90 HE Driver</div>
+                <div class="download-version">Sürüm 3.2.1 — Build 2026.08.21</div>
+                <div class="download-desc">
+                    Rapid Trigger, SOCD, RGB, Makro ve tüm gelişmiş ayarları yapılandırın.
+                    Windows 10/11 (64-bit) uyumlu.
+                </div>
+
+                <a href="OnlyEULA_KF90_HE_Driver_v3.2.1_Setup.txt" download class="download-btn" id="downloadBtn" onclick="startDownload()">
+                    <span class="dl-icon">⬇</span>
+                    Ücretsiz İndir — v3.2.1
+                </a>
+
+                <div class="download-progress" id="downloadProgress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">İndiriliyor... 0%</div>
+                </div>
+
+                <div class="download-meta">
+                    <div class="download-meta-item">
+                        <span class="icon">📦</span> 128.4 MB
+                    </div>
+                    <div class="download-meta-item">
+                        <span class="icon">💻</span> Windows 10/11
+                    </div>
+                    <div class="download-meta-item">
+                        <span class="icon">🔒</span> Güvenli İndirme
+                    </div>
+                    <div class="download-meta-item">
+                        <span class="icon">🔄</span> Otomatik Güncelleme
+                    </div>
+                </div>
+
+                <div class="download-features">
+                    <div class="download-feature">
+                        <div class="df-icon">⚡</div>
+                        <div class="df-title">Rapid Trigger</div>
+                        <div class="df-desc">0.01mm hassasiyet ayarı</div>
+                    </div>
+                    <div class="download-feature">
+                        <div class="df-icon">📡</div>
+                        <div class="df-title">8K Hz Ayarı</div>
+                        <div class="df-desc">Polling rate yapılandırma</div>
+                    </div>
+                    <div class="download-feature">
+                        <div class="df-icon">🎮</div>
+                        <div class="df-title">SOCD Config</div>
+                        <div class="df-desc">Anti-cheat uyumlu</div>
+                    </div>
+                    <div class="download-feature">
+                        <div class="df-icon">🌈</div>
+                        <div class="df-title">RGB Studio</div>
+                        <div class="df-desc">20+ efekt ve özelleştirme</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ DRIVER SOFTWARE ============ -->
+    <section id="driver">
+        <div class="section-header animate-on-scroll">
+            <div class="section-tag">🖥 Driver Önizleme</div>
+            <h2>Yazılım Arayüzü</h2>
+            <p>Tüm ayarları tek bir yerden yönetin. İşte driver yazılımının canlı önizlemesi.</p>
+        </div>
+
+        <div class="driver-app animate-on-scroll">
+            <div class="driver-titlebar">
+                <div class="driver-titlebar-left">
+                    <div class="driver-dots"><span></span><span></span><span></span></div>
+                    <span class="driver-title-text">Only EULA KF90 HE Driver — v3.2.1</span>
+                </div>
+                <div class="driver-status">
+                    <span class="dot"></span>
+                    Cihaz Bağlı — KF90 HE PRO
+                </div>
+            </div>
+
+            <div class="driver-content">
+                <div class="driver-sidebar">
+                    <div class="driver-nav-section">Performans</div>
+                    <div class="driver-nav-item active" data-panel="rapid-trigger"><span class="icon">⚡</span> Rapid Trigger</div>
+                    <div class="driver-nav-item" data-panel="polling"><span class="icon">📡</span> Polling Rate</div>
+                    <div class="driver-nav-item" data-panel="socd"><span class="icon">🎮</span> SOCD</div>
+                    <div class="driver-nav-item" data-panel="dks"><span class="icon">🔑</span> DKS</div>
+                    <div class="driver-nav-section">Özelleştirme</div>
+                    <div class="driver-nav-item" data-panel="actuation"><span class="icon">📏</span> Aktüasyon</div>
+                    <div class="driver-nav-item" data-panel="rgb"><span class="icon">🌈</span> RGB</div>
+                    <div class="driver-nav-item" data-panel="keymap"><span class="icon">⌨</span> Tuş Ataması</div>
+                    <div class="driver-nav-item" data-panel="macro"><span class="icon">📝</span> Makro</div>
+                    <div class="driver-nav-section">Sistem</div>
+                    <div class="driver-nav-item" data-panel="firmware"><span class="icon">💾</span> Firmware</div>
+                    <div class="driver-nav-item" data-panel="profiles"><span class="icon">👤</span> Profiller</div>
+                </div>
+
+                <div class="driver-main">
+                    <!-- RAPID TRIGGER -->
+                    <div class="driver-panel active" id="panel-rapid-trigger">
+                        <div class="driver-panel-title">⚡ Rapid Trigger Ayarları</div>
+                        <div class="driver-panel-desc">Tuşa basma ve bırakma tetikleme mesafelerini bağımsız ayarlayın.</div>
+                        <div class="profile-bar">
+                            <button class="profile-tab active">Global</button>
+                            <button class="profile-tab">Per-Key</button>
+                            <button class="profile-tab">WASD Only</button>
+                        </div>
+                        <div class="rt-visual">
+                            <div class="rt-visual-title">Rapid Trigger Görselleştirme</div>
+                            <div class="rt-bar-container">
+                                <div class="rt-bar-fill" id="rtBarPress" style="width:15%">Press: 0.10mm</div>
+                            </div>
+                            <div class="rt-bar-labels"><span>0mm</span><span>Aktüasyon</span><span>4mm</span></div>
+                            <div class="rt-graph" id="rtGraph"></div>
+                        </div>
+                        <div class="control-group">
+                            <div class="control-label"><span class="control-label-text">Rapid Trigger</span><span class="toggle-switch on" onclick="this.classList.toggle('on')"></span></div>
+                        </div>
+                        <div class="control-group">
+                            <div class="control-label"><span class="control-label-text">Press Sensitivity</span><span class="control-value" id="rtPressValue">0.10mm</span></div>
+                            <input type="range" class="range-slider" id="rtPress" min="1" max="400" value="10" oninput="updateRT('press', this.value)">
+                            <div class="control-hint">Tuşa ne kadar basıldığında tetikleneceğini belirler</div>
+                        </div>
+                        <div class="control-group">
+                            <div class="control-label"><span class="control-label-text">Release Sensitivity</span><span class="control-value" id="rtReleaseValue">0.10mm</span></div>
+                            <input type="range" class="range-slider" id="rtRelease" min="1" max="400" value="10" oninput="updateRT('release', this.value)">
+                        </div>
+                        <div class="control-group">
+                            <div class="control-label"><span class="control-label-text">Preset</span></div>
+                            <div class="preset-grid">
+                                <button class="preset-btn active" onclick="setRTPreset(this,0.1,0.1)">Ultra Hızlı</button>
+                                <button class="preset-btn" onclick="setRTPreset(this,0.2,0.2)">Hızlı</button>
+                                <button class="preset-btn" onclick="setRTPreset(this,0.5,0.5)">Dengeli</button>
+                                <button class="preset-btn" onclick="setRTPreset(this,1.0,1.0)">Konfor</button>
+                                <button class="preset-btn" onclick="setRTPreset(this,2.0,2.0)">Yazım</button>
+                                <button class="preset-btn" onclick="setRTPreset(this,0.05,0.05)">Beast Mode</button>
+                            </div>
+                        </div>
+                        <div class="toggle-row"><div class="toggle-info"><div class="toggle-title">Continuous Rapid Trigger</div><div class="toggle-desc">Tuş tam çıkmadan tekrar tetiklenebilir</div></div><span class="toggle-switch on" onclick="this.classList.toggle('on')"></span></div>
+                        <div class="toggle-row"><div class="toggle-info"><div class="toggle-title">Dead Zone Bypass</div><div class="toggle-desc">Minimum gecikme için dead zone'u kaldır</div></div><span class="toggle-switch on" onclick="this.classList.toggle('on')"></span></div>
+                    </div>
+
+                    <!-- POLLING RATE -->
+                    <div class="driver-panel" id="panel-polling">
+                        <div class="driver-panel-title">📡 Polling Rate</div>
+                        <div class="driver-panel-desc">Saniyede kaç kez veri gönderileceğini ayarlayın.</div>
+                        <div class="stats-grid">
+                            <div class="stat-box"><div class="stat-box-value" id="pollingDisplay">8000Hz</div><div class="stat-box-label">Aktif Polling Rate</div></div>
+                            <div class="stat-box"><div class="stat-box-value" id="latencyDisplay">0.125ms</div><div class="stat-box-label">Input Latency</div></div>
+                        </div>
+                        <div class="control-group">
+                            <div class="preset-grid">
+                                <button class="preset-btn" onclick="setPolling(this,125)">125Hz</button>
+                                <button class="preset-btn" onclick="setPolling(this,250)">250Hz</button>
+                                <button class="preset-btn" onclick="setPolling(this,500)">500Hz</button>
+                                <button class="preset-btn" onclick="setPolling(this,1000)">1000Hz</button>
+                                <button class="preset-btn" onclick="setPolling(this,2000)">2000Hz</button>
+                                <button class="preset-btn" onclick="setPolling(this,4000)">4000Hz</button>
+                                <button class="preset-btn active" onclick="setPolling(this,8000)">8000Hz</button>
+                            </div>
+                        </div>
+                        <div class="rt-visual" style="margin-top:16px;">
+                            <div class="rt-visual-title">Latency Karşılaştırma</div>
+                            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span style="font-size:11px;color:var(--text-muted);width:60px;">125Hz</span><div class="rt-bar-container" style="height:20px;"><div class="rt-bar-fill" style="width:100%;background:var(--red);font-size:10px;">8.00ms</div></div></div>
+                            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span style="font-size:11px;color:var(--text-muted);width:60px;">1000Hz</span><div class="rt-bar-container" style="height:20px;"><div class="rt-bar-fill" style="width:12.5%;background:var(--orange);font-size:10px;">1.00ms</div></div></div>
+                            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span style="font-size:11px;color:var(--text-muted);width:60px;">4000Hz</span><div class="rt-bar-container" style="height:20px;"><div class="rt-bar-fill" style="width:3.1%;min-width:50px;background:var(--cyan);font-size:10px;">0.25ms</div></div></div>
+                            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:11px;color:var(--accent-light);width:60px;font-weight:700;">8000Hz</span><div class="rt-bar-container" style="height:20px;"><div class="rt-bar-fill" style="width:1.6%;min-width:55px;font-size:10px;">0.125ms</div></div></div>
+                        </div>
+                        <div class="toggle-row"><div class="toggle-info"><div class="toggle-title">Motion Sync</div><div class="toggle-desc">Mouse ile senkronize polling</div></div><span class="toggle-switch" onclick="this.classList.toggle('on')"></span></div>
+                    </div>
+
+                    <!-- SOCD -->
+                    <div class="driver-panel" id="panel-socd">
+                        <div class="driver-panel-title">🎮 SOCD Cleaning</div>
+                        <div class="driver-panel-desc">Zıt yönlü tuşlarda davranış belirleyin.</div>
+                        <div class="control-group">
+                            <select class="custom-select" id="socdMode" onchange="updateSOCD()">
+                                <option value="neutral">Neutral — Zıt tuşlar birbirini iptal eder</option>
+                                <option value="last-win" selected>Last Input — Son basılan geçerli</option>
+                                <option value="first-win">First Input — İlk basılan geçerli</option>
+                                <option value="up-priority">Up Priority — Yukarı öncelikli (Hitbox)</option>
+                                <option value="disabled">Devre Dışı</option>
+                            </select>
+                        </div>
+                        <div class="rt-visual"><div class="rt-visual-title">SOCD Açıklama</div><div id="socdExplanation"><div style="font-size:13px;display:grid;grid-template-columns:auto 1fr;gap:8px;"><span style="font-weight:700;color:var(--accent-light);">A + D →</span><span style="color:var(--text-secondary);">Son basılan tuş aktif</span><span style="font-weight:700;color:var(--accent-light);">W + S →</span><span style="color:var(--text-secondary);">Son basılan tuş aktif</span></div></div></div>
+                        <div class="keybind-grid">
+                            <div class="keybind-row"><span class="keybind-key">A ↔ D</span><span class="keybind-action">Yatay hareket</span><button class="keybind-edit">Düzenle</button></div>
+                            <div class="keybind-row"><span class="keybind-key">W ↔ S</span><span class="keybind-action">Dikey hareket</span><button class="keybind-edit">Düzenle</button></div>
+                        </div>
+                        <div class="toggle-row" style="margin-top:12px;"><div class="toggle-info"><div class="toggle-title">Anti-Cheat Uyumlu Mod</div><div class="toggle-desc">VAC uyumlu SOCD</div></div><span class="toggle-switch on" onclick="this.classList.toggle('on')"></span></div>
+                    </div>
+
+                    <!-- DKS -->
+                    <div class="driver-panel" id="panel-dks">
+                        <div class="driver-panel-title">🔑 Dynamic Keystroke</div>
+                        <div class="driver-panel-desc">Her tuş vuruşunun 4 aşamasına farklı aksiyonlar atayın.</div>
+                        <div class="rt-visual"><div class="rt-visual-title">DKS Aşamaları</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;"><div><div style="width:44px;height:44px;margin:0 auto 6px;border-radius:10px;background:var(--accent-subtle);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;">↓</div><div style="font-size:11px;font-weight:700;color:var(--accent-light);">Basma</div></div><div><div style="width:44px;height:44px;margin:0 auto 6px;border-radius:10px;background:var(--accent-subtle);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;">⬇</div><div style="font-size:11px;font-weight:700;color:var(--accent-light);">Tam Bas</div></div><div><div style="width:44px;height:44px;margin:0 auto 6px;border-radius:10px;background:var(--accent-subtle);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;">↑</div><div style="font-size:11px;font-weight:700;color:var(--accent-light);">Bırak</div></div><div><div style="width:44px;height:44px;margin:0 auto 6px;border-radius:10px;background:var(--accent-subtle);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;">⬆</div><div style="font-size:11px;font-weight:700;color:var(--accent-light);">Tam Bırak</div></div></div></div>
+                        <div class="keybind-grid">
+                            <div class="keybind-row"><span class="keybind-key">C Tuşu</span><span class="keybind-action">Crouch → Prone → Stand → —</span><button class="keybind-edit">Düzenle</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Shift</span><span class="keybind-action">Walk → Sprint → Walk → Stand</span><button class="keybind-edit">Düzenle</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Space</span><span class="keybind-action">Jump → — → — → Bunny Hop</span><button class="keybind-edit">Düzenle</button></div>
+                        </div>
+                    </div>
+
+                    <!-- ACTUATION -->
+                    <div class="driver-panel" id="panel-actuation">
+                        <div class="driver-panel-title">📏 Aktüasyon Ayarları</div>
+                        <div class="driver-panel-desc">Her tuş için bağımsız aktüasyon ve reset noktası.</div>
+                        <div class="control-group"><div class="control-label"><span class="control-label-text">Aktüasyon Noktası</span><span class="control-value" id="actPoint">0.30mm</span></div><input type="range" class="range-slider" min="1" max="400" value="30" oninput="document.getElementById('actPoint').textContent=(this.value/100).toFixed(2)+'mm'"></div>
+                        <div class="control-group"><div class="control-label"><span class="control-label-text">Reset Noktası</span><span class="control-value" id="resetPoint">0.25mm</span></div><input type="range" class="range-slider" min="1" max="400" value="25" oninput="document.getElementById('resetPoint').textContent=(this.value/100).toFixed(2)+'mm'"></div>
+                        <div class="toggle-row"><div class="toggle-info"><div class="toggle-title">Analog Mod</div><div class="toggle-desc">Tuşları analog joystick olarak kullan</div></div><span class="toggle-switch" onclick="this.classList.toggle('on')"></span></div>
+                    </div>
+
+                    <!-- RGB -->
+                    <div class="driver-panel" id="panel-rgb">
+                        <div class="driver-panel-title">🌈 RGB Aydınlatma</div>
+                        <div class="driver-panel-desc">Per-key RGB, underglow ve efekt ayarları.</div>
+                        <div class="control-group"><div class="control-label"><span class="control-label-text">Efekt</span></div><div class="effect-grid">
+                            <button class="effect-btn active" onclick="selectEffect(this)">🌊 Wave</button><button class="effect-btn" onclick="selectEffect(this)">🌈 Rainbow</button><button class="effect-btn" onclick="selectEffect(this)">💨 Breathe</button><button class="effect-btn" onclick="selectEffect(this)">⚡ Reactive</button><button class="effect-btn" onclick="selectEffect(this)">🌌 Starlight</button><button class="effect-btn" onclick="selectEffect(this)">🎯 Ripple</button><button class="effect-btn" onclick="selectEffect(this)">🔥 Fire</button><button class="effect-btn" onclick="selectEffect(this)">❄ Snow</button><button class="effect-btn" onclick="selectEffect(this)">🌀 Spiral</button>
+                        </div></div>
+                        <div class="control-group"><div class="control-label"><span class="control-label-text">Renk</span></div><div class="color-grid">
+                            <div class="color-swatch active" style="background:#7c3aed;" onclick="selectColor(this)"></div><div class="color-swatch" style="background:#ef4444;" onclick="selectColor(this)"></div><div class="color-swatch" style="background:#f59e0b;" onclick="selectColor(this)"></div><div class="color-swatch" style="background:#10b981;" onclick="selectColor(this)"></div><div class="color-swatch" style="background:#22d3ee;" onclick="selectColor(this)"></div><div class="color-swatch" style="background:#3b82f6;" onclick="selectColor(this)"></div><div class="color-swatch" style="background:#ec4899;" onclick="selectColor(this)"></div><div class="color-swatch" style="background:#fff;" onclick="selectColor(this)"></div>
+                        </div></div>
+                        <div class="control-group"><div class="control-label"><span class="control-label-text">Parlaklık</span><span class="control-value" id="rgbBright">80%</span></div><input type="range" class="range-slider" min="0" max="100" value="80" oninput="document.getElementById('rgbBright').textContent=this.value+'%'"></div>
+                        <div class="toggle-row"><div class="toggle-info"><div class="toggle-title">Underglow</div><div class="toggle-desc">Alt RGB aydınlatma</div></div><span class="toggle-switch on" onclick="this.classList.toggle('on')"></span></div>
+                    </div>
+
+                    <!-- KEYMAP -->
+                    <div class="driver-panel" id="panel-keymap">
+                        <div class="driver-panel-title">⌨ Tuş Ataması</div>
+                        <div class="driver-panel-desc">Her tuşu yeniden atayın.</div>
+                        <div class="profile-bar"><button class="profile-tab active">Katman 0</button><button class="profile-tab">Katman 1 (Fn)</button><button class="profile-tab">Katman 2</button></div>
+                        <div class="keybind-grid">
+                            <div class="keybind-row"><span class="keybind-key">Caps Lock</span><span class="keybind-action">Fn Katman Geçiş</span><button class="keybind-edit">Değiştir</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Fn + 1-0</span><span class="keybind-action">F1 — F10</span><button class="keybind-edit">Değiştir</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Fn + ↑↓</span><span class="keybind-action">Ses Kontrol</span><button class="keybind-edit">Değiştir</button></div>
+                        </div>
+                        <div class="toggle-row" style="margin-top:12px;"><div class="toggle-info"><div class="toggle-title">N-Key Rollover</div><div class="toggle-desc">Tam NKRO desteği</div></div><span class="toggle-switch on" onclick="this.classList.toggle('on')"></span></div>
+                    </div>
+
+                    <!-- MACRO -->
+                    <div class="driver-panel" id="panel-macro">
+                        <div class="driver-panel-title">📝 Makro Editörü</div>
+                        <div class="driver-panel-desc">Tuş dizileri kaydedin ve atayın.</div>
+                        <div class="keybind-grid">
+                            <div class="keybind-row"><span class="keybind-key">Makro 1</span><span class="keybind-action">GG → Enter</span><button class="keybind-edit">Düzenle</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Makro 2</span><span class="keybind-action">Ctrl+Shift+Esc</span><button class="keybind-edit">Düzenle</button></div>
+                        </div>
+                        <div style="margin-top:16px;"><button class="btn btn-primary" style="font-size:13px;">+ Yeni Makro</button></div>
+                    </div>
+
+                    <!-- FIRMWARE -->
+                    <div class="driver-panel" id="panel-firmware">
+                        <div class="driver-panel-title">💾 Firmware & Sistem</div>
+                        <div class="driver-panel-desc">Cihaz bilgileri ve güncelleme.</div>
+                        <div class="stats-grid">
+                            <div class="stat-box"><div class="stat-box-value">v2.4.1</div><div class="stat-box-label">Firmware</div></div>
+                            <div class="stat-box"><div class="stat-box-value">v3.2.1</div><div class="stat-box-label">Driver</div></div>
+                            <div class="stat-box"><div class="stat-box-value">KF90 PRO</div><div class="stat-box-label">Cihaz</div></div>
+                            <div class="stat-box"><div class="stat-box-value">5/5</div><div class="stat-box-label">Profil</div></div>
+                        </div>
+                        <div class="rt-visual"><div class="rt-visual-title">Firmware Güncelleme</div><div style="display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:13px;font-weight:600;color:var(--green);">✓ Güncel</div></div><button class="btn btn-secondary" style="padding:6px 14px;font-size:12px;" onclick="simulateFirmware()">Kontrol Et</button></div><div class="firmware-bar"><div class="firmware-bar-fill" id="fwBar" style="width:100%;"></div></div></div>
+                        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;"><button class="btn btn-secondary" style="font-size:12px;padding:8px 14px;">📤 Dışa Aktar</button><button class="btn btn-secondary" style="font-size:12px;padding:8px 14px;">📥 İçe Aktar</button><button class="btn btn-secondary" style="font-size:12px;padding:8px 14px;border-color:var(--red);color:var(--red);">🔄 Sıfırla</button></div>
+                    </div>
+
+                    <!-- PROFILES -->
+                    <div class="driver-panel" id="panel-profiles">
+                        <div class="driver-panel-title">👤 Profiller</div>
+                        <div class="driver-panel-desc">5 profil arasında geçiş yapın.</div>
+                        <div class="keybind-grid">
+                            <div class="keybind-row" style="border-color:var(--accent);"><span class="keybind-key">Profil 1</span><span class="keybind-action">CS2 — RT Aktif, SOCD Last Win, 8K</span><button class="keybind-edit" style="color:var(--accent-light);border-color:var(--accent);">Aktif ✓</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Profil 2</span><span class="keybind-action">Valorant — Custom RT, Neutral, 4K</span><button class="keybind-edit">Yükle</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Profil 3</span><span class="keybind-action">Yazım — RT Kapalı, 1K, Konfor</span><button class="keybind-edit">Yükle</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Profil 4</span><span class="keybind-action">Fortnite — Beast Mode, 8K</span><button class="keybind-edit">Yükle</button></div>
+                            <div class="keybind-row"><span class="keybind-key">Profil 5</span><span class="keybind-action">Boş</span><button class="keybind-edit">Oluştur</button></div>
+                        </div>
+                        <div class="toggle-row" style="margin-top:12px;"><div class="toggle-info"><div class="toggle-title">Oto Algılama</div><div class="toggle-desc">Uygulamaya göre profil değiştir</div></div><span class="toggle-switch on" onclick="this.classList.toggle('on')"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ SPECS ============ -->
+    <section id="specs">
+        <div class="section-header animate-on-scroll">
+            <div class="section-tag">📋 Teknik</div>
+            <h2>Detaylı Spesifikasyonlar</h2>
+            <p>Only EULA KF90 HE PRO — Tüm teknik detaylar</p>
+        </div>
+        <div class="specs-table animate-on-scroll">
+            <div class="specs-row"><div class="specs-label">Model</div><div class="specs-value">Only EULA KF90 HE PRO</div></div>
+            <div class="specs-row"><div class="specs-label">Layout</div><div class="specs-value">60% (64 Tuş)</div></div>
+            <div class="specs-row"><div class="specs-label">Switch</div><div class="specs-value">Xingyi Manyetik Hall Effect</div></div>
+            <div class="specs-row"><div class="specs-label">Aktüasyon</div><div class="specs-value">0.01mm — 4.00mm (ayarlanabilir)</div></div>
+            <div class="specs-row"><div class="specs-label">Hassasiyet</div><div class="specs-value">0.01mm (Beast Mode: 0.005mm)</div></div>
+            <div class="specs-row"><div class="specs-label">Polling Rate</div><div class="specs-value">125 / 250 / 500 / 1K / 2K / 4K / 8000Hz</div></div>
+            <div class="specs-row"><div class="specs-label">Rapid Trigger</div><div class="specs-value">0.01mm hassasiyetli, bağımsız press/release</div></div>
+            <div class="specs-row"><div class="specs-label">SOCD</div><div class="specs-value">Neutral / Last Win / First Win / Up Priority</div></div>
+            <div class="specs-row"><div class="specs-label">DKS</div><div class="specs-value">4 aşamalı Dynamic Keystroke</div></div>
+            <div class="specs-row"><div class="specs-label">Bağlantı</div><div class="specs-value">USB-C + BT 5.1 + 2.4GHz Dongle</div></div>
+            <div class="specs-row"><div class="specs-label">RGB</div><div class="specs-value">Per-Key + Underglow (16.8M renk)</div></div>
+            <div class="specs-row"><div class="specs-label">Montaj</div><div class="specs-value">Gasket Mount — Silikon damperleme</div></div>
+            <div class="specs-row"><div class="specs-label">Keycap</div><div class="specs-value">PBT Double-Shot Shine-through</div></div>
+            <div class="specs-row"><div class="specs-label">Kasa</div><div class="specs-value">Alüminyum Alaşım + ABS</div></div>
+            <div class="specs-row"><div class="specs-label">Hafıza</div><div class="specs-value">5 Profil On-Board Memory</div></div>
+            <div class="specs-row"><div class="specs-label">NKRO</div><div class="specs-value">Tam N-Key Rollover</div></div>
+            <div class="specs-row"><div class="specs-label">Batarya</div><div class="specs-value">4000mAh — 200+ saat</div></div>
+            <div class="specs-row"><div class="specs-label">Boyut</div><div class="specs-value">295 × 105 × 38mm — 680g</div></div>
+            <div class="specs-row"><div class="specs-label">Uyumluluk</div><div class="specs-value">Windows / macOS / Linux / Android / iOS</div></div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="nav-brand" style="margin-bottom:8px;">
+                    <div class="nav-logo"><span>OE</span></div>
+                    <span class="nav-brand-text">Only <span class="accent">EULA</span></span>
+                </div>
+                <p>Hall Effect manyetik switch teknolojili klavyeler. Rakipsiz hassasiyet, üstün performans.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Ürünler</h4>
+                <a href="#">KF90 HE</a><a href="#">KF90 HE PRO</a><a href="#">KF90 HE MAX</a><a href="#">Aksesuar</a>
+            </div>
+            <div class="footer-col">
+                <h4>Destek</h4>
+                <a href="#download">Driver İndir</a><a href="#">Firmware</a><a href="#">SSS</a><a href="#">Garanti</a>
+            </div>
+            <div class="footer-col">
+                <h4>Topluluk</h4>
+                <a href="#">Discord</a><a href="#">YouTube</a><a href="#">Twitter / X</a><a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Only EULA. Tüm hakları saklıdır.</span>
+            <span>KF90 HE — Designed for Champions</span>
+        </div>
+    </footer>
+
+    <!-- ============ JAVASCRIPT ============ -->
+    <script>
+        // Particles
+        (function() {
+            const c = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (8 + Math.random() * 15) + 's';
+                p.style.animationDelay = Math.random() * 10 + 's';
+                p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+                c.appendChild(p);
+            }
+        })();
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('.nav-links a, a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const t = document.querySelector(href);
+                    if (t) t.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Driver nav
+        document.querySelectorAll('.driver-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.driver-nav-item').forEach(n => n.classList.remove('active'));
+                item.classList.add('active');
+                document.querySelectorAll('.driver-panel').forEach(p => p.classList.remove('active'));
+                document.getElementById('panel-' + item.dataset.panel).classList.add('active');
+            });
+        });
+
+        // RT
+        function updateRT(type, value) {
+            const mm = (value / 100).toFixed(2);
+            if (type === 'press') {
+                document.getElementById('rtPressValue').textContent = mm + 'mm';
+                const pct = Math.max((value / 400) * 100, 5);
+                document.getElementById('rtBarPress').style.width = pct + '%';
+                document.getElementById('rtBarPress').textContent = 'Press: ' + mm + 'mm';
+            } else {
+                document.getElementById('rtReleaseValue').textContent = mm + 'mm';
+            }
+        }
+
+        function setRTPreset(btn, p, r) {
+            document.querySelectorAll('.preset-grid .preset-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const pv = Math.round(p * 100), rv = Math.round(r * 100);
+            document.getElementById('rtPress').value = pv;
+            document.getElementById('rtRelease').value = rv;
+            updateRT('press', pv);
+            updateRT('release', rv);
+        }
+
+        // RT Graph
+        (function() {
+            const g = document.getElementById('rtGraph');
+            for (let i = 0; i < 35; i++) {
+                const b = document.createElement('div');
+                b.className = 'rt-graph-bar';
+                b.style.height = (20 + Math.random() * 60) + '%';
+                g.appendChild(b);
+            }
+            setInterval(() => {
+                document.querySelectorAll('.rt-graph-bar').forEach(b => {
+                    b.style.height = (20 + Math.random() * 60) + '%';
+                });
+            }, 1500);
+        })();
+
+        // Polling
+        function setPolling(btn, hz) {
+            btn.closest('.preset-grid').querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('pollingDisplay').textContent = hz >= 1000 ? (hz / 1000) + 'K Hz' : hz + 'Hz';
+            document.getElementById('latencyDisplay').textContent = (1000 / hz).toFixed(3) + 'ms';
+        }
+
+        // SOCD
+        function updateSOCD() {
+            const m = document.getElementById('socdMode').value;
+            const e = {
+                'neutral': '<span style="font-weight:700;color:var(--accent-light);">A+D →</span> Durma (iptal)',
+                'last-win': '<span style="font-weight:700;color:var(--accent-light);">A+D →</span> Son basılan aktif',
+                'first-win': '<span style="font-weight:700;color:var(--accent-light);">A+D →</span> İlk basılan aktif',
+                'up-priority': '<span style="font-weight:700;color:var(--accent-light);">W+S →</span> W öncelikli',
+                'disabled': '<span style="color:var(--red);">SOCD kapalı</span>'
+            };
+            document.getElementById('socdExplanation').innerHTML = '<div style="font-size:13px;padding:6px 0;">' + (e[m] || '') + '</div>';
+        }
+
+        // RGB
+        function selectEffect(b) { b.closest('.effect-grid').querySelectorAll('.effect-btn').forEach(x => x.classList.remove('active')); b.classList.add('active'); }
+        function selectColor(s) { s.closest('.color-grid').querySelectorAll('.color-swatch').forEach(x => x.classList.remove('active')); s.classList.add('active'); }
+
+        // Firmware
+        function simulateFirmware() {
+            const b = document.getElementById('fwBar');
+            b.style.width = '0%';
+            let w = 0;
+            const i = setInterval(() => { w += Math.random() * 15; if (w >= 100) { w = 100; clearInterval(i); } b.style.width = w + '%'; }, 200);
+        }
+
+        // Download
+        function startDownload() {
+            const prog = document.getElementById('downloadProgress');
+            const fill = document.getElementById('progressFill');
+            const text = document.getElementById('progressText');
+            prog.classList.add('active');
+            let w = 0;
+            const i = setInterval(() => {
+                w += Math.random() * 12 + 3;
+                if (w >= 100) { w = 100; clearInterval(i); text.textContent = '✓ İndirme Tamamlandı!'; text.style.color = '#10b981'; }
+                else { text.textContent = 'İndiriliyor... ' + Math.round(w) + '%'; }
+                fill.style.width = w + '%';
+            }, 150);
+        }
+
+        // Scroll animation
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => obs.observe(el));
+
+        // Active nav on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['hero', 'models', 'features', 'download', 'driver', 'specs'];
+            let current = '';
+            sections.forEach(id => {
+                const s = document.getElementById(id);
+                if (s && s.offsetTop - 200 <= window.scrollY) current = id;
+            });
+            document.querySelectorAll('.nav-links a').forEach(l => {
+                l.classList.remove('active');
+                if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

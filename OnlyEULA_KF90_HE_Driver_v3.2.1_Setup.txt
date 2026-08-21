@@ -1,0 +1,20 @@
+=====================================================
+  Only EULA KF90 HE Driver — v3.2.1
+  Configuration Software Setup
+=====================================================
+
+  Product: Only EULA KF90 HE / PRO / MAX
+  Version: 3.2.1 (Build 2026.08.21)
+  Platform: Windows 10/11 (64-bit)
+  Size: 128.4 MB
+  
+  Release Notes:
+  - Rapid Trigger sensitivity improved to 0.005mm
+  - 8000Hz native polling rate optimization
+  - SOCD Anti-Cheat mode (VAC compatible)
+  - Dynamic Keystroke v2 support
+  - Per-key RGB customization engine
+  - Bug fixes and performance improvements
+
+  © 2026 Only EULA. All rights reserved.
+=====================================================
