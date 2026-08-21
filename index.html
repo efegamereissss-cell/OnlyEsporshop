@@ -1860,11 +1860,9 @@
 
                 <!-- Interactive Variant Selectors -->
                 <div class="pdp-option-block" id="colorOptionBlock">
-                    <label class="pdp-option-label">Renk / Kasa Seçeneği: <span id="selectedColorText">Camgöbeği (Cyan)</span></label>
+                    <label class="pdp-option-label" id="colorOptionLabel">Seçenek / Renk: <span id="selectedColorText">Varsayılan</span></label>
                     <div class="pdp-option-pills" id="colorPills">
-                        <button class="pdp-pill-btn active" onclick="selectVariant('color', 'Camgöbeği (Cyan)', this)">Camgöbeği (Cyan)</button>
-                        <button class="pdp-pill-btn" onclick="selectVariant('color', 'Mat Siyah (Stealth)', this)">Mat Siyah (Stealth)</button>
-                        <button class="pdp-pill-btn" onclick="selectVariant('color', 'Kutup Beyazı (Ghost)', this)">Kutup Beyazı (Ghost)</button>
+                        <!-- Dynamically populated in openProduct -->
                     </div>
                 </div>
 
@@ -1914,7 +1912,7 @@
             </div>
 
             <div id="tabPanelSpecs" class="pdp-tab-content-panel">
-                <p id="pdpLongDesc" style="margin-bottom: 20px;">Özel üretim manyetik klavye mimarisi, milisaniyelik tepki süresi ve kusursuz Rapid Trigger deneyimi.</p>
+                <p id="pdpLongDesc" style="margin-bottom: 20px;">Özel üretim donanım mimarisi, milisaniyelik tepki süresi ve espor oyuncuları için kusursuz yüzey kalitesi.</p>
                 <div class="specs-bullet-grid" id="pdpSpecsGrid">
                     <!-- Injected via JS -->
                 </div>
@@ -1923,9 +1921,9 @@
             <div id="tabPanelBox" class="pdp-tab-content-panel" style="display: none;">
                 <div class="specs-bullet-grid">
                     <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Only EULA Donanım Ürünü</div>
-                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Örgülü Type-C to USB-A Kablo (1.8m)</div>
-                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x 2-in-1 Switch ve Keycap Sökme Aparatı</div>
-                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Hızlı Başlangıç Kılavuzu & Garanti Belgesi</div>
+                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Özel Koruyucu Espor Kılıfı / Paketleme</div>
+                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Orijinallik ve Seri Numarası Kartı</div>
+                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Hızlı Başlangıç Kılavuzu & 2 Yıl Garanti Belgesi</div>
                 </div>
             </div>
 
@@ -2095,6 +2093,11 @@
                 images: ["always_promo_1.jpg", "always_promo_2.jpg", "always_promo_3.jpg"],
                 desc: "Özel üretim anime mural tuş takımı, ince anodize camgöbeği alüminyum kasa, 8000Hz Polling Rate ve Hall Effect manyetik switchler.",
                 longDesc: "Only EULA KF90 Always Edition, rekabetçi espor dünyası için özel olarak sınırlı sayıda üretildi. 0.01mm hassasiyete sahip Rapid Trigger sensörleri ve CNC işlenmiş gövdesi ile benzersiz bir estetik ve hız sunar.",
+                variants: [
+                    { name: "Camgöbeği (Cyan Anime)", img: "always_promo_1.jpg" },
+                    { name: "Mat Siyah (Stealth)", img: "always_promo_2.jpg" },
+                    { name: "Kutup Beyazı (Ghost)", img: "always_promo_3.jpg" }
+                ],
                 specs: [
                     "0.01mm - 4.0mm Ayarlanabilir Rapid Trigger",
                     "8000Hz (0.125ms) Polling Rate Hızı",
@@ -2115,9 +2118,13 @@
                 tag: "Limited Edition",
                 tagClass: "limited",
                 img: "mousepad_kitsune.jpg",
-                images: ["mousepad_kitsune.jpg"],
+                images: ["mousepad_kitsune.jpg", "mousepad_kitsune_black.jpg"],
                 desc: "900x400mm Japon Mitolojisi Kitsune anime temalı, Only EULA özel logolu, mikro dokuma speed espor yüzeyli koleksiyoncu deskmat mousepadi.",
                 longDesc: "Always Edition klavyemiz ile kusursuz bir uyum yakalayan Only EULA Kitsune Limited Deskmat, su geçirmez mikro dokuma yüzeyi, çift dikişli aşınmaz kenarları ve 4mm ultra yoğun kaymaz doğal kauçuk tabanıyla hem sanatı hem de espor hızını masanıza getirir.",
+                variants: [
+                    { name: "Kitsune Anime (Mavi/Mor)", img: "mousepad_kitsune.jpg" },
+                    { name: "Stealth Siyah Edition", img: "mousepad_kitsune_black.jpg" }
+                ],
                 specs: [
                     "900x400x4mm Ekstra Geniş Espor Boyutu",
                     "Özel Üretim Kitsune Anime & Torii Gate Artwork",
@@ -2140,6 +2147,10 @@
                 images: ["keyboard.jpg", "keyboard_vertical.jpg"],
                 desc: "60% Manyetik HE Klavye, 8000Hz, Rapid Trigger, SOCD desteği ile en üst düzey rekabetçi avantaj.",
                 longDesc: "Klasik mat siyah tasarım, profesyonel CS2 ve Valorant oyuncuları için optimize edilmiş Hall Effect switch mimarisi.",
+                variants: [
+                    { name: "Mat Siyah (Stealth)", img: "keyboard.jpg" },
+                    { name: "Alüminyum Gümüş", img: "keyboard_vertical.jpg" }
+                ],
                 specs: [
                     "8000Hz Polling Rate",
                     "Rapid Trigger (0.1mm - 4.0mm)",
@@ -2161,6 +2172,10 @@
                 images: ["keyboard_vertical.jpg", "keyboard.jpg"],
                 desc: "60% Manyetik Switch Oyuncu Klavyesi, 1000Hz, per-key RGB aydınlatma ve alüminyum plaka.",
                 longDesc: "Hall Effect manyetik switchlerin sunduğu hızı uygun fiyata sunan espor başlangıç klavyesi.",
+                variants: [
+                    { name: "Alüminyum Standart", img: "keyboard_vertical.jpg" },
+                    { name: "Mat Siyah", img: "keyboard.jpg" }
+                ],
                 specs: [
                     "1000Hz Polling Rate",
                     "Manyetik Switchler",
@@ -2181,6 +2196,9 @@
                 images: ["keyboard.jpg", "keyboard_vertical.jpg"],
                 desc: "Tam CNC Alüminyum yekpare gövde, entegre OLED bilgi ekranı ve Dynamic Keystroke (DKS) teknolojisi.",
                 longDesc: "Lüks ve teknolojinin birleşimi: OLED ekranda anlık actuation mesafesini ve profil durumunu görüntüleyin.",
+                variants: [
+                    { name: "CNC Gece Siyahı", img: "keyboard.jpg" }
+                ],
                 specs: [
                     "Yekpare CNC Alüminyum Gövde",
                     "Entegre OLED Durum Ekranı",
@@ -2201,6 +2219,9 @@
                 images: ["mousepad_circuit.jpg"],
                 desc: "900x400mm cyberpunk devre kartı temalı, dikişli kenarlı ve mikro dokuma yüzeyli XL mousepad.",
                 longDesc: "Özel mikro dokuma speed kumaşı sayesinde mouse hareketlerinde sıfır sürtünme ve anında durma gücü.",
+                variants: [
+                    { name: "Mor Cyber Devre", img: "mousepad_circuit.jpg" }
+                ],
                 specs: [
                     "900x400x4mm Ekstra Geniş Boyut",
                     "Mikro Dokuma Speed Kumaş Yüzey",
@@ -2221,6 +2242,9 @@
                 images: ["mousepad_ravenfall.jpg"],
                 desc: "900x400mm cyberpunk şehir manzarası. Sıvı itici özel kaplama ile ultra uzun ömürlü.",
                 longDesc: "Sanatsal görsel detayları ve su itici kumaşı ile masanıza tarz ve performans katın.",
+                variants: [
+                    { name: "Cyberpunk Şehir", img: "mousepad_ravenfall.jpg" }
+                ],
                 specs: [
                     "900x400x4mm Boyut",
                     "Su ve Sıvı İtici Yüzey",
@@ -2241,6 +2265,9 @@
                 images: ["mousepad_cyberglass.jpg"],
                 desc: "450x400mm BW monochrome cyberpunk, ultra hızlı cam hissiyatlı özel sert hibrit yüzey.",
                 longDesc: "Cam mousepadlerin akıcılığını kumaş padlerin konforuyla birleştiren hibrit espor yüzeyi.",
+                variants: [
+                    { name: "Monochrome Cam Hissi", img: "mousepad_cyberglass.jpg" }
+                ],
                 specs: [
                     "450x400x3mm Rekabetçi Boyut",
                     "Cam Hissiyatlı Özel Kaplama",
@@ -2261,6 +2288,9 @@
                 images: ["mousepad_circuit.jpg"],
                 desc: "450x400mm kompakt boyut. Mükemmel kontrol ve durma gücü arayan profesyonel FPS oyuncuları için.",
                 longDesc: "Düşük DPI oyuncuları için ideal ölçüde kompakt devre kartı desenli performans mousepadi.",
+                variants: [
+                    { name: "Kompakt Standart", img: "mousepad_circuit.jpg" }
+                ],
                 specs: [
                     "450x400x4mm Standart Boyut",
                     "Dengeli Control/Speed Dengesi",
@@ -2280,6 +2310,9 @@
                 images: ["mousepad_ravenfall.jpg"],
                 desc: "450x400mm kompakt boyutlu Ravenfall temalı hibrit performans mousepadi.",
                 longDesc: "Kompakt masalar için tasarlanmış şık cyberpunk illüstrasyonlu mousepad.",
+                variants: [
+                    { name: "Kompakt Şehir", img: "mousepad_ravenfall.jpg" }
+                ],
                 specs: [
                     "450x400x4mm Boyut",
                     "Su İtici Yüzey",
@@ -2293,7 +2326,7 @@
         let currentQuantity = 1;
         let cartItems = [];
         let selectedVariants = {
-            color: "Camgöbeği (Cyan)",
+            color: "Varsayılan",
             layout: "Türkçe Q",
             switch: "Hall Effect Linear (0.1-4.0mm)"
         };
@@ -2397,6 +2430,17 @@
             });
             document.getElementById('pdpSpecsGrid').innerHTML = specsHtml;
 
+            // Render Dynamic Variants for Color / Edition
+            const variantsList = p.variants || [{ name: "Standart", img: p.img }];
+            selectedVariants.color = variantsList[0].name;
+            document.getElementById('selectedColorText').innerText = variantsList[0].name;
+            
+            let pillsHtml = '';
+            variantsList.forEach((v, idx) => {
+                pillsHtml += `<button class="pdp-pill-btn ${idx === 0 ? 'active' : ''}" onclick="selectVariantWithImage('color', '${v.name}', '${v.img}', this)">${v.name}</button>`;
+            });
+            document.getElementById('colorPills').innerHTML = pillsHtml;
+
             // Render Thumbnails & Main Image
             const imgList = p.images && p.images.length > 0 ? p.images : [p.img];
             document.getElementById('pdpMainImage').src = imgList[0];
@@ -2410,7 +2454,7 @@
             });
             document.getElementById('pdpThumbsContainer').innerHTML = thumbsHtml;
 
-            // Show/Hide Option Blocks based on Category
+            // Show/Hide Keyboard-Specific Option Blocks
             const isKbd = p.category === 'keyboard' || (p.category === 'limited' && p.id === 9);
             document.getElementById('layoutOptionBlock').style.display = isKbd ? 'block' : 'none';
             document.getElementById('switchOptionBlock').style.display = isKbd ? 'block' : 'none';
@@ -2460,6 +2504,22 @@
             btnElement.classList.add('active');
             
             showToast(`${value} seçeneği belirlendi`);
+        }
+
+        // Variant selection that also changes image
+        function selectVariantWithImage(type, value, imgSrc, btnElement) {
+            selectVariant(type, value, btnElement);
+            if (imgSrc) {
+                document.getElementById('pdpMainImage').src = imgSrc;
+                // Highlight matching thumbnail if exists
+                document.querySelectorAll('.pdp-thumb-item').forEach(t => {
+                    if (t.querySelector('img') && t.querySelector('img').getAttribute('src') === imgSrc) {
+                        t.classList.add('active');
+                    } else {
+                        t.classList.remove('active');
+                    }
+                });
+            }
         }
 
         // Quantity Stepper
