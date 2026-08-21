@@ -64,6 +64,19 @@
         .dropdown-menu a { padding: 12px 16px; border-radius: 8px; font-weight: 500; display: block; color: var(--text-main); text-decoration: none; }
         .dropdown-menu a:hover { background: var(--bg); color: var(--primary); }
 
+        
+        .nav-center .dropdown { position: relative; display: flex; align-items: center; cursor: pointer; height: 100%; }
+        .dropdown-menu { 
+            position: absolute; top: 40px; left: -16px; background: var(--white); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 12px; padding: 12px;
+            display: flex; flex-direction: column; min-width: 200px;
+            opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease;
+            border: 1px solid var(--border); z-index: 100;
+        }
+        .nav-center .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { padding: 12px 16px; border-radius: 8px; font-weight: 500; display: block; color: var(--text-main); text-decoration: none; }
+        .dropdown-menu a:hover { background: var(--bg); color: var(--primary); }
+
         /* Hero Grid */
         .hero-section { padding: 24px 5%; max-width: 1600px; margin: 0 auto; }
         .hero-grid {
@@ -339,12 +352,12 @@
                 </div>
             </div>
             
-            <div class="hero-card right-bottom" onclick="openModal(1)">
-                <img src="keyboard.jpg" alt="KF90 PRO" class="hero-img anim-5">
+            <div class="hero-card right-bottom" onclick="openModal(9)">
+                <img src="keyboard_always.jpg" alt="KF90 Always Edition" class="hero-img anim-5">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <h3>KF90 HE PRO</h3>
-                    <p>Ultimate Performans</p>
+                    <h3>KF90 Always Edition</h3>
+                    <p>Limited Edition</p>
                 </div>
             </div>
         </div>
@@ -512,6 +525,12 @@
         // Products Data
         const products = [
             {
+                id: 9, name: "KF90 HE PRO Always Edition", brand: "ONLY EULA", price: "₺8,999", oldPrice: null, 
+                desc: "60% HE Klavye, özel üretim anime artwork keycaps tasarımı. 8000Hz, Rapid Trigger ve premium cyan alüminyum kasa.", 
+                specs: ["Özel Üretim Anime Keycaps", "Cyan Alüminyum Kasa", "8000Hz Polling Rate", "Rapid Trigger (0.1mm - 4.0mm)", "Sınırlı Üretim"], 
+                img: "keyboard_always.jpg", tag: "Limited"
+            },
+                        {
                 id: 1, name: "KF90 HE PRO", brand: "ONLY EULA", price: "₺7,999", oldPrice: null, 
                 desc: "60% HE Klavye, 8000Hz, Rapid Trigger, SOCD desteği ile en üst düzey rekabetçi avantaj.", 
                 specs: ["Manyetik Switchler", "8000Hz Polling Rate", "Rapid Trigger (0.1mm - 4.0mm)", "SOCD Desteği", "PBT Keycaps"], 
