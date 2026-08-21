@@ -346,6 +346,7 @@
 
         .hero-tag.cyan { background: #0284c7; }
         .hero-tag.green { background: #059669; }
+        .hero-tag.purple { background: #7c3aed; }
 
         .hero-title {
             font-size: 24px;
@@ -912,7 +913,7 @@
         }
 
         .pdp-stars {
-            color: #f59e0b;
+            color: #94a3b8;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -1651,7 +1652,7 @@
                 <div class="dropdown-menu">
                     <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('all')">ONLY EULA</a>
                     <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('keyboard')">KF90 Series</a>
-                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('mousepad')">Ravenfall Edition</a>
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('limited')">Kitsune Edition</a>
                 </div>
             </div>
 
@@ -1716,15 +1717,15 @@
                     </div>
                 </div>
 
-                <!-- Wide 2 -->
-                <div class="hero-card wide-2" onclick="openProduct(5)">
+                <!-- Wide 2 (Kitsune Limited Deskmat) -->
+                <div class="hero-card wide-2" onclick="openProduct(10)">
                     <div class="hero-card-img-wrap">
-                        <img src="mousepad_ravenfall.jpg" alt="Ravenfall Deskmat">
+                        <img src="mousepad_kitsune.jpg" alt="Kitsune Limited Deskmat">
                     </div>
                     <div class="hero-card-overlay">
-                        <div class="hero-tag cyan">Sınırlı Stok</div>
-                        <div class="hero-title">Ravenfall Deskmat</div>
-                        <div class="hero-subtitle">Su İtici Cyberpunk Şehir Teması</div>
+                        <div class="hero-tag purple">Limited Anime</div>
+                        <div class="hero-title">Kitsune Limited Deskmat XL</div>
+                        <div class="hero-subtitle">Japon Mitolojisi & 9 Kuyruklu Tilki Teması</div>
                     </div>
                 </div>
 
@@ -1839,8 +1840,8 @@
                 <h1 class="pdp-title-header" id="pdpTitle">KF90 HE PRO Always Edition (Manyetik Switch / HE)</h1>
                 
                 <div class="pdp-rating-row">
-                    <div class="pdp-stars">★★★★★ 5.0</div>
-                    <span class="pdp-review-count">(48 Müşteri Değerlendirmesi)</span>
+                    <div class="pdp-stars">☆☆☆☆☆ 0.0</div>
+                    <span class="pdp-review-count">(0 Müşteri Değerlendirmesi - İlk Değerlendiren Sen Ol)</span>
                 </div>
 
                 <div class="pdp-price-box">
@@ -2105,6 +2106,28 @@
                 ]
             },
             {
+                id: 10,
+                name: "Only EULA Kitsune Limited Deskmat XL",
+                category: "limited",
+                brand: "ONLY EULA",
+                price: 1499,
+                oldPrice: 1799,
+                tag: "Limited Edition",
+                tagClass: "limited",
+                img: "mousepad_kitsune.jpg",
+                images: ["mousepad_kitsune.jpg"],
+                desc: "900x400mm Japon Mitolojisi Kitsune anime temalı, Only EULA özel logolu, mikro dokuma speed espor yüzeyli koleksiyoncu deskmat mousepadi.",
+                longDesc: "Always Edition klavyemiz ile kusursuz bir uyum yakalayan Only EULA Kitsune Limited Deskmat, su geçirmez mikro dokuma yüzeyi, çift dikişli aşınmaz kenarları ve 4mm ultra yoğun kaymaz doğal kauçuk tabanıyla hem sanatı hem de espor hızını masanıza getirir.",
+                specs: [
+                    "900x400x4mm Ekstra Geniş Espor Boyutu",
+                    "Özel Üretim Kitsune Anime & Torii Gate Artwork",
+                    "Only EULA Lazer Baskılı İkonik Logo",
+                    "Ultra Düşük Sürtünmeli Speed Hibrit Kumaş",
+                    "Aşınmaz Çift Dikişli Kenarlar",
+                    "Kaymaz Doğal Kauçuk Taban"
+                ]
+            },
+            {
                 id: 1,
                 name: "KF90 HE PRO",
                 category: "keyboard",
@@ -2282,7 +2305,7 @@
 
             const filtered = category === 'all' 
                 ? productsDB 
-                : productsDB.filter(p => p.category === category || (category === 'limited' && p.tag === 'Limited'));
+                : productsDB.filter(p => p.category === category || (category === 'limited' && (p.tag === 'Limited' || p.tag === 'Limited Edition')));
 
             let html = '';
             filtered.forEach(p => {
@@ -2388,7 +2411,7 @@
             document.getElementById('pdpThumbsContainer').innerHTML = thumbsHtml;
 
             // Show/Hide Option Blocks based on Category
-            const isKbd = p.category === 'keyboard' || p.category === 'limited';
+            const isKbd = p.category === 'keyboard' || (p.category === 'limited' && p.id === 9);
             document.getElementById('layoutOptionBlock').style.display = isKbd ? 'block' : 'none';
             document.getElementById('switchOptionBlock').style.display = isKbd ? 'block' : 'none';
 
