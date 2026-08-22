@@ -3908,10 +3908,7 @@
             renderCheckoutSummary();
         }
 
-        function trigger3DSecurePayment() {
-            // When user tries to pay, directly show the rejection notification & modal
-            showRejectModal();
-        }
+
 
         
         // Contract Text Data
@@ -4022,7 +4019,7 @@
                     agreementBox.classList.add('error-shake');
                     setTimeout(() => { agreementBox.classList.remove('error-shake'); }, 800);
                 }
-                showToast('⚠️ Lütfen devam etmek için Ön Bilgilendirme ve Mesafeli Satış Sözleşmesi'ni onaylayınız.', true);
+                showToast("⚠️ Lütfen devam etmek için Ön Bilgilendirme ve Mesafeli Satış Sözleşmesi'ni onaylayınız.", true);
                 agreementBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
