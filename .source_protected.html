@@ -1545,6 +1545,51 @@
             color: var(--text-dark);
         }
 
+        
+        .pdp-direct-buy-btn {
+            flex: 1.2;
+            height: 52px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+            cursor: pointer;
+            border: none;
+        }
+
+        .pdp-direct-buy-btn:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+        }
+
+        .quick-buy-action-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 8px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .quick-buy-action-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
         .pdp-add-cart-btn {
             flex: 1;
             height: 52px;
@@ -2244,15 +2289,19 @@
                         </div>
                     </div>
 
+                    
                     <div class="promo-action-row">
                         <button class="promo-main-btn" onclick="openProduct(9)">
-                            <span>Ürünü İncele & Satın Al</span>
+                            <span>Ürünü İncele</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                        </button>
+                        <button class="promo-main-btn" onclick="quickBuyProduct(9)" style="background: linear-gradient(90deg, #10b981, #059669); border: none;">
+                            <span>⚡ Hemen Satın Al</span>
                         </button>
                         <div class="promo-price-tag">₺8,999</div>
                     </div>
-                </div>
 
+                </div>
                 <div class="promo-visual-side">
                     <div class="promo-main-img-wrap">
                         <img src="always_promo_1.jpg" alt="Always Edition Angle" id="promoMainDisplay" class="promo-display-img">
@@ -3125,9 +3174,14 @@
                             ${oldPriceHtml}
                             <span class="current-price-text">₺${p.price.toLocaleString('tr-TR')}</span>
                         </div>
-                        <button class="quick-view-action-btn" onclick="event.stopPropagation(); openProduct(${p.id})">
-                            İncele
-                        </button>
+                        <div style="display: flex; gap: 6px;">
+                            <button class="quick-view-action-btn" onclick="event.stopPropagation(); openProduct(${p.id})">
+                                İncele
+                            </button>
+                            <button class="quick-buy-action-btn" onclick="event.stopPropagation(); quickBuyProduct(${p.id})">
+                                ⚡ Satın Al
+                            </button>
+                        </div>
                     </div>
                 </div>`;
             });
@@ -3426,6 +3480,24 @@
         
         // Checkout System
         let activeDiscountRatio = 0;
+
+        
+        function quickBuyProduct(id) {
+            const p = productsDB.find(x => x.id === id);
+            if (!p) return;
+            currentProduct = p;
+            currentQuantity = 1;
+            selectedVariants.color = (p.variants && p.variants[0]) ? p.variants[0].name : "Standart";
+            selectedVariants.layout = "Türkçe Q";
+            selectedVariants.switch = "Hall Effect Linear (0.1-4.0mm)";
+            addCurrentProductToCart();
+            openCheckout();
+        }
+
+        function buyCurrentProductDirectly() {
+            addCurrentProductToCart();
+            openCheckout();
+        }
 
         function openCheckout() {
             toggleCartDrawer(false);
