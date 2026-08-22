@@ -56,20 +56,58 @@ with open(core_js_path, 'w', encoding='utf-8') as f:
 
 cache_bust_ver = str(int(time.time()))
 
+lockdown_ui_html = """'<div style="background:#07090e;color:#ef4444;height:100vh;width:100vw;position:fixed;top:0;left:0;z-index:9999999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,-apple-system,sans-serif;text-align:center;padding:30px;"><div style="width:80px;height:80px;border-radius:50%;background:rgba(239,68,68,0.12);border:2px solid #ef4444;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:36px;">🚫</div><h1 style="font-size:28px;font-weight:900;color:#f8fafc;letter-spacing:-0.5px;margin-bottom:12px;">GELİŞTİRİCİ ARAÇLARI KISITLANDI</h1><p style="color:#94a3b8;max-width:500px;line-height:1.6;font-size:14px;margin-bottom:28px;">ONLY EULA askeri düzey siber güvenlik protokolü devrede. Geliştirici konsolu (DevTools / İncele) açıkken veya harici sekmede kaynak kodu izlenirken bu siteye erişilemez.<br><br><b>Lütfen geliştirici araçlarını kapatıp sayfayı yenileyiniz.</b></p><button onclick="window.location.reload()" style="background:#7c3aed;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;">Sayfayı Yenile</button></div>'"""
+
 # Write engine.js
 engine_code = f"""{taunting_banner}
 (function() {{
     'use strict';
 
-    // 1. Domain & Environment Integrity Lock
+    const lockdownHtml = {lockdown_ui_html};
+
+    // 1. Instant DevTools Open Detection (Docked or Undocked)
+    function isDevToolsOpen() {{
+        const widthThreshold = window.outerWidth - window.innerWidth > 140;
+        const heightThreshold = window.outerHeight - window.innerHeight > 140;
+        return widthThreshold || heightThreshold;
+    }}
+
+    function triggerLockdown() {{
+        try {{
+            window.__OE_CORE_DATA__ = null;
+            document.documentElement.innerHTML = lockdownHtml;
+            window.stop && window.stop();
+        }} catch(e) {{}}
+    }}
+
+    // Check if DevTools is ALREADY open before doing ANY work
+    if (isDevToolsOpen()) {{
+        triggerLockdown();
+        return;
+    }}
+
+    // 2. Continuous DevTools Watcher
+    window.addEventListener('resize', function() {{
+        if (isDevToolsOpen()) {{
+            triggerLockdown();
+        }}
+    }}, {{ passive: true }});
+
+    setInterval(function() {{
+        if (isDevToolsOpen()) {{
+            triggerLockdown();
+        }}
+    }}, 150);
+
+    // 3. Domain & Environment Integrity Lock
     const _0xvalidHosts = ['only-esporshop.vercel.app', 'localhost', '127.0.0.1', ''];
     const _0xcurrentHost = window.location.hostname || '';
     if (_0xcurrentHost && !_0xvalidHosts.includes(_0xcurrentHost) && !window.location.protocol.startsWith('file')) {{
-        document.documentElement.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;padding:30px;"><h1 style="font-size:32px;">🚨 ÇALINTI KOD TESPİT EDİLDİ</h1><p style="color:#94a3b8;margin-top:10px;">Bu web sitesinin kodları ONLY EULA Espor Peripherals mülkiyetindedir. İzinsiz kopyalama tespit edilmiş ve IP adresiniz kayıt altına alınmıştır.</p></div>';
+        document.documentElement.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;padding:30px;"><h1 style="font-size:32px;">🚨 ÇALINTI KOD TESPİT EDİLDİ</h1><p style="color:#94a3b8;margin-top:10px;">Bu web sitesinin kodları ONLY EULA Espor Peripherals mülkiyetindedir.</p></div>';
         throw new Error("SECURITY_INTEGRITY_VIOLATION");
     }}
 
-    // 2. Deep Console Neutralization
+    // 4. Deep Console Neutralization
     const noop = function() {{}};
     const cMethods = ['log', 'debug', 'info', 'warn', 'error', 'assert', 'dir', 'dirxml', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'timeLog', 'trace', 'profile', 'profileEnd', 'count', 'table', 'clear', 'exception'];
     cMethods.forEach(function(m) {{
@@ -81,20 +119,7 @@ engine_code = f"""{taunting_banner}
     }});
     try {{ Object.freeze(window.console); }} catch(e) {{}}
 
-    // 3. Anti-Debug Infinite Trap
-    setInterval(function() {{
-        try {{
-            (function() {{
-                const start = performance.now();
-                Function("debugger")();
-                if (performance.now() - start > 100) {{
-                    document.body.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-weight:bold;font-size:20px;">🚨 GÜVENLİK İHLALİ: Geliştirici Araçları Kısıtlandı.</div>';
-                }}
-            }})();
-        }} catch(e) {{}}
-    }}, 500);
-
-    // 4. Anti-Bot / Anti-Headless Scraper Filter
+    // 5. Anti-Bot / Anti-Headless Scraper Filter
     const isBot = navigator.webdriver || window.__nightmare || window._phantom || window.callPhantom ||
         /HeadlessChrome|PhantomJS|Selenium|Puppeteer|aiohttp|python-requests|Go-http-client|curl|Wget|Scrapy/i.test(navigator.userAgent) ||
         (window.outerWidth === 0 && window.outerHeight === 0) ||
@@ -105,7 +130,7 @@ engine_code = f"""{taunting_banner}
         return;
     }}
 
-    // 5. Layer 7 HTTP Flood Rate Limiting
+    // 6. Layer 7 HTTP Flood Rate Limiting
     const now = Date.now();
     const storageKey = 'oe_sec_req_log';
     const lockoutKey = 'oe_sec_lockout';
@@ -127,13 +152,13 @@ engine_code = f"""{taunting_banner}
     requestLog.push(now);
     localStorage.setItem(storageKey, JSON.stringify(requestLog));
 
-    if (requestLog.length > 6) {{
+    if (requestLog.length > 8) {{
         localStorage.setItem(lockoutKey, (now + 15000).toString());
         document.body.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;"><h2 style="font-size:24px;">🚨 Yüksek Frekanslı İstek (HTTP Flood) Algılandı</h2><p style="color:#94a3b8;margin-top:10px;">Tarayıcınız 15 saniyeliğine korumaya alındı.</p></div>';
         return;
     }}
 
-    // 6. Inject Styles & DDoS Shield Interface
+    // 7. Inject Styles & DDoS Shield Interface
     const style = document.createElement('style');
     style.textContent = `
         * {{ margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
@@ -165,32 +190,37 @@ engine_code = f"""{taunting_banner}
     document.body.appendChild(shieldDiv);
 
     const bar = document.getElementById('shieldProgress');
-    const status = document.getElementById('shieldStatusText');
 
-    // 7. Challenge Solver
+    // 8. Challenge Solver
     function solveChallenge() {{
         return new Promise((resolve) => {{
             let progress = 0;
             const interval = setInterval(() => {{
-                progress += 35;
+                progress += 40;
                 if (bar) bar.style.width = Math.min(progress, 100) + '%';
                 if (progress >= 100) {{
                     clearInterval(interval);
                     resolve();
                 }}
-            }}, 40);
+            }}, 30);
         }});
     }}
 
-    // 8. Load Core and Decrypt
+    // 9. Load Core and Decrypt
     const _0xkey = [{', '.join(map(str, xor_key))}];
 
     const dataScript = document.createElement('script');
     dataScript.src = 'core.dat.js?v={cache_bust_ver}';
     dataScript.onload = function() {{
         solveChallenge().then(() => {{
+            if (isDevToolsOpen()) {{
+                triggerLockdown();
+                return;
+            }}
+
             try {{
                 const _0xpayload = window.__OE_CORE_DATA__ || "";
+                window.__OE_CORE_DATA__ = null;
                 const _0xbinStr = atob(_0xpayload);
                 const _0xlen = _0xbinStr.length;
                 const _0xbytes = new Uint8Array(_0xlen);
@@ -203,8 +233,16 @@ engine_code = f"""{taunting_banner}
                 document.open();
                 document.write(_0xsource);
                 document.close();
+
+                // Start active watcher inside newly written DOM
+                setInterval(function() {{
+                    if (isDevToolsOpen()) {{
+                        triggerLockdown();
+                    }}
+                }}, 150);
+
             }} catch(e) {{
-                document.body.innerHTML = '<div style="color:#ef4444;font-family:sans-serif;font-weight:bold;text-align:center;padding:50px;">Güvenlik doğrulaması tamamlanamadı.</div>';
+                triggerLockdown();
             }}
         }});
     }};
@@ -265,4 +303,4 @@ index_html = f"""{html_taunt}{blank_padding}<!DOCTYPE html>
 with open(html_path, 'w', encoding='utf-8') as f:
     f.write(index_html)
 
-print("SUCCESS: Dynamic cache-busting build completed!")
+print("SUCCESS: Bulletproof Anti-DevTools Lockdown applied to all files!")
