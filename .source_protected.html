@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=(), camera=(), microphone=(), geolocation=()">
+    <meta name="robots" content="index, follow">
+    <title>ONLY EULA | Premium Manyetik Espor Oyuncu Ekipmanları</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-hover: #6d28d9;
+            --primary-light: #ede9fe;
+            --secondary: #00d2ff;
+            --bg-page: #f8fafc;
+            --bg-white: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-full: 9999px;
+            --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 12px 24px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+            --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.25s ease;
+        }
+
+        /* ==================== SECURITY & ANTI-TAMPER CSS ==================== */
+        html, body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        img, a {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        input, textarea, select, button {
+            -webkit-user-select: auto;
+            user-select: auto;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; outline: none; background: none; font-family: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* ==================== TOP BAR ==================== */
+        .top-bar {
+            background: linear-gradient(90deg, #7c3aed, #6366f1, #7c3aed);
+            background-size: 200% 100%;
+            animation: gradientMove 8s ease infinite;
+            color: white;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+            z-index: 101;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .top-bar-track {
+            display: inline-flex;
+            animation: marquee 25s linear infinite;
+        }
+
+        .top-bar-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 35px;
+            letter-spacing: 0.3px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ==================== NAVBAR ==================== */
+        .navbar {
+            background-color: var(--bg-white);
+            height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .nav-logo-img {
+            height: 38px;
+            width: auto;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .nav-logo-text {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        .nav-logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        /* Dropdowns */
+        .nav-dropdown {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-modal);
+            padding: 10px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-dark);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background: var(--bg-page);
+            color: var(--primary);
+            padding-left: 18px;
+        }
+
+        .dropdown-badge {
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-icon-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-icon-btn:hover {
+            background: var(--bg-page);
+            color: var(--primary);
+        }
+
+        .nav-icon-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--primary);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* ==================== HERO SECTION (GRID) ==================== */
+        .hero-section {
+            max-width: 1440px;
+            margin: 28px auto;
+            padding: 0 4%;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            grid-template-rows: 270px 270px;
+            gap: 16px;
+        }
+
+        .hero-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow-card);
+            background: #0f172a;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-card-img-wrap {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .hero-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.2) 50%, rgba(0,0,0,0) 100%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            color: white;
+            transition: background 0.3s ease;
+        }
+
+        .hero-card:hover .hero-card-overlay {
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.3) 60%, rgba(0,0,0,0) 100%);
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            width: fit-content;
+            margin-bottom: 8px;
+        }
+
+        .hero-tag.cyan { background: #0284c7; }
+        .hero-tag.green { background: #059669; }
+        .hero-tag.purple { background: #7c3aed; }
+
+        .hero-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 13px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .hero-card.tall { grid-row: 1 / 3; }
+        .hero-card.wide-1 { grid-column: 2; grid-row: 1; }
+        .hero-card.square-1 { grid-column: 3; grid-row: 1; }
+        .hero-card.wide-2 { grid-column: 2; grid-row: 2; }
+        .hero-card.square-2 { grid-column: 3; grid-row: 2; }
+
+        /* ==================== ALWAYS EDITION PROMO BANNER ==================== */
+        .promo-banner {
+            max-width: 1440px;
+            margin: 40px auto;
+            padding: 0 4%;
+        }
+
+        .promo-banner-inner {
+            background: linear-gradient(135deg, #090d16 0%, #111827 50%, #0f172a 100%);
+            border: 1px solid #1e293b;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            min-height: 460px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .promo-text-side {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .promo-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(124, 58, 237, 0.25);
+            border: 1px solid rgba(167, 139, 250, 0.5);
+            color: #c4b5fd;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            width: fit-content;
+            margin-bottom: 20px;
+        }
+
+        .promo-headline {
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .promo-headline span {
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .promo-body {
+            font-size: 15px;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 28px;
+            max-width: 480px;
+        }
+
+        .promo-feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .promo-feat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e2e8f0;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .promo-feat-item svg {
+            color: #38bdf8;
+        }
+
+        .promo-action-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .promo-main-btn {
+            background: linear-gradient(90deg, #0284c7, #7c3aed);
+            color: white;
+            padding: 14px 32px;
+            border-radius: var(--radius-full);
+            font-size: 15px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        .promo-main-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .promo-price-tag {
+            font-size: 24px;
+            font-weight: 900;
+            color: white;
+        }
+
+        .promo-visual-side {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .promo-main-img-wrap {
+            flex: 1;
+            position: relative;
+            min-height: 320px;
+        }
+
+        .promo-display-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s ease, transform 0.6s ease;
+        }
+
+        .promo-angle-thumbs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 5;
+        }
+
+        .promo-thumb-btn {
+            width: 60px;
+            height: 45px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            opacity: 0.6;
+            transition: var(--transition);
+            cursor: pointer;
+            background: #1e293b;
+        }
+
+        .promo-thumb-btn:hover { opacity: 0.9; }
+
+        .promo-thumb-btn.active {
+            border-color: #38bdf8;
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .promo-thumb-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ==================== PRODUCTS SECTION ==================== */
+        .products-section {
+            max-width: 1440px;
+            margin: 50px auto;
+            padding: 0 4%;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        .category-filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 8px 18px;
+            border-radius: var(--radius-full);
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .filter-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .product-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--border-hover);
+        }
+
+        .product-card-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--text-dark);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            z-index: 10;
+        }
+
+        .product-card-badge.limited { background: linear-gradient(90deg, #0284c7, #7c3aed); }
+        .product-card-badge.popular { background: #059669; }
+        .product-card-badge.sale { background: #e11d48; }
+
+        .wishlist-heart-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .wishlist-heart-btn:hover {
+            color: #ef4444;
+            transform: scale(1.1);
+        }
+
+        .wishlist-heart-btn.active {
+            color: #ef4444;
+            fill: #ef4444;
+        }
+
+        .product-card-image-box {
+            width: 100%;
+            aspect-ratio: 1.1;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            padding: 12px;
+        }
+
+        .product-card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-card-image-box img {
+            transform: scale(1.06);
+        }
+
+        .product-brand-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .product-name-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-desc-snippet {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            line-height: 1.4;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .old-price-text {
+            font-size: 12px;
+            color: var(--text-light);
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+
+        .current-price-text {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+
+        .quick-view-action-btn {
+            background: var(--text-dark);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick-view-action-btn:hover {
+            background: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        /* ==================== PRODUCT DETAIL PAGE ==================== */
+        #productDetailView {
+            display: none;
+            max-width: 1400px;
+            margin: 30px auto 60px;
+            padding: 0 4%;
+        }
+
+        .pdp-breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .pdp-breadcrumbs a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .pdp-breadcrumbs span.current {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .pdp-main-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 50px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-card);
+        }
+
+        /* Left PDP Gallery */
+        .pdp-gallery-col {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .pdp-thumbs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .pdp-thumb-item {
+            width: 74px;
+            height: 74px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border-color);
+            padding: 4px;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .pdp-thumb-item:hover {
+            border-color: var(--border-hover);
+        }
+
+        .pdp-thumb-item.active {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+        }
+
+        .pdp-thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .pdp-main-image-display {
+            flex: 1;
+            aspect-ratio: 1.05;
+            background: #f8fafc;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pdp-main-image-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        /* Right PDP Info */
+        .pdp-info-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdp-brand-tag {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .pdp-title-header {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .pdp-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .pdp-stars {
+            color: #94a3b8;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .pdp-review-count {
+            color: var(--text-muted);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .pdp-price-box {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .pdp-current-price {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .pdp-old-price {
+            font-size: 18px;
+            color: var(--text-light);
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .pdp-discount-pill {
+            background: #ef4444;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+        }
+
+        .pdp-guarantee-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .pdp-guarantee-title {
+            color: #0284c7;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pdp-guarantee-desc {
+            font-size: 12px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        /* PDP Options Selectors */
+        .pdp-option-block {
+            margin-bottom: 20px;
+        }
+
+        .pdp-option-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .pdp-option-label span {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .pdp-option-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pdp-pill-btn {
+            background: var(--bg-white);
+            border: 1.5px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .pdp-pill-btn:hover {
+            border-color: var(--text-dark);
+        }
+
+        .pdp-pill-btn.active {
+            border-color: var(--text-dark);
+            background: var(--text-dark);
+            color: white;
+        }
+
+        /* Quantity & Add to Cart */
+        .pdp-buy-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 10px;
+            margin-bottom: 24px;
+        }
+
+        .pdp-qty-stepper {
+            display: inline-flex;
+            align-items: center;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-full);
+            background: white;
+            overflow: hidden;
+            height: 52px;
+        }
+
+        .qty-btn {
+            width: 44px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .qty-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .qty-val-display {
+            width: 40px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .pdp-add-cart-btn {
+            flex: 1;
+            height: 52px;
+            background: var(--primary);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            cursor: pointer;
+        }
+
+        .pdp-add-cart-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        .pdp-back-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-top: 10px;
+            transition: color 0.2s;
+        }
+
+        .pdp-back-link-btn:hover {
+            color: var(--primary);
+        }
+
+        /* PDP Tabs */
+        .pdp-specs-tab-section {
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        .pdp-specs-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .pdp-tab-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pdp-tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .pdp-tab-content-panel {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        .specs-bullet-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .spec-bullet-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .spec-bullet-item svg {
+            color: #10b981;
+            flex-shrink: 0;
+        }
+
+        /* ==================== FEATURES BAR ==================== */
+        .features-bar {
+            background: white;
+            padding: 40px 4%;
+            margin: 60px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .f-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .f-text h4 {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .f-text p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ==================== CTA BANNER ==================== */
+        .cta-banner {
+            max-width: 1440px;
+            margin: 60px auto;
+            padding: 0 4%;
+        }
+
+        .cta-inner-card {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            background: #0f172a;
+            color: white;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            mask-image: linear-gradient(to right, transparent, black);
+            -webkit-mask-image: linear-gradient(to right, transparent, black);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 540px;
+        }
+
+        .cta-content h2 {
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .cta-content p {
+            font-size: 15px;
+            color: #cbd5e1;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .dl-btn {
+            background: var(--primary);
+            color: white;
+            padding: 14px 30px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+        }
+
+        .dl-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: white;
+            padding: 60px 4% 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 50px;
+        }
+
+        .f-brand h3 {
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .f-brand h3 img {
+            height: 32px;
+            border-radius: 4px;
+        }
+
+        .f-brand p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-page);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .f-col h4 {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            color: var(--text-dark);
+        }
+
+        .f-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .f-col a {
+            color: var(--text-muted);
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .f-col a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 8px;
+        }
+
+        .payment-methods span {
+            padding: 4px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ==================== CART DRAWER ==================== */
+        .cart-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-drawer-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 420px;
+            max-width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 10001;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cart-drawer-overlay.active .cart-drawer-panel {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .cart-close-btn {
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .cart-items-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cart-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            text-align: center;
+            gap: 12px;
+        }
+
+        .cart-item-row {
+            display: flex;
+            gap: 14px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 65px;
+            height: 65px;
+            background: #f8fafc;
+            border-radius: 8px;
+            object-fit: contain;
+            padding: 4px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .cart-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border-color);
+            background: #f8fafc;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .cart-checkout-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 14px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .cart-checkout-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* ==================== TOAST NOTIFICATION & SECURITY MODAL ==================== */
+        .toast-notification {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--text-dark);
+            color: white;
+            padding: 14px 22px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: var(--shadow-modal);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-notification.security-alert {
+            background: #1e1b4b;
+            border: 1px solid #7c3aed;
+            color: #f8fafc;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1080px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+            .hero-card.tall { grid-row: auto; grid-column: 1 / 3; height: 320px; }
+            .hero-card.wide-1, .hero-card.wide-2 { grid-column: auto; grid-row: auto; height: 240px; }
+            .hero-card.square-1, .hero-card.square-2 { grid-column: auto; grid-row: auto; height: 240px; }
+            
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+            .promo-banner-inner { grid-template-columns: 1fr; }
+            .pdp-main-grid { grid-template-columns: 1fr; gap: 30px; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-center { display: none; }
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-card.tall, .hero-card.wide-1, .hero-card.wide-2, .hero-card.square-1, .hero-card.square-2 { grid-column: 1; height: 220px; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .promo-text-side { padding: 30px 20px; }
+            .promo-headline { font-size: 28px; }
+            .pdp-gallery-col { flex-direction: column-reverse; }
+            .pdp-thumbs-list { flex-direction: row; width: 100%; justify-content: center; }
+            .pdp-main-grid { padding: 20px; }
+            .pdp-title-header { font-size: 24px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .cta-inner-card { padding: 30px 20px; flex-direction: column; }
+            .cta-bg { width: 100%; opacity: 0.2; }
+            .specs-bullet-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
+
+    <!-- ============ TOP BAR ============ -->
+    <div class="top-bar">
+        <div class="top-bar-track">
+            <div class="top-bar-item">🚚 SAAT 14:00'A KADAR VERİLEN SİPARİŞLERDE AYNI GÜN KARGO</div>
+            <div class="top-bar-item">📦 2199₺ VE ÜZERİ SİPARİŞLERDE ÜCRETSİZ KARGO</div>
+            <div class="top-bar-item">🔒 256-BIT SSL GÜVENLİ ALIŞVERİŞ</div>
+            <div class="top-bar-item">⚡ 8000HZ VE MANYETİK (HALL EFFECT) TEKNOLOJİSİ</div>
+            <div class="top-bar-item">🛡️ 30 GÜN KOŞULSUZ MEMNUNİYET GARANTİSİ</div>
+            <!-- Loop Duplicate -->
+            <div class="top-bar-item">🚚 SAAT 14:00'A KADAR VERİLEN SİPARİŞLERDE AYNI GÜN KARGO</div>
+            <div class="top-bar-item">📦 2199₺ VE ÜZERİ SİPARİŞLERDE ÜCRETSİZ KARGO</div>
+            <div class="top-bar-item">🔒 256-BIT SSL GÜVENLİ ALIŞVERİŞ</div>
+            <div class="top-bar-item">⚡ 8000HZ VE MANYETİK (HALL EFFECT) TEKNOLOJİSİ</div>
+            <div class="top-bar-item">🛡️ 30 GÜN KOŞULSUZ MEMNUNİYET GARANTİSİ</div>
+        </div>
+    </div>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left" onclick="showHomePage()">
+            <img src="logo.jpg" alt="Only EULA Logo" class="nav-logo-img">
+            <div class="nav-logo-text">ONLY<span>EULA.</span></div>
+        </div>
+        
+        <div class="nav-center">
+            <a href="javascript:void(0)" class="nav-link" onclick="showHomePage()">Ana Sayfa</a>
+            
+            <div class="nav-dropdown">
+                <a href="javascript:void(0)" class="nav-link">Kategoriler ▾</a>
+                <div class="dropdown-menu">
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('keyboard')">
+                        Manyetik Klavyeler <span class="dropdown-badge">8000Hz</span>
+                    </a>
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('mousepad')">
+                        Gaming Mousepadler <span class="dropdown-badge">Speed</span>
+                    </a>
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('limited')">
+                        Limited Edition <span class="dropdown-badge">Özel</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown">
+                <a href="javascript:void(0)" class="nav-link">Markalar ▾</a>
+                <div class="dropdown-menu">
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('all')">ONLY EULA</a>
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('keyboard')">KF90 Series</a>
+                    <a href="javascript:void(0)" class="dropdown-item" onclick="filterCategory('limited')">Kitsune Edition</a>
+                </div>
+            </div>
+
+            <a href="#driverSection" class="nav-link" onclick="scrollToDriver()">Sürücü (Driver)</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showToast('Partner Programı Başvuruları Yakında!')">Partner Programı</a>
+            <a href="javascript:void(0)" class="nav-link" onclick="showToast('Müşteri Hizmetleri: destek@onlyeula.com')">İletişim</a>
+        </div>
+
+        <div class="nav-right">
+            <button class="nav-icon-btn" onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})" title="Arama">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+            </button>
+            <button class="nav-icon-btn" onclick="showToast('Hesabım paneli yakında aktif olacak')" title="Hesap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            <button class="nav-icon-btn" onclick="toggleCartDrawer(true)" title="Sepet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20a1 1 0 100 2 1 1 0 000-2zM20 20a1 1 0 100 2 1 1 0 000-2z"></path><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                <div class="cart-badge" id="cartCountBadge">0</div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== HOME VIEW ==================== -->
+    <div id="homeView">
+        
+        <!-- Hero Grid -->
+        <section class="hero-section">
+            <div class="hero-grid">
+                <!-- Tall 1 -->
+                <div class="hero-card tall" onclick="openProduct(2)">
+                    <div class="hero-card-img-wrap">
+                        <img src="keyboard_vertical.jpg" alt="KF90 HE Klavye">
+                    </div>
+                    <div class="hero-card-overlay">
+                        <div class="hero-tag">Yeni Nesil</div>
+                        <div class="hero-title">KF90 HE</div>
+                        <div class="hero-subtitle">60% Manyetik Switch Oyuncu Klavyesi</div>
+                    </div>
+                </div>
+
+                <!-- Wide 1 -->
+                <div class="hero-card wide-1" onclick="openProduct(4)">
+                    <div class="hero-card-img-wrap">
+                        <img src="mousepad_circuit.jpg" alt="Circuit Deskmat">
+                    </div>
+                    <div class="hero-card-overlay">
+                        <div class="hero-tag green">Çok Satan</div>
+                        <div class="hero-title">Circuit Deskmat XL</div>
+                        <div class="hero-subtitle">900x400mm Cyberpunk Speed Yüzey</div>
+                    </div>
+                </div>
+
+                <!-- Square 1 -->
+                <div class="hero-card square-1" onclick="openProduct(6)">
+                    <div class="hero-card-img-wrap">
+                        <img src="mousepad_cyberglass.jpg" alt="Cyberglass">
+                    </div>
+                    <div class="hero-card-overlay">
+                        <div class="hero-tag">Cam Hissiyatı</div>
+                        <div class="hero-title">Cyberglass Dot Clicker</div>
+                        <div class="hero-subtitle">Ultra Düşük Sürtünme</div>
+                    </div>
+                </div>
+
+                <!-- Wide 2 (Kitsune Limited Deskmat) -->
+                <div class="hero-card wide-2" onclick="openProduct(10)">
+                    <div class="hero-card-img-wrap">
+                        <img src="mousepad_kitsune.jpg" alt="Kitsune Limited Deskmat">
+                    </div>
+                    <div class="hero-card-overlay">
+                        <div class="hero-tag purple">Limited Anime</div>
+                        <div class="hero-title">Kitsune Limited Deskmat XL</div>
+                        <div class="hero-subtitle">Japon Mitolojisi & 9 Kuyruklu Tilki Teması</div>
+                    </div>
+                </div>
+
+                <!-- Square 2 -->
+                <div class="hero-card square-2" onclick="openProduct(1)">
+                    <div class="hero-card-img-wrap">
+                        <img src="keyboard.jpg" alt="KF90 HE PRO">
+                    </div>
+                    <div class="hero-card-overlay">
+                        <div class="hero-tag">8000Hz</div>
+                        <div class="hero-title">KF90 HE PRO</div>
+                        <div class="hero-subtitle">0.01mm Rapid Trigger Hassasiyeti</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Always Edition Limited Interactive Promo -->
+        <section class="promo-banner">
+            <div class="promo-banner-inner">
+                <div class="promo-text-side">
+                    <div class="promo-pill">✨ LIMITED COLLECTOR'S EDITION</div>
+                    <h2 class="promo-headline">KF90 <span>ALWAYS EDITION</span></h2>
+                    <p class="promo-body">İnce camgöbeği alüminyum kasa üzerine lazer kazınmış detaylar. Tamamen Manyetik (Hall Effect) switchler ve tuşlara yayılan özel sanatsal anime tasarımı ile %100 gerçekçi, 8000Hz performansın zirvesi.</p>
+                    
+                    <div class="promo-feature-list">
+                        <div class="promo-feat-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"></path></svg>
+                            Manyetik Hall Effect Switch
+                        </div>
+                        <div class="promo-feat-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"></path></svg>
+                            8000Hz Polling Rate
+                        </div>
+                        <div class="promo-feat-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"></path></svg>
+                            0.01mm Rapid Trigger
+                        </div>
+                    </div>
+
+                    <div class="promo-action-row">
+                        <button class="promo-main-btn" onclick="openProduct(9)">
+                            <span>Ürünü İncele & Satın Al</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="promo-price-tag">₺8,999</div>
+                    </div>
+                </div>
+
+                <div class="promo-visual-side">
+                    <div class="promo-main-img-wrap">
+                        <img src="always_promo_1.jpg" alt="Always Edition Angle" id="promoMainDisplay" class="promo-display-img">
+                    </div>
+                    <div class="promo-angle-thumbs">
+                        <div class="promo-thumb-btn active" onclick="switchPromoAngle('always_promo_1.jpg', this)">
+                            <img src="always_promo_1.jpg" alt="Açı 1">
+                        </div>
+                        <div class="promo-thumb-btn" onclick="switchPromoAngle('always_promo_2.jpg', this)">
+                            <img src="always_promo_2.jpg" alt="Açı 2">
+                        </div>
+                        <div class="promo-thumb-btn" onclick="switchPromoAngle('always_promo_3.jpg', this)">
+                            <img src="always_promo_3.jpg" alt="Açı 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products-section" id="productsSection">
+            <div class="section-header">
+                <h2 class="section-title">Popüler Ekipmanlar</h2>
+                <div class="category-filter-tabs">
+                    <button class="filter-tab active" onclick="filterCategory('all', this)">Tüm Ürünler</button>
+                    <button class="filter-tab" onclick="filterCategory('keyboard', this)">Manyetik Klavyeler</button>
+                    <button class="filter-tab" onclick="filterCategory('mousepad', this)">Gaming Mousepad</button>
+                    <button class="filter-tab" onclick="filterCategory('limited', this)">Limited Edition</button>
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ==================== PRODUCT DETAIL VIEW ==================== -->
+    <div id="productDetailView">
+        <div class="pdp-breadcrumbs">
+            <a href="javascript:void(0)" onclick="showHomePage()">Ana Sayfa</a>
+            <span>/</span>
+            <a href="javascript:void(0)" onclick="showHomePage()" id="pdpBreadcrumbCategory">Klavyeler</a>
+            <span>/</span>
+            <span class="current" id="pdpBreadcrumbTitle">KF90 HE PRO Always Edition</span>
+        </div>
+
+        <div class="pdp-main-grid">
+            <!-- Left: Gallery -->
+            <div class="pdp-gallery-col">
+                <div class="pdp-thumbs-list" id="pdpThumbsContainer">
+                    <!-- Thumbnails Injected via JS -->
+                </div>
+                <div class="pdp-main-image-display">
+                    <img id="pdpMainImage" src="always_promo_1.jpg" alt="Ürün Görseli">
+                </div>
+            </div>
+
+            <!-- Right: Info & Controls -->
+            <div class="pdp-info-col">
+                <div class="pdp-brand-tag" id="pdpBrand">ONLY EULA ESPORTS</div>
+                <h1 class="pdp-title-header" id="pdpTitle">KF90 HE PRO Always Edition (Manyetik Switch / HE)</h1>
+                
+                <div class="pdp-rating-row">
+                    <div class="pdp-stars">☆☆☆☆☆ 0.0</div>
+                    <span class="pdp-review-count">(0 Müşteri Değerlendirmesi - İlk Değerlendiren Sen Ol)</span>
+                </div>
+
+                <div class="pdp-price-box">
+                    <div class="pdp-current-price" id="pdpPrice">₺8,999</div>
+                    <div class="pdp-old-price" id="pdpOldPrice">₺10,499</div>
+                    <div class="pdp-discount-pill" id="pdpDiscount">Kazancınız: ₺1,500</div>
+                </div>
+
+                <div class="pdp-guarantee-box">
+                    <div class="pdp-guarantee-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Only EULA Ürünlerinde 30 Gün Memnuniyet Garantisi!
+                    </div>
+                    <p class="pdp-guarantee-desc">Only EULA markalı ürünlerde 30 gün içerisinde koşulsuz iade hakkı bulunur. 2 yıl boyunca teknik servis ve bire bir değişim güvencesi altındadır.</p>
+                </div>
+
+                <!-- Interactive Variant Selectors -->
+                <div class="pdp-option-block" id="colorOptionBlock">
+                    <label class="pdp-option-label" id="colorOptionLabel">Seçenek / Renk: <span id="selectedColorText">Varsayılan</span></label>
+                    <div class="pdp-option-pills" id="colorPills">
+                        <!-- Dynamically populated in openProduct -->
+                    </div>
+                </div>
+
+                <div class="pdp-option-block" id="layoutOptionBlock">
+                    <label class="pdp-option-label">Tuş Takımı Düzeni: <span id="selectedLayoutText">Türkçe Q</span></label>
+                    <div class="pdp-option-pills" id="layoutPills">
+                        <button class="pdp-pill-btn active" onclick="selectVariant('layout', 'Türkçe Q', this)">Türkçe Q</button>
+                        <button class="pdp-pill-btn" onclick="selectVariant('layout', 'İngilizce ANSI', this)">İngilizce ANSI</button>
+                    </div>
+                </div>
+
+                <div class="pdp-option-block" id="switchOptionBlock">
+                    <label class="pdp-option-label">Manyetik Switch Tipi: <span id="selectedSwitchText">Hall Effect Linear (0.1-4.0mm)</span></label>
+                    <div class="pdp-option-pills" id="switchPills">
+                        <button class="pdp-pill-btn active" onclick="selectVariant('switch', 'Hall Effect Linear (0.1-4.0mm)', this)">Hall Effect Linear (0.1-4.0mm)</button>
+                        <button class="pdp-pill-btn" onclick="selectVariant('switch', 'Gateron Magnetic Jade (Ultra Smooth)', this)">Gateron Magnetic Jade</button>
+                    </div>
+                </div>
+
+                <!-- Quantity & Cart Row -->
+                <div class="pdp-buy-row">
+                    <div class="pdp-qty-stepper">
+                        <button class="qty-btn" onclick="changeQuantity(-1)">-</button>
+                        <div class="qty-val-display" id="pdpQtyVal">1</div>
+                        <button class="qty-btn" onclick="changeQuantity(1)">+</button>
+                    </div>
+                    
+                    <button class="pdp-add-cart-btn" onclick="addCurrentProductToCart()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                        Sepete Ekle
+                    </button>
+                </div>
+
+                <button class="pdp-back-link-btn" onclick="showHomePage()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+                    ← Alışverişe Devam Et
+                </button>
+            </div>
+        </div>
+
+        <!-- PDP Features & Specs Tabbed Section -->
+        <div class="pdp-specs-tab-section">
+            <div class="pdp-specs-tabs">
+                <button class="pdp-tab-btn active" onclick="switchPdpTab('specs', this)">Özellikler & Detaylar</button>
+                <button class="pdp-tab-btn" onclick="switchPdpTab('box', this)">Kutu İçeriği</button>
+                <button class="pdp-tab-btn" onclick="switchPdpTab('driver', this)">Sürücü & Yazılım</button>
+            </div>
+
+            <div id="tabPanelSpecs" class="pdp-tab-content-panel">
+                <p id="pdpLongDesc" style="margin-bottom: 20px;">Özel üretim donanım mimarisi, milisaniyelik tepki süresi ve espor oyuncuları için kusursuz yüzey kalitesi.</p>
+                <div class="specs-bullet-grid" id="pdpSpecsGrid">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <div id="tabPanelBox" class="pdp-tab-content-panel" style="display: none;">
+                <div class="specs-bullet-grid">
+                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Only EULA Donanım Ürünü</div>
+                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Özel Koruyucu Espor Kılıfı / Paketleme</div>
+                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Orijinallik ve Seri Numarası Kartı</div>
+                    <div class="spec-bullet-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg> 1x Hızlı Başlangıç Kılavuzu & 2 Yıl Garanti Belgesi</div>
+                </div>
+            </div>
+
+            <div id="tabPanelDriver" class="pdp-tab-content-panel" style="display: none;">
+                <p style="margin-bottom: 16px;">KF90 serisi klavyelerimizi tarayıcınız üzerinden veya resmi masaüstü uygulaması ile özelleştirebilirsiniz.</p>
+                <a href="OnlyEULA_KF90_HE_Driver_v3.2.1_Setup.txt" download class="dl-btn" style="padding: 10px 20px; font-size: 13px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Only EULA Driver v3.2 İndir (.exe)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ FEATURES BAR ============ -->
+    <div class="features-bar">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="f-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                </div>
+                <div class="f-text">
+                    <h4>Aynı Gün Kargo</h4>
+                    <p>14:00'dan önceki tüm siparişler</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="f-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg>
+                </div>
+                <div class="f-text">
+                    <h4>256-Bit Güvenli Ödeme</h4>
+                    <p>3D Secure & SSL Koruması</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="f-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div class="f-text">
+                    <h4>Ücretsiz Kargo</h4>
+                    <p>2199₺ ve üzeri alışverişlerde</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="f-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.13 15.57a9 9 0 1 0 3.09-10.4l3.18 3.18"></path></svg>
+                </div>
+                <div class="f-text">
+                    <h4>30 Gün Koşulsuz İade</h4>
+                    <p>Birebir değişim ve destek</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ CTA DRIVER BANNER ============ -->
+    <section class="cta-banner" id="driverSection">
+        <div class="cta-inner-card">
+            <img src="keyboard.jpg" alt="Driver Klavye" class="cta-bg">
+            <div class="cta-content">
+                <h2>Only EULA Driver v3.2</h2>
+                <p>KF90 serisi klavyelerinizin Rapid Trigger hassasiyetini (0.01mm - 4.0mm), 8000Hz Polling Rate hızını, SOCD ayarlarını ve dinamik tuş atamalarını en yüksek hassasiyetle yapılandırın.</p>
+                <a href="OnlyEULA_KF90_HE_Driver_v3.2.1_Setup.txt" download class="dl-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Sürücüyü İndir (Windows 10/11)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="footer-grid">
+            <div class="f-brand">
+                <h3><img src="logo.jpg" alt="Only EULA Logo"> ONLY EULA</h3>
+                <p>Profesyonel esporcular ve tutkulu oyuncular için geliştirilmiş Manyetik (Hall Effect) klavyeler ve yüksek performanslı gaming ekipmanları.</p>
+                <div class="social-icons">
+                    <a href="javascript:void(0)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                    <a href="javascript:void(0)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="javascript:void(0)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                </div>
+            </div>
+            <div class="f-col">
+                <h4>Kategoriler</h4>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="filterCategory('keyboard')">Manyetik Klavyeler</a></li>
+                    <li><a href="javascript:void(0)" onclick="filterCategory('mousepad')">Gaming Mousepadler</a></li>
+                    <li><a href="javascript:void(0)" onclick="filterCategory('limited')">Limited Edition</a></li>
+                    <li><a href="javascript:void(0)" onclick="filterCategory('keyboard')">Hall Effect Switchler</a></li>
+                </ul>
+            </div>
+            <div class="f-col">
+                <h4>Destek & Yardım</h4>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="showToast('Sipariş takip sayfası')">Sipariş Takibi</a></li>
+                    <li><a href="javascript:void(0)" onclick="showToast('Garanti ve İade koşulları')">Garanti & İade</a></li>
+                    <li><a href="javascript:void(0)" onclick="showToast('Sıkça sorulan sorular')">Sıkça Sorulan Sorular</a></li>
+                    <li><a href="javascript:void(0)" onclick="scrollToDriver()">Sürücü Yazılımı</a></li>
+                </ul>
+            </div>
+            <div class="f-col">
+                <h4>Kurumsal</h4>
+                <ul>
+                    <li><a href="javascript:void(0)">Hakkımızda</a></li>
+                    <li><a href="javascript:void(0)">Gizlilik Sözleşmesi</a></li>
+                    <li><a href="javascript:void(0)">Mesafeli Satış Sözleşmesi</a></li>
+                    <li><a href="javascript:void(0)">İletişim</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ONLY EULA Esports Peripherals. Tüm hakları saklıdır.</p>
+            <div class="payment-methods">
+                <span>VISA</span>
+                <span>MASTERCARD</span>
+                <span>TROY</span>
+                <span>HAVALE / EFT</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ CART SLIDE-OVER DRAWER ============ -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="toggleCartDrawer(false)">
+        <div class="cart-drawer-panel" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <h3>Alışveriş Sepetim (<span id="cartDrawerCount">0</span>)</h3>
+                <button class="cart-close-btn" onclick="toggleCartDrawer(false)">&times;</button>
+            </div>
+            <div class="cart-items-list" id="cartItemsContainer">
+                <div class="cart-empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                    <p>Sepetinizde henüz ürün bulunmuyor.</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total-row">
+                    <span>Toplam Tutar:</span>
+                    <span id="cartTotalPrice" style="color: var(--primary);">₺0</span>
+                </div>
+                <button class="cart-checkout-btn" onclick="showToast('Ödeme adımı tamamlanmak üzere yönlendiriliyorsunuz!')">
+                    Siparişi Tamamla (Güvenli Ödeme)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ TOAST NOTIFICATION ============ -->
+    <div class="toast-notification" id="toastBox">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" id="toastIcon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span id="toastMessage">İşlem başarıyla gerçekleşti!</span>
+    </div>
+
+    <!-- ============ JAVASCRIPT LOGIC ============ -->
+    <script>
+        // Products Database
+        const productsDB = [
+            {
+                id: 9,
+                name: "KF90 HE PRO Always Edition",
+                category: "limited",
+                brand: "ONLY EULA",
+                price: 8999,
+                oldPrice: 10499,
+                tag: "Limited",
+                tagClass: "limited",
+                img: "always_promo_1.jpg",
+                images: ["always_promo_1.jpg", "always_promo_2.jpg", "always_promo_3.jpg"],
+                desc: "Özel üretim anime mural tuş takımı, ince anodize camgöbeği alüminyum kasa, 8000Hz Polling Rate ve Hall Effect manyetik switchler.",
+                longDesc: "Only EULA KF90 Always Edition, rekabetçi espor dünyası için özel olarak sınırlı sayıda üretildi. 0.01mm hassasiyete sahip Rapid Trigger sensörleri ve CNC işlenmiş gövdesi ile benzersiz bir estetik ve hız sunar.",
+                variants: [
+                    { name: "Camgöbeği (Cyan Anime)", img: "always_promo_1.jpg" },
+                    { name: "Mat Siyah (Stealth)", img: "always_promo_2.jpg" },
+                    { name: "Kutup Beyazı (Ghost)", img: "always_promo_3.jpg" }
+                ],
+                specs: [
+                    "0.01mm - 4.0mm Ayarlanabilir Rapid Trigger",
+                    "8000Hz (0.125ms) Polling Rate Hızı",
+                    "Manyetik Hall Effect Switch Teknolojisi",
+                    "SOCD (Simultaneous Opposing Cardinal Directions) Desteği",
+                    "CNC Anodize Cyan Alüminyum Gövde",
+                    "5-Side Dye-Sublimation PBT Anime Keycaps",
+                    "RGB Per-Key Aydınlatma & Web Driver"
+                ]
+            },
+            {
+                id: 10,
+                name: "Only EULA Kitsune Limited Deskmat XL",
+                category: "limited",
+                brand: "ONLY EULA",
+                price: 1499,
+                oldPrice: 1799,
+                tag: "Limited Edition",
+                tagClass: "limited",
+                img: "mousepad_kitsune.jpg",
+                images: ["mousepad_kitsune.jpg", "mousepad_kitsune_black.jpg"],
+                desc: "900x400mm Japon Mitolojisi Kitsune anime temalı, Only EULA özel logolu, mikro dokuma speed espor yüzeyli koleksiyoncu deskmat mousepadi.",
+                longDesc: "Always Edition klavyemiz ile kusursuz bir uyum yakalayan Only EULA Kitsune Limited Deskmat, su geçirmez mikro dokuma yüzeyi, çift dikişli aşınmaz kenarları ve 4mm ultra yoğun kaymaz doğal kauçuk tabanıyla hem sanatı hem de espor hızını masanıza getirir.",
+                variants: [
+                    { name: "Kitsune Anime (Mavi/Mor)", img: "mousepad_kitsune.jpg" },
+                    { name: "Stealth Siyah Edition", img: "mousepad_kitsune_black.jpg" }
+                ],
+                specs: [
+                    "900x400x4mm Ekstra Geniş Espor Boyutu",
+                    "Özel Üretim Kitsune Anime & Torii Gate Artwork",
+                    "Only EULA Lazer Baskılı İkonik Logo",
+                    "Ultra Düşük Sürtünmeli Speed Hibrit Kumaş",
+                    "Aşınmaz Çift Dikişli Kenarlar",
+                    "Kaymaz Doğal Kauçuk Taban"
+                ]
+            },
+            {
+                id: 1,
+                name: "KF90 HE PRO",
+                category: "keyboard",
+                brand: "ONLY EULA",
+                price: 7999,
+                oldPrice: 8999,
+                tag: "8000Hz",
+                tagClass: "popular",
+                img: "keyboard.jpg",
+                images: ["keyboard.jpg", "keyboard_vertical.jpg"],
+                desc: "60% Manyetik HE Klavye, 8000Hz, Rapid Trigger, SOCD desteği ile en üst düzey rekabetçi avantaj.",
+                longDesc: "Klasik mat siyah tasarım, profesyonel CS2 ve Valorant oyuncuları için optimize edilmiş Hall Effect switch mimarisi.",
+                variants: [
+                    { name: "Mat Siyah (Stealth)", img: "keyboard.jpg" },
+                    { name: "Alüminyum Gümüş", img: "keyboard_vertical.jpg" }
+                ],
+                specs: [
+                    "8000Hz Polling Rate",
+                    "Rapid Trigger (0.1mm - 4.0mm)",
+                    "SOCD & Snappy Tapping Desteği",
+                    "Gasket Mount Yapısı ile Tok Ses",
+                    "PBT Çift Katmanlı Tuşlar"
+                ]
+            },
+            {
+                id: 2,
+                name: "KF90 HE Standard",
+                category: "keyboard",
+                brand: "ONLY EULA",
+                price: 4999,
+                oldPrice: null,
+                tag: "En Çok Satan",
+                tagClass: "popular",
+                img: "keyboard_vertical.jpg",
+                images: ["keyboard_vertical.jpg", "keyboard.jpg"],
+                desc: "60% Manyetik Switch Oyuncu Klavyesi, 1000Hz, per-key RGB aydınlatma ve alüminyum plaka.",
+                longDesc: "Hall Effect manyetik switchlerin sunduğu hızı uygun fiyata sunan espor başlangıç klavyesi.",
+                variants: [
+                    { name: "Alüminyum Standart", img: "keyboard_vertical.jpg" },
+                    { name: "Mat Siyah", img: "keyboard.jpg" }
+                ],
+                specs: [
+                    "1000Hz Polling Rate",
+                    "Manyetik Switchler",
+                    "Per-Key RGB Aydınlatma",
+                    "Alüminyum Üst Plaka"
+                ]
+            },
+            {
+                id: 3,
+                name: "KF90 HE MAX OLED",
+                category: "keyboard",
+                brand: "ONLY EULA",
+                price: 12999,
+                oldPrice: 14499,
+                tag: "Yeni",
+                tagClass: "limited",
+                img: "keyboard.jpg",
+                images: ["keyboard.jpg", "keyboard_vertical.jpg"],
+                desc: "Tam CNC Alüminyum yekpare gövde, entegre OLED bilgi ekranı ve Dynamic Keystroke (DKS) teknolojisi.",
+                longDesc: "Lüks ve teknolojinin birleşimi: OLED ekranda anlık actuation mesafesini ve profil durumunu görüntüleyin.",
+                variants: [
+                    { name: "CNC Gece Siyahı", img: "keyboard.jpg" }
+                ],
+                specs: [
+                    "Yekpare CNC Alüminyum Gövde",
+                    "Entegre OLED Durum Ekranı",
+                    "DKS (4 Adımlı Tuş Basma)",
+                    "8000Hz Ultra Hızlı İşlemci"
+                ]
+            },
+            {
+                id: 4,
+                name: "Circuit Deskmat XL",
+                category: "mousepad",
+                brand: "ONLY EULA",
+                price: 1299,
+                oldPrice: null,
+                tag: "Speed",
+                tagClass: "popular",
+                img: "mousepad_circuit.jpg",
+                images: ["mousepad_circuit.jpg"],
+                desc: "900x400mm cyberpunk devre kartı temalı, dikişli kenarlı ve mikro dokuma yüzeyli XL mousepad.",
+                longDesc: "Özel mikro dokuma speed kumaşı sayesinde mouse hareketlerinde sıfır sürtünme ve anında durma gücü.",
+                variants: [
+                    { name: "Mor Cyber Devre", img: "mousepad_circuit.jpg" }
+                ],
+                specs: [
+                    "900x400x4mm Ekstra Geniş Boyut",
+                    "Mikro Dokuma Speed Kumaş Yüzey",
+                    "Kaymaz Doğal Kauçuk Taban",
+                    "Aşınmaya Karşı Dikişli Kenarlar"
+                ]
+            },
+            {
+                id: 5,
+                name: "Ravenfall Deskmat",
+                category: "mousepad",
+                brand: "ONLY EULA",
+                price: 999,
+                oldPrice: 1249,
+                tag: "%20 İndirim",
+                tagClass: "sale",
+                img: "mousepad_ravenfall.jpg",
+                images: ["mousepad_ravenfall.jpg"],
+                desc: "900x400mm cyberpunk şehir manzarası. Sıvı itici özel kaplama ile ultra uzun ömürlü.",
+                longDesc: "Sanatsal görsel detayları ve su itici kumaşı ile masanıza tarz ve performans katın.",
+                variants: [
+                    { name: "Cyberpunk Şehir", img: "mousepad_ravenfall.jpg" }
+                ],
+                specs: [
+                    "900x400x4mm Boyut",
+                    "Su ve Sıvı İtici Yüzey",
+                    "Yüksek Çözünürlüklü Baskı",
+                    "Yumuşak Kauçuk Taban"
+                ]
+            },
+            {
+                id: 6,
+                name: "Cyberglass Dot Clicker",
+                category: "mousepad",
+                brand: "ONLY EULA",
+                price: 899,
+                oldPrice: null,
+                tag: "Cam Hissi",
+                tagClass: "limited",
+                img: "mousepad_cyberglass.jpg",
+                images: ["mousepad_cyberglass.jpg"],
+                desc: "450x400mm BW monochrome cyberpunk, ultra hızlı cam hissiyatlı özel sert hibrit yüzey.",
+                longDesc: "Cam mousepadlerin akıcılığını kumaş padlerin konforuyla birleştiren hibrit espor yüzeyi.",
+                variants: [
+                    { name: "Monochrome Cam Hissi", img: "mousepad_cyberglass.jpg" }
+                ],
+                specs: [
+                    "450x400x3mm Rekabetçi Boyut",
+                    "Cam Hissiyatlı Özel Kaplama",
+                    "Lazer Kesim Kusursuz Kenarlar",
+                    "Maksimum Glide Akıcılığı"
+                ]
+            },
+            {
+                id: 7,
+                name: "Circuit Mousepad M",
+                category: "mousepad",
+                brand: "ONLY EULA",
+                price: 699,
+                oldPrice: null,
+                tag: null,
+                tagClass: "",
+                img: "mousepad_circuit.jpg",
+                images: ["mousepad_circuit.jpg"],
+                desc: "450x400mm kompakt boyut. Mükemmel kontrol ve durma gücü arayan profesyonel FPS oyuncuları için.",
+                longDesc: "Düşük DPI oyuncuları için ideal ölçüde kompakt devre kartı desenli performans mousepadi.",
+                variants: [
+                    { name: "Kompakt Standart", img: "mousepad_circuit.jpg" }
+                ],
+                specs: [
+                    "450x400x4mm Standart Boyut",
+                    "Dengeli Control/Speed Dengesi",
+                    "Kauçuk Kaymaz Taban"
+                ]
+            },
+            {
+                id: 8,
+                name: "Ravenfall Mousepad M",
+                category: "mousepad",
+                brand: "ONLY EULA",
+                price: 649,
+                oldPrice: null,
+                tag: null,
+                tagClass: "",
+                img: "mousepad_ravenfall.jpg",
+                images: ["mousepad_ravenfall.jpg"],
+                desc: "450x400mm kompakt boyutlu Ravenfall temalı hibrit performans mousepadi.",
+                longDesc: "Kompakt masalar için tasarlanmış şık cyberpunk illüstrasyonlu mousepad.",
+                variants: [
+                    { name: "Kompakt Şehir", img: "mousepad_ravenfall.jpg" }
+                ],
+                specs: [
+                    "450x400x4mm Boyut",
+                    "Su İtici Yüzey",
+                    "Dikişli Kenarlar"
+                ]
+            }
+        ];
+
+        // State
+        let currentProduct = productsDB[0];
+        let currentQuantity = 1;
+        let cartItems = [];
+        let selectedVariants = {
+            color: "Varsayılan",
+            layout: "Türkçe Q",
+            switch: "Hall Effect Linear (0.1-4.0mm)"
+        };
+
+        // Render Products
+        function renderProducts(category = 'all') {
+            const grid = document.getElementById('productsGrid');
+            if (!grid) return;
+
+            const filtered = category === 'all' 
+                ? productsDB 
+                : productsDB.filter(p => p.category === category || (category === 'limited' && (p.tag === 'Limited' || p.tag === 'Limited Edition')));
+
+            let html = '';
+            filtered.forEach(p => {
+                const oldPriceHtml = p.oldPrice ? `<span class="old-price-text">₺${p.oldPrice.toLocaleString('tr-TR')}</span>` : '';
+                const badgeHtml = p.tag ? `<div class="product-card-badge ${p.tagClass}">${p.tag}</div>` : '';
+
+                html += `
+                <div class="product-card" onclick="openProduct(${p.id})">
+                    ${badgeHtml}
+                    <button class="wishlist-heart-btn" onclick="toggleWishlist(event, ${p.id}, this)" title="Favorilere Ekle">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </button>
+                    
+                    <div class="product-card-image-box">
+                        <img src="${p.img}" alt="${p.name}">
+                    </div>
+                    
+                    <div class="product-brand-title">${p.brand}</div>
+                    <h3 class="product-name-title">${p.name}</h3>
+                    <p class="product-desc-snippet">${p.desc}</p>
+                    
+                    <div class="product-card-bottom">
+                        <div class="price-container">
+                            ${oldPriceHtml}
+                            <span class="current-price-text">₺${p.price.toLocaleString('tr-TR')}</span>
+                        </div>
+                        <button class="quick-view-action-btn" onclick="event.stopPropagation(); openProduct(${p.id})">
+                            İncele
+                        </button>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        // Category Filter Tabs
+        function filterCategory(cat, btnElement) {
+            if (btnElement) {
+                document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
+            renderProducts(cat);
+            showHomePage();
+            const sec = document.getElementById('productsSection');
+            if (sec && btnElement) {
+                sec.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Open Product Page
+        function openProduct(id) {
+            const p = productsDB.find(x => x.id === id);
+            if (!p) return;
+
+            currentProduct = p;
+            currentQuantity = 1;
+            document.getElementById('pdpQtyVal').innerText = "1";
+
+            // Set Breadcrumbs & Titles
+            document.getElementById('pdpBreadcrumbCategory').innerText = p.category === 'keyboard' ? 'Klavyeler' : (p.category === 'mousepad' ? 'Mousepadler' : 'Limited Edition');
+            document.getElementById('pdpBreadcrumbTitle').innerText = p.name;
+            document.getElementById('pdpBrand').innerText = p.brand + " ESPORTS";
+            document.getElementById('pdpTitle').innerText = p.name + (p.category === 'keyboard' ? " (Manyetik Switch / HE)" : "");
+            
+            // Set Prices
+            document.getElementById('pdpPrice').innerText = "₺" + p.price.toLocaleString('tr-TR');
+            const oldP = document.getElementById('pdpOldPrice');
+            const discP = document.getElementById('pdpDiscount');
+            if (p.oldPrice) {
+                oldP.innerText = "₺" + p.oldPrice.toLocaleString('tr-TR');
+                oldP.style.display = "inline";
+                const diff = p.oldPrice - p.price;
+                discP.innerText = "Kazancınız: ₺" + diff.toLocaleString('tr-TR');
+                discP.style.display = "inline-block";
+            } else {
+                oldP.style.display = "none";
+                discP.style.display = "none";
+            }
+
+            // Set Descriptions & Specs
+            document.getElementById('pdpLongDesc').innerText = p.longDesc || p.desc;
+            let specsHtml = '';
+            (p.specs || []).forEach(s => {
+                specsHtml += `
+                <div class="spec-bullet-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+                    <span>${s}</span>
+                </div>`;
+            });
+            document.getElementById('pdpSpecsGrid').innerHTML = specsHtml;
+
+            // Render Dynamic Variants for Color / Edition
+            const variantsList = p.variants || [{ name: "Standart", img: p.img }];
+            selectedVariants.color = variantsList[0].name;
+            document.getElementById('selectedColorText').innerText = variantsList[0].name;
+            
+            let pillsHtml = '';
+            variantsList.forEach((v, idx) => {
+                pillsHtml += `<button class="pdp-pill-btn ${idx === 0 ? 'active' : ''}" onclick="selectVariantWithImage('color', '${v.name}', '${v.img}', this)">${v.name}</button>`;
+            });
+            document.getElementById('colorPills').innerHTML = pillsHtml;
+
+            // Render Thumbnails & Main Image
+            const imgList = p.images && p.images.length > 0 ? p.images : [p.img];
+            document.getElementById('pdpMainImage').src = imgList[0];
+
+            let thumbsHtml = '';
+            imgList.forEach((src, idx) => {
+                thumbsHtml += `
+                <div class="pdp-thumb-item ${idx === 0 ? 'active' : ''}" onclick="switchPdpMainImage('${src}', this)">
+                    <img src="${src}" alt="Thumbnail ${idx+1}">
+                </div>`;
+            });
+            document.getElementById('pdpThumbsContainer').innerHTML = thumbsHtml;
+
+            // Show/Hide Keyboard-Specific Option Blocks
+            const isKbd = p.category === 'keyboard' || (p.category === 'limited' && p.id === 9);
+            document.getElementById('layoutOptionBlock').style.display = isKbd ? 'block' : 'none';
+            document.getElementById('switchOptionBlock').style.display = isKbd ? 'block' : 'none';
+
+            // Switch Views
+            document.getElementById('homeView').style.display = 'none';
+            document.getElementById('productDetailView').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Return to Home Page
+        function showHomePage() {
+            document.getElementById('productDetailView').style.display = 'none';
+            document.getElementById('homeView').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Switch PDP Main Image on Thumbnail Click
+        function switchPdpMainImage(src, thumbElement) {
+            document.getElementById('pdpMainImage').src = src;
+            document.querySelectorAll('.pdp-thumb-item').forEach(t => t.classList.remove('active'));
+            if (thumbElement) thumbElement.classList.add('active');
+        }
+
+        // Switch Promo Angle
+        function switchPromoAngle(src, thumbElement) {
+            const mainImg = document.getElementById('promoMainDisplay');
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+                mainImg.src = src;
+                mainImg.style.opacity = '1';
+            }, 150);
+
+            document.querySelectorAll('.promo-thumb-btn').forEach(b => b.classList.remove('active'));
+            if (thumbElement) thumbElement.classList.add('active');
+        }
+
+        // PDP Variant Selectors
+        function selectVariant(type, value, btnElement) {
+            selectedVariants[type] = value;
+            if (type === 'color') document.getElementById('selectedColorText').innerText = value;
+            if (type === 'layout') document.getElementById('selectedLayoutText').innerText = value;
+            if (type === 'switch') document.getElementById('selectedSwitchText').innerText = value;
+
+            const parent = btnElement.parentElement;
+            parent.querySelectorAll('.pdp-pill-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            showToast(`${value} seçeneği belirlendi`);
+        }
+
+        // Variant selection that also changes image
+        function selectVariantWithImage(type, value, imgSrc, btnElement) {
+            selectVariant(type, value, btnElement);
+            if (imgSrc) {
+                document.getElementById('pdpMainImage').src = imgSrc;
+                document.querySelectorAll('.pdp-thumb-item').forEach(t => {
+                    if (t.querySelector('img') && t.querySelector('img').getAttribute('src') === imgSrc) {
+                        t.classList.add('active');
+                    } else {
+                        t.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Quantity Stepper
+        function changeQuantity(delta) {
+            currentQuantity = Math.max(1, currentQuantity + delta);
+            document.getElementById('pdpQtyVal').innerText = currentQuantity;
+        }
+
+        // Add to Cart Logic
+        function addCurrentProductToCart() {
+            const item = {
+                product: currentProduct,
+                qty: currentQuantity,
+                color: selectedVariants.color,
+                layout: selectedVariants.layout,
+                switch: selectedVariants.switch
+            };
+
+            const existingIdx = cartItems.findIndex(x => x.product.id === currentProduct.id && x.color === item.color);
+            if (existingIdx > -1) {
+                cartItems[existingIdx].qty += currentQuantity;
+            } else {
+                cartItems.push(item);
+            }
+
+            updateCartUI();
+            showToast(`${currentProduct.name} (${currentQuantity} Adet) sepete eklendi!`);
+            toggleCartDrawer(true);
+        }
+
+        function updateCartUI() {
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            const container = document.getElementById('cartItemsContainer');
+            if (cartItems.length === 0) {
+                container.innerHTML = `
+                <div class="cart-empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                    <p>Sepetinizde henüz ürün bulunmuyor.</p>
+                </div>`;
+            } else {
+                let html = '';
+                cartItems.forEach((ci, idx) => {
+                    totalCount += ci.qty;
+                    totalPrice += ci.product.price * ci.qty;
+
+                    html += `
+                    <div class="cart-item-row">
+                        <img src="${ci.product.img}" alt="${ci.product.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${ci.product.name}</div>
+                            <div class="cart-item-meta">${ci.color} | ${ci.qty} Adet</div>
+                            <div class="cart-item-price">₺${(ci.product.price * ci.qty).toLocaleString('tr-TR')}</div>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" style="color:#ef4444; font-size:18px; padding:4px;" title="Sil">&times;</button>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            document.getElementById('cartCountBadge').innerText = totalCount;
+            document.getElementById('cartDrawerCount').innerText = totalCount;
+            document.getElementById('cartTotalPrice').innerText = "₺" + totalPrice.toLocaleString('tr-TR');
+        }
+
+        function removeFromCart(idx) {
+            cartItems.splice(idx, 1);
+            updateCartUI();
+            showToast('Ürün sepetten çıkarıldı.');
+        }
+
+        function toggleCartDrawer(show) {
+            const overlay = document.getElementById('cartDrawerOverlay');
+            if (show) {
+                overlay.classList.add('active');
+            } else {
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Toggle Wishlist
+        function toggleWishlist(e, id, btnElement) {
+            e.stopPropagation();
+            btnElement.classList.toggle('active');
+            if (btnElement.classList.contains('active')) {
+                showToast('Ürün favorilerinize eklendi! ❤️');
+            } else {
+                showToast('Ürün favorilerinizden çıkarıldı.');
+            }
+        }
+
+        // PDP Tabs Switching
+        function switchPdpTab(tabName, btnElement) {
+            document.querySelectorAll('.pdp-tab-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            document.getElementById('tabPanelSpecs').style.display = tabName === 'specs' ? 'block' : 'none';
+            document.getElementById('tabPanelBox').style.display = tabName === 'box' ? 'block' : 'none';
+            document.getElementById('tabPanelDriver').style.display = tabName === 'driver' ? 'block' : 'none';
+        }
+
+        // Toast Notification System
+        let toastTimeout;
+        function showToast(msg, isSecurity = false) {
+            const box = document.getElementById('toastBox');
+            const txt = document.getElementById('toastMessage');
+            const icon = document.getElementById('toastIcon');
+            
+            if (isSecurity) {
+                box.classList.add('security-alert');
+                icon.innerHTML = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>';
+                icon.setAttribute('stroke', '#a78bfa');
+            } else {
+                box.classList.remove('security-alert');
+                icon.innerHTML = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>';
+                icon.setAttribute('stroke', '#10b981');
+            }
+
+            txt.innerText = msg;
+            box.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                box.classList.remove('show');
+            }, 3200);
+        }
+
+        // Scroll to Driver
+        function scrollToDriver() {
+            showHomePage();
+            const sec = document.getElementById('driverSection');
+            if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Sticky Navbar Listener
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 15) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+        });
+
+        /* ==================== MAXIMUM CLIENT-SIDE SECURITY & LOCKDOWN ENGINE ==================== */
+        (function() {
+            'use strict';
+
+            // 1. Completely Disable and Neutralize the Console
+            const noop = function() {};
+            const consoleMethods = [
+                'log', 'debug', 'info', 'warn', 'error', 'assert', 'dir', 'dirxml',
+                'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'timeLog',
+                'trace', 'profile', 'profileEnd', 'count', 'table', 'clear', 'exception',
+                'timeStamp', 'context', 'memory'
+            ];
+
+            consoleMethods.forEach(function(m) {
+                try {
+                    Object.defineProperty(window.console, m, {
+                        get: function() { return noop; },
+                        set: function() {},
+                        configurable: false,
+                        enumerable: false
+                    });
+                } catch(e) {
+                    try { window.console[m] = noop; } catch(err) {}
+                }
+            });
+
+            try {
+                Object.freeze(window.console);
+            } catch(e) {}
+
+            // 2. Anti-Clickjacking / Frame Busting
+            if (window.top !== window.self) {
+                try {
+                    window.top.location = window.self.location;
+                } catch (e) {
+                    window.location = "about:blank";
+                }
+            }
+
+            // 3. Disable Right Click Context Menu
+            ['contextmenu', 'selectstart', 'dragstart', 'drop'].forEach(function(evt) {
+                document.addEventListener(evt, function(e) {
+                    e.preventDefault();
+                    if (evt === 'contextmenu') {
+                        showToast('🔒 ONLY EULA Güvenlik: Sağ tık menüsü devre dışıdır.', true);
+                    }
+                    return false;
+                }, { capture: true, passive: false });
+            });
+
+            // 4. Disable Copy, Cut, Paste globally
+            ['copy', 'cut', 'paste'].forEach(function(evt) {
+                document.addEventListener(evt, function(e) {
+                    const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+                    if (tag !== 'input' && tag !== 'textarea') {
+                        e.preventDefault();
+                        showToast('🔒 ONLY EULA Güvenlik: Kopyalama/Yapıştırma devre dışıdır.', true);
+                        return false;
+                    }
+                }, { capture: true, passive: false });
+            });
+
+            // 5. Block ALL Browser & System Shortcuts (F1-F12, Ctrl+*, Alt+*, Cmd+*, Shift+Ctrl+*)
+            function blockShortcut(e) {
+                const key = e.key || '';
+                const code = e.keyCode || e.which || 0;
+                const ctrl = e.ctrlKey || e.metaKey;
+                const alt = e.altKey;
+                const shift = e.shiftKey;
+
+                // Block ALL Function Keys (F1 - F12)
+                if ((code >= 112 && code <= 123) || /^F\d{1,2}$/i.test(key)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: Fonksiyon tuşları (F1-F12) devre dışıdır.', true);
+                    return false;
+                }
+
+                // Block PrintScreen & ContextMenu key
+                if (key === 'PrintScreen' || code === 44 || key === 'ContextMenu' || code === 93) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: Ekran yakalama/menü tuşu engellendi.', true);
+                    return false;
+                }
+
+                // Block ALL Ctrl / Cmd / Alt shortcut combinations
+                if (ctrl || alt) {
+                    // Exempt basic navigation if strictly needed, but block all letters, numbers, symbols
+                    const isLetterOrNumber = /^[a-zA-Z0-9]$/.test(key);
+                    const blockedKeys = ['u', 's', 'p', 'i', 'j', 'c', 'k', 'a', 'h', 'r', 'e', 'g', 'f', 'o', 'd', 'b', 'n', 't', 'w', 'm', 'q'];
+                    
+                    if (isLetterOrNumber || blockedKeys.includes(key.toLowerCase()) || shift) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showToast('🔒 ONLY EULA Güvenlik: Kısayol kombinasyonları devre dışı bırakılmıştır.', true);
+                        return false;
+                    }
+                }
+            }
+
+            window.addEventListener('keydown', blockShortcut, { capture: true, passive: false });
+            window.addEventListener('keypress', blockShortcut, { capture: true, passive: false });
+            window.addEventListener('keyup', blockShortcut, { capture: true, passive: false });
+
+            // 6. Anti-DevTools & Debugger Trap
+            setInterval(function() {
+                try {
+                    (function() {
+                        const start = performance.now();
+                        Function("debugger")();
+                        if (performance.now() - start > 100) {
+                            showToast('⚠️ Geliştirici Araçları tespit edildi. Koruma devrede.', true);
+                        }
+                    })();
+                } catch(e) {}
+            }, 600);
+
+        })();
+    </script>
+</body>
+</html>
