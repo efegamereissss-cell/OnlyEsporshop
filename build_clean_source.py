@@ -1,5 +1,6 @@
 import base64
 import os
+import time
 
 source_path = r'C:\Users\eserh\Desktop\OnlyEULA-KF90-HE\.source_protected.html'
 html_path = r'C:\Users\eserh\Desktop\OnlyEULA-KF90-HE\index.html'
@@ -52,6 +53,8 @@ Tavsiyemiz: Sekmeyi sakince kapat ve orijinal sitemizden hayranlıkla alışveri
 # Write core.dat.js with taunt banner and protected payload
 with open(core_js_path, 'w', encoding='utf-8') as f:
     f.write(f'{taunting_banner}\nwindow.__OE_CORE_DATA__ = "{encoded_payload}";')
+
+cache_bust_ver = str(int(time.time()))
 
 # Write engine.js
 engine_code = f"""{taunting_banner}
@@ -183,7 +186,7 @@ engine_code = f"""{taunting_banner}
     const _0xkey = [{', '.join(map(str, xor_key))}];
 
     const dataScript = document.createElement('script');
-    dataScript.src = 'core.dat.js';
+    dataScript.src = 'core.dat.js?v={cache_bust_ver}';
     dataScript.onload = function() {{
         solveChallenge().then(() => {{
             try {{
@@ -255,11 +258,11 @@ index_html = f"""{html_taunt}{blank_padding}<!DOCTYPE html>
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 </head>
 <body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
-    <script src="engine.js"></script>
+    <script src="engine.js?v={cache_bust_ver}"></script>
 </body>
 </html>"""
 
 with open(html_path, 'w', encoding='utf-8') as f:
     f.write(index_html)
 
-print("SUCCESS: Master security and taunt applied to all files!")
+print("SUCCESS: Dynamic cache-busting build completed!")
