@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONLY EULA | Wraith Tarzı Manyetik Oyuncu Ekipmanları</title>
+    <title>ONLY EULA | Premium Manyetik Espor Oyuncu Ekipmanları</title>
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -774,7 +774,7 @@
             transform: translateY(-1px);
         }
 
-        /* ==================== WRAITH-STYLE PRODUCT DETAIL PAGE ==================== */
+        /* ==================== PRODUCT DETAIL PAGE ==================== */
         #productDetailView {
             display: none;
             max-width: 1400px;
@@ -1678,7 +1678,7 @@
     <!-- ==================== HOME VIEW ==================== -->
     <div id="homeView">
         
-        <!-- Hero Grid (Wraith Layout) -->
+        <!-- Hero Grid -->
         <section class="hero-section">
             <div class="hero-grid">
                 <!-- Tall 1 -->
@@ -1813,7 +1813,7 @@
 
     </div>
 
-    <!-- ==================== WRAITH PRODUCT DETAIL VIEW ==================== -->
+    <!-- ==================== PRODUCT DETAIL VIEW ==================== -->
     <div id="productDetailView">
         <div class="pdp-breadcrumbs">
             <a href="javascript:void(0)" onclick="showHomePage()">Ana Sayfa</a>
@@ -2388,7 +2388,7 @@
             }
         }
 
-        // Open Product Page (Wraith Style)
+        // Open Product Page
         function openProduct(id) {
             const p = productsDB.find(x => x.id === id);
             if (!p) return;
@@ -2511,7 +2511,6 @@
             selectVariant(type, value, btnElement);
             if (imgSrc) {
                 document.getElementById('pdpMainImage').src = imgSrc;
-                // Highlight matching thumbnail if exists
                 document.querySelectorAll('.pdp-thumb-item').forEach(t => {
                     if (t.querySelector('img') && t.querySelector('img').getAttribute('src') === imgSrc) {
                         t.classList.add('active');
