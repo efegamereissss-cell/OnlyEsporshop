@@ -2421,6 +2421,11 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
                         Sepete Ekle
                     </button>
+
+                    <button class="pdp-direct-buy-btn" onclick="buyCurrentProductDirectly()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        Hemen Satın Al
+                    </button>
                 </div>
 
                 <button class="pdp-back-link-btn" onclick="showHomePage()">
@@ -3495,33 +3500,56 @@
         }
 
         function buyCurrentProductDirectly() {
-            addCurrentProductToCart();
+            if (!currentProduct) {
+                currentProduct = productsDB[0];
+            }
+            const item = {
+                product: currentProduct,
+                qty: currentQuantity || 1,
+                color: selectedVariants.color || "Standart",
+                layout: selectedVariants.layout || "Türkçe Q",
+                switch: selectedVariants.switch || "Hall Effect Linear (0.1-4.0mm)"
+            };
+            const existingIdx = cartItems.findIndex(x => x.product.id === currentProduct.id && x.color === item.color);
+            if (existingIdx > -1) {
+                cartItems[existingIdx].qty += (currentQuantity || 1);
+            } else {
+                cartItems.push(item);
+            }
+            updateCartUI();
             openCheckout();
         }
 
         function openCheckout() {
             toggleCartDrawer(false);
-            if (cartItems.length === 0 && currentProduct) {
-                // If cart is empty but on PDP, add current product
-                addCurrentProductToCart();
-            } else if (cartItems.length === 0) {
-                showToast('Lütfen önce sepete bir ürün ekleyin!');
-                return;
+            if (cartItems.length === 0) {
+                if (currentProduct) {
+                    buyCurrentProductDirectly();
+                    return;
+                } else {
+                    cartItems.push({
+                        product: productsDB[0],
+                        qty: 1,
+                        color: "Camgöbeği (Cyan Anime)",
+                        layout: "Türkçe Q",
+                        switch: "Hall Effect Linear (0.1-4.0mm)"
+                    });
+                    updateCartUI();
+                }
             }
 
-            // Hide other views
-            document.getElementById('homeView').style.display = 'none';
-            document.getElementById('productDetailView').style.display = 'none';
-            document.getElementById('orderSuccessView').style.display = 'none';
-            document.getElementById('checkoutView').style.display = 'block';
+            const home = document.getElementById('homeView');
+            const pdp = document.getElementById('productDetailView');
+            const success = document.getElementById('orderSuccessView');
+            const checkout = document.getElementById('checkoutView');
+
+            if (home) home.style.display = 'none';
+            if (pdp) pdp.style.display = 'none';
+            if (success) success.style.display = 'none';
+            if (checkout) checkout.style.display = 'block';
 
             renderCheckoutSummary();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function buyCurrentProductDirectly() {
-            addCurrentProductToCart();
-            openCheckout();
         }
 
         function renderCheckoutSummary() {
