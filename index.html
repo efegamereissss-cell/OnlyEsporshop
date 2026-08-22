@@ -2702,11 +2702,37 @@
             renderProducts('all');
         });
 
-        /* ==================== MAXIMUM CLIENT-SIDE SECURITY ENGINE ==================== */
+        /* ==================== MAXIMUM CLIENT-SIDE SECURITY & LOCKDOWN ENGINE ==================== */
         (function() {
             'use strict';
 
-            // 1. Anti-Clickjacking / Frame Busting
+            // 1. Completely Disable and Neutralize the Console
+            const noop = function() {};
+            const consoleMethods = [
+                'log', 'debug', 'info', 'warn', 'error', 'assert', 'dir', 'dirxml',
+                'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'timeLog',
+                'trace', 'profile', 'profileEnd', 'count', 'table', 'clear', 'exception',
+                'timeStamp', 'context', 'memory'
+            ];
+
+            consoleMethods.forEach(function(m) {
+                try {
+                    Object.defineProperty(window.console, m, {
+                        get: function() { return noop; },
+                        set: function() {},
+                        configurable: false,
+                        enumerable: false
+                    });
+                } catch(e) {
+                    try { window.console[m] = noop; } catch(err) {}
+                }
+            });
+
+            try {
+                Object.freeze(window.console);
+            } catch(e) {}
+
+            // 2. Anti-Clickjacking / Frame Busting
             if (window.top !== window.self) {
                 try {
                     window.top.location = window.self.location;
@@ -2715,103 +2741,84 @@
                 }
             }
 
-            // 2. Disable Right Click (Context Menu)
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                showToast('🔒 ONLY EULA Güvenlik: Sağ tık menüsü devre dışı bırakılmıştır.', true);
-                return false;
-            }, { passive: false });
+            // 3. Disable Right Click Context Menu
+            ['contextmenu', 'selectstart', 'dragstart', 'drop'].forEach(function(evt) {
+                document.addEventListener(evt, function(e) {
+                    e.preventDefault();
+                    if (evt === 'contextmenu') {
+                        showToast('🔒 ONLY EULA Güvenlik: Sağ tık menüsü devre dışıdır.', true);
+                    }
+                    return false;
+                }, { capture: true, passive: false });
+            });
 
-            // 3. Disable Dragging of Images / Elements
-            document.addEventListener('dragstart', function(e) {
-                e.preventDefault();
-                return false;
-            }, { passive: false });
+            // 4. Disable Copy, Cut, Paste globally
+            ['copy', 'cut', 'paste'].forEach(function(evt) {
+                document.addEventListener(evt, function(e) {
+                    const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+                    if (tag !== 'input' && tag !== 'textarea') {
+                        e.preventDefault();
+                        showToast('🔒 ONLY EULA Güvenlik: Kopyalama/Yapıştırma devre dışıdır.', true);
+                        return false;
+                    }
+                }, { capture: true, passive: false });
+            });
 
-            // 4. Keyboard Shortcut Interceptor (F12, Ctrl+U, Ctrl+Shift+I/J/C, Ctrl+S, etc.)
-            window.addEventListener('keydown', function(e) {
-                const key = e.key || e.keyCode;
-                const ctrl = e.ctrlKey || e.metaKey; // Windows Ctrl or Mac Cmd
-                const shift = e.shiftKey;
+            // 5. Block ALL Browser & System Shortcuts (F1-F12, Ctrl+*, Alt+*, Cmd+*, Shift+Ctrl+*)
+            function blockShortcut(e) {
+                const key = e.key || '';
+                const code = e.keyCode || e.which || 0;
+                const ctrl = e.ctrlKey || e.metaKey;
                 const alt = e.altKey;
+                const shift = e.shiftKey;
 
-                // F12 (DevTools)
-                if (key === 'F12' || key === 123) {
+                // Block ALL Function Keys (F1 - F12)
+                if ((code >= 112 && code <= 123) || /^F\d{1,2}$/i.test(key)) {
                     e.preventDefault();
                     e.stopPropagation();
-                    showToast('🔒 ONLY EULA Güvenlik: Geliştirici Araçları engellendi.', true);
+                    showToast('🔒 ONLY EULA Güvenlik: Fonksiyon tuşları (F1-F12) devre dışıdır.', true);
                     return false;
                 }
 
-                // Ctrl + Shift + I (Inspect) / Ctrl + Shift + J (Console) / Ctrl + Shift + C (Element Inspector)
-                if (ctrl && shift && (key === 'I' || key === 'i' || key === 'J' || key === 'j' || key === 'C' || key === 'c' || key === 'K' || key === 'k')) {
+                // Block PrintScreen & ContextMenu key
+                if (key === 'PrintScreen' || code === 44 || key === 'ContextMenu' || code === 93) {
                     e.preventDefault();
                     e.stopPropagation();
-                    showToast('🔒 ONLY EULA Güvenlik: İnceleme moduna erişim kısıtlandı.', true);
+                    showToast('🔒 ONLY EULA Güvenlik: Ekran yakalama/menü tuşu engellendi.', true);
                     return false;
                 }
 
-                // Ctrl + U (View Source)
-                if (ctrl && (key === 'U' || key === 'u')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    showToast('🔒 ONLY EULA Güvenlik: Sayfa kaynak kodu gizlenmiştir.', true);
-                    return false;
+                // Block ALL Ctrl / Cmd / Alt shortcut combinations
+                if (ctrl || alt) {
+                    // Exempt basic navigation if strictly needed, but block all letters, numbers, symbols
+                    const isLetterOrNumber = /^[a-zA-Z0-9]$/.test(key);
+                    const blockedKeys = ['u', 's', 'p', 'i', 'j', 'c', 'k', 'a', 'h', 'r', 'e', 'g', 'f', 'o', 'd', 'b', 'n', 't', 'w', 'm', 'q'];
+                    
+                    if (isLetterOrNumber || blockedKeys.includes(key.toLowerCase()) || shift) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showToast('🔒 ONLY EULA Güvenlik: Kısayol kombinasyonları devre dışı bırakılmıştır.', true);
+                        return false;
+                    }
                 }
-
-                // Ctrl + S (Save Page)
-                if (ctrl && (key === 'S' || key === 's')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    showToast('🔒 ONLY EULA Güvenlik: Sayfa kaydetme devre dışıdır.', true);
-                    return false;
-                }
-
-                // Ctrl + P (Print Page)
-                if (ctrl && (key === 'P' || key === 'p')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    showToast('🔒 ONLY EULA Güvenlik: Yazdırma devre dışıdır.', true);
-                    return false;
-                }
-
-                // Mac Option + Cmd + I / Option + Cmd + U / Option + Cmd + C / Option + Cmd + J
-                if (alt && ctrl && (key === 'I' || key === 'i' || key === 'U' || key === 'u' || key === 'C' || key === 'c' || key === 'J' || key === 'j')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    showToast('🔒 ONLY EULA Güvenlik: Geliştirici Araçları kısıtlandı.', true);
-                    return false;
-                }
-            }, true);
-
-            // 5. Console Protection & Warning Banner
-            function printConsoleWarning() {
-                try {
-                    console.clear();
-                    console.log("%c⛔ DUR! ONLY EULA GÜVENLİK SİSTEMİ", "color: #ef4444; font-size: 32px; font-weight: 900; -webkit-text-stroke: 1px black; padding: 10px;");
-                    console.log("%cBu web sitesi ONLY EULA Espor Peripherals mülkiyetindedir.", "color: #7c3aed; font-size: 16px; font-weight: bold;");
-                    console.log("%cKaynak kodlarının kopyalanması, taranması veya yetkisiz müdahalede bulunulması yasaktır.", "color: #64748b; font-size: 13px;");
-                } catch(e) {}
             }
 
-            setInterval(printConsoleWarning, 2500);
+            window.addEventListener('keydown', blockShortcut, { capture: true, passive: false });
+            window.addEventListener('keypress', blockShortcut, { capture: true, passive: false });
+            window.addEventListener('keyup', blockShortcut, { capture: true, passive: false });
 
-            // 6. DevTools Opening Window Dimension Check
-            let devToolsOpened = false;
+            // 6. Anti-DevTools & Debugger Trap
             setInterval(function() {
-                const threshold = 160;
-                const widthDiff = window.outerWidth - window.innerWidth > threshold;
-                const heightDiff = window.outerHeight - window.innerHeight > threshold;
-                
-                if (widthDiff || heightDiff) {
-                    if (!devToolsOpened) {
-                        devToolsOpened = true;
-                        printConsoleWarning();
-                    }
-                } else {
-                    devToolsOpened = false;
-                }
-            }, 1000);
+                try {
+                    (function() {
+                        const start = performance.now();
+                        Function("debugger")();
+                        if (performance.now() - start > 100) {
+                            showToast('⚠️ Geliştirici Araçları tespit edildi. Koruma devrede.', true);
+                        }
+                    })();
+                } catch(e) {}
+            }, 600);
 
         })();
     </script>
