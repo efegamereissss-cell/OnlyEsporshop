@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=(), camera=(), microphone=(), geolocation=()">
+    <meta name="robots" content="index, follow">
     <title>ONLY EULA | Premium Manyetik Espor Oyuncu Ekipmanları</title>
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -28,6 +33,29 @@
             --shadow-hover: 0 12px 24px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
             --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
             --transition: all 0.25s ease;
+        }
+
+        /* ==================== SECURITY & ANTI-TAMPER CSS ==================== */
+        html, body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        img, a {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        input, textarea, select, button {
+            -webkit-user-select: auto;
+            user-select: auto;
         }
 
         *, *::before, *::after {
@@ -1540,7 +1568,7 @@
             background: var(--primary-hover);
         }
 
-        /* ==================== TOAST NOTIFICATION ==================== */
+        /* ==================== TOAST NOTIFICATION & SECURITY MODAL ==================== */
         .toast-notification {
             position: fixed;
             bottom: 24px;
@@ -1565,6 +1593,12 @@
         .toast-notification.show {
             transform: translateY(0);
             opacity: 1;
+        }
+
+        .toast-notification.security-alert {
+            background: #1e1b4b;
+            border: 1px solid #7c3aed;
+            color: #f8fafc;
         }
 
         /* ==================== RESPONSIVE ==================== */
@@ -1603,7 +1637,7 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
 
     <!-- ============ TOP BAR ============ -->
     <div class="top-bar">
@@ -2072,7 +2106,7 @@
 
     <!-- ============ TOAST NOTIFICATION ============ -->
     <div class="toast-notification" id="toastBox">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" id="toastIcon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         <span id="toastMessage">İşlem başarıyla gerçekleşti!</span>
     </div>
 
@@ -2621,17 +2655,29 @@
             document.getElementById('tabPanelDriver').style.display = tabName === 'driver' ? 'block' : 'none';
         }
 
-        // Toast Notification
+        // Toast Notification System
         let toastTimeout;
-        function showToast(msg) {
+        function showToast(msg, isSecurity = false) {
             const box = document.getElementById('toastBox');
             const txt = document.getElementById('toastMessage');
+            const icon = document.getElementById('toastIcon');
+            
+            if (isSecurity) {
+                box.classList.add('security-alert');
+                icon.innerHTML = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>';
+                icon.setAttribute('stroke', '#a78bfa');
+            } else {
+                box.classList.remove('security-alert');
+                icon.innerHTML = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>';
+                icon.setAttribute('stroke', '#10b981');
+            }
+
             txt.innerText = msg;
             box.classList.add('show');
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 box.classList.remove('show');
-            }, 3000);
+            }, 3200);
         }
 
         // Scroll to Driver
@@ -2655,6 +2701,119 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts('all');
         });
+
+        /* ==================== MAXIMUM CLIENT-SIDE SECURITY ENGINE ==================== */
+        (function() {
+            'use strict';
+
+            // 1. Anti-Clickjacking / Frame Busting
+            if (window.top !== window.self) {
+                try {
+                    window.top.location = window.self.location;
+                } catch (e) {
+                    window.location = "about:blank";
+                }
+            }
+
+            // 2. Disable Right Click (Context Menu)
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showToast('🔒 ONLY EULA Güvenlik: Sağ tık menüsü devre dışı bırakılmıştır.', true);
+                return false;
+            }, { passive: false });
+
+            // 3. Disable Dragging of Images / Elements
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            }, { passive: false });
+
+            // 4. Keyboard Shortcut Interceptor (F12, Ctrl+U, Ctrl+Shift+I/J/C, Ctrl+S, etc.)
+            window.addEventListener('keydown', function(e) {
+                const key = e.key || e.keyCode;
+                const ctrl = e.ctrlKey || e.metaKey; // Windows Ctrl or Mac Cmd
+                const shift = e.shiftKey;
+                const alt = e.altKey;
+
+                // F12 (DevTools)
+                if (key === 'F12' || key === 123) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: Geliştirici Araçları engellendi.', true);
+                    return false;
+                }
+
+                // Ctrl + Shift + I (Inspect) / Ctrl + Shift + J (Console) / Ctrl + Shift + C (Element Inspector)
+                if (ctrl && shift && (key === 'I' || key === 'i' || key === 'J' || key === 'j' || key === 'C' || key === 'c' || key === 'K' || key === 'k')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: İnceleme moduna erişim kısıtlandı.', true);
+                    return false;
+                }
+
+                // Ctrl + U (View Source)
+                if (ctrl && (key === 'U' || key === 'u')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: Sayfa kaynak kodu gizlenmiştir.', true);
+                    return false;
+                }
+
+                // Ctrl + S (Save Page)
+                if (ctrl && (key === 'S' || key === 's')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: Sayfa kaydetme devre dışıdır.', true);
+                    return false;
+                }
+
+                // Ctrl + P (Print Page)
+                if (ctrl && (key === 'P' || key === 'p')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: Yazdırma devre dışıdır.', true);
+                    return false;
+                }
+
+                // Mac Option + Cmd + I / Option + Cmd + U / Option + Cmd + C / Option + Cmd + J
+                if (alt && ctrl && (key === 'I' || key === 'i' || key === 'U' || key === 'u' || key === 'C' || key === 'c' || key === 'J' || key === 'j')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast('🔒 ONLY EULA Güvenlik: Geliştirici Araçları kısıtlandı.', true);
+                    return false;
+                }
+            }, true);
+
+            // 5. Console Protection & Warning Banner
+            function printConsoleWarning() {
+                try {
+                    console.clear();
+                    console.log("%c⛔ DUR! ONLY EULA GÜVENLİK SİSTEMİ", "color: #ef4444; font-size: 32px; font-weight: 900; -webkit-text-stroke: 1px black; padding: 10px;");
+                    console.log("%cBu web sitesi ONLY EULA Espor Peripherals mülkiyetindedir.", "color: #7c3aed; font-size: 16px; font-weight: bold;");
+                    console.log("%cKaynak kodlarının kopyalanması, taranması veya yetkisiz müdahalede bulunulması yasaktır.", "color: #64748b; font-size: 13px;");
+                } catch(e) {}
+            }
+
+            setInterval(printConsoleWarning, 2500);
+
+            // 6. DevTools Opening Window Dimension Check
+            let devToolsOpened = false;
+            setInterval(function() {
+                const threshold = 160;
+                const widthDiff = window.outerWidth - window.innerWidth > threshold;
+                const heightDiff = window.outerHeight - window.innerHeight > threshold;
+                
+                if (widthDiff || heightDiff) {
+                    if (!devToolsOpened) {
+                        devToolsOpened = true;
+                        printConsoleWarning();
+                    }
+                } else {
+                    devToolsOpened = false;
+                }
+            }, 1000);
+
+        })();
     </script>
 </body>
 </html>
