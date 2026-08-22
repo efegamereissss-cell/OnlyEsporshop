@@ -1,7 +1,108 @@
+/*
+====================================================================================================
+  ██████╗ ███╗   ██╗██╗  ██╗   ██╗    ███████╗██╗   ██╗██╗      █████╗ 
+ ██╔═══██╗████╗  ██║██║  ╚██╗ ██╔╝    ██╔════╝██║   ██║██║     ██╔══██╗
+ ██║   ██║██╔██╗ ██║██║   ╚████╔╝     █████╗  ██║   ██║██║     ███████║
+ ██║   ██║██║╚██╗██║██║    ╚██╔╝      ██╔══╝  ██║   ██║██║     ██╔══██║
+ ╚██████╔╝██║ ╚████║███████╗██║       ███████╗╚██████╔╝███████╗██║  ██║
+  ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝       ╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
+====================================================================================================
+
+😂 NE O, JAVASCRIPT DOSYALARINI AÇIP KOD MU ARAYACAKTIN?
+
+Zahmet edip "engine.js" / "core.dat.js" dosyalarını açmışsın ama eline geçen tek şey bu mesaj oldu...
+
+ONLY EULA'nın özel üretim manyetik klavye sistemlerini, espor yazılımlarını ve 
+teknolojilerini öyle iki dosya açıp kopyalayabileceğini mi sandın gerçekten?
+
+Buradaki tüm kodlar Askeri Düzey Polimorfik Şifreleme, Anti-Tamper ve Domain-Lock
+ile kilitlenmiştir. Kodları kopyalayıp başka bir sunucuda çalıştırmayı denersen
+site otomatik olarak kendini imha eder.
+
+Biz bu sektöre yön veriyoruz, sen ise sadece izliyorsun.
+
+Tavsiyemiz: Sekmeyi sakince kapat ve orijinal sitemizden hayranlıkla alışveriş yap. 😉
+
+[ ONLY EULA CYBER DEFENSE PROTOCOL - LEVEL 5 MILITARY ENCRYPTION ]
+====================================================================================================
+*/
+
 (function() {
     'use strict';
 
-    // 1. Inject Styles & DDoS Modal
+    // 1. Domain & Environment Integrity Lock
+    const _0xvalidHosts = ['only-esporshop.vercel.app', 'localhost', '127.0.0.1', ''];
+    const _0xcurrentHost = window.location.hostname || '';
+    if (_0xcurrentHost && !_0xvalidHosts.includes(_0xcurrentHost) && !window.location.protocol.startsWith('file')) {
+        document.documentElement.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;padding:30px;"><h1 style="font-size:32px;">🚨 ÇALINTI KOD TESPİT EDİLDİ</h1><p style="color:#94a3b8;margin-top:10px;">Bu web sitesinin kodları ONLY EULA Espor Peripherals mülkiyetindedir. İzinsiz kopyalama tespit edilmiş ve IP adresiniz kayıt altına alınmıştır.</p></div>';
+        throw new Error("SECURITY_INTEGRITY_VIOLATION");
+    }
+
+    // 2. Deep Console Neutralization
+    const noop = function() {};
+    const cMethods = ['log', 'debug', 'info', 'warn', 'error', 'assert', 'dir', 'dirxml', 'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'timeLog', 'trace', 'profile', 'profileEnd', 'count', 'table', 'clear', 'exception'];
+    cMethods.forEach(function(m) {
+        try {
+            Object.defineProperty(window.console, m, { get: function() { return noop; }, set: function() {}, configurable: false, enumerable: false });
+        } catch(e) {
+            try { window.console[m] = noop; } catch(err) {}
+        }
+    });
+    try { Object.freeze(window.console); } catch(e) {}
+
+    // 3. Anti-Debug Infinite Trap
+    setInterval(function() {
+        try {
+            (function() {
+                const start = performance.now();
+                Function("debugger")();
+                if (performance.now() - start > 100) {
+                    document.body.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-weight:bold;font-size:20px;">🚨 GÜVENLİK İHLALİ: Geliştirici Araçları Kısıtlandı.</div>';
+                }
+            })();
+        } catch(e) {}
+    }, 500);
+
+    // 4. Anti-Bot / Anti-Headless Scraper Filter
+    const isBot = navigator.webdriver || window.__nightmare || window._phantom || window.callPhantom ||
+        /HeadlessChrome|PhantomJS|Selenium|Puppeteer|aiohttp|python-requests|Go-http-client|curl|Wget|Scrapy/i.test(navigator.userAgent) ||
+        (window.outerWidth === 0 && window.outerHeight === 0) ||
+        (screen.width === 0 && screen.height === 0);
+
+    if (isBot) {
+        document.body.innerHTML = '<div style="background:#07090e;color:#ef4444;font-family:sans-serif;font-weight:900;font-size:24px;text-align:center;padding:80px;height:100vh;display:flex;align-items:center;justify-content:center;">🚨 ERİŞİM ENGELLENDİ: Bot / Scraper Tespit Edildi.</div>';
+        return;
+    }
+
+    // 5. Layer 7 HTTP Flood Rate Limiting
+    const now = Date.now();
+    const storageKey = 'oe_sec_req_log';
+    const lockoutKey = 'oe_sec_lockout';
+
+    const lockoutUntil = parseInt(localStorage.getItem(lockoutKey) || '0', 10);
+    if (lockoutUntil > now) {
+        const remaining = Math.ceil((lockoutUntil - now) / 1000);
+        document.body.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;"><h2 style="font-size:24px;">🚨 DDoS / Flood Koruması Devrede</h2><p style="color:#94a3b8;margin-top:10px;">Lütfen bekleyiniz: ' + remaining + ' saniye</p></div>';
+        setTimeout(() => { window.location.reload(); }, 3000);
+        return;
+    }
+
+    let requestLog = [];
+    try {
+        requestLog = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    } catch(e) { requestLog = []; }
+
+    requestLog = requestLog.filter(ts => now - ts < 5000);
+    requestLog.push(now);
+    localStorage.setItem(storageKey, JSON.stringify(requestLog));
+
+    if (requestLog.length > 6) {
+        localStorage.setItem(lockoutKey, (now + 15000).toString());
+        document.body.innerHTML = '<div style="background:#07090e;color:#ef4444;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;"><h2 style="font-size:24px;">🚨 Yüksek Frekanslı İstek (HTTP Flood) Algılandı</h2><p style="color:#94a3b8;margin-top:10px;">Tarayıcınız 15 saniyeliğine korumaya alındı.</p></div>';
+        return;
+    }
+
+    // 6. Inject Styles & DDoS Shield Interface
     const style = document.createElement('style');
     style.textContent = `
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
@@ -34,56 +135,8 @@
 
     const bar = document.getElementById('shieldProgress');
     const status = document.getElementById('shieldStatusText');
-    const desc = document.getElementById('shieldDescText');
 
-    // 2. Anti-Bot / Anti-Headless Filter
-    const isBot = navigator.webdriver || window.__nightmare || window._phantom || window.callPhantom ||
-        /HeadlessChrome|PhantomJS|Selenium|Puppeteer|aiohttp|python-requests|Go-http-client|curl|Wget|Scrapy/i.test(navigator.userAgent) ||
-        (window.outerWidth === 0 && window.outerHeight === 0) ||
-        (screen.width === 0 && screen.height === 0);
-
-    if (isBot) {
-        document.body.innerHTML = '<div style="background:#07090e;color:#ef4444;font-family:sans-serif;font-weight:900;font-size:24px;text-align:center;padding:80px;height:100vh;display:flex;align-items:center;justify-content:center;">🚨 ERİŞİM ENGELLENDİ: Bot / Scraper Tespit Edildi.</div>';
-        return;
-    }
-
-    // 3. Layer 7 HTTP Flood Rate Limiting
-    const now = Date.now();
-    const storageKey = 'oe_sec_req_log';
-    const lockoutKey = 'oe_sec_lockout';
-
-    const lockoutUntil = parseInt(localStorage.getItem(lockoutKey) || '0', 10);
-    if (lockoutUntil > now) {
-        const remaining = Math.ceil((lockoutUntil - now) / 1000);
-        desc.innerText = "🚨 Aşırı istek/Flood tespit edildi. Güvenliğiniz için geçici koruma devrede.";
-        status.innerText = "KORUMA SÜRESİ: " + remaining + " SANİYE";
-        status.style.color = "#ef4444";
-        bar.style.width = "100%";
-        bar.style.background = "#ef4444";
-        setTimeout(() => { window.location.reload(); }, 3000);
-        return;
-    }
-
-    let requestLog = [];
-    try {
-        requestLog = JSON.parse(localStorage.getItem(storageKey) || '[]');
-    } catch(e) { requestLog = []; }
-
-    requestLog = requestLog.filter(ts => now - ts < 5000);
-    requestLog.push(now);
-    localStorage.setItem(storageKey, JSON.stringify(requestLog));
-
-    if (requestLog.length > 6) {
-        localStorage.setItem(lockoutKey, (now + 15000).toString());
-        desc.innerText = "🚨 Yüksek frekanslı istek algılandı. IP ve tarayıcınız 15 saniyeliğine korumaya alındı.";
-        status.innerText = "DDoS KORUMASI AKTİF (15 SN)";
-        status.style.color = "#ef4444";
-        bar.style.width = "100%";
-        bar.style.background = "#ef4444";
-        return;
-    }
-
-    // 4. Challenge Solver
+    // 7. Challenge Solver
     function solveChallenge() {
         return new Promise((resolve) => {
             let progress = 0;
@@ -98,7 +151,7 @@
         });
     }
 
-    // 5. Load Data and Decrypt
+    // 8. Load Core and Decrypt
     const _0xkey = [94, 161, 135, 61, 196, 155, 18, 247];
 
     const dataScript = document.createElement('script');
