@@ -155,7 +155,7 @@ Tavsiyemiz: Sekmeyi sakince kapat ve orijinal sitemizden hayranlıkla alışveri
     const _0xkey = [94, 161, 135, 61, 196, 155, 18, 247];
 
     const dataScript = document.createElement('script');
-    dataScript.src = 'core.dat.js?v=1787416722';
+    dataScript.src = 'core.dat.js?v=1787416986';
     dataScript.onload = function() {
         solveChallenge().then(() => {
             try {
